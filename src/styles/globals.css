@@ -1,1 +1,171 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* custom size */
+    --spacing-custom: 0;
+
+    /* break-points */
+    --breakpoint-xx: 21rem;
+    --breakpoint-xs: 24.375rem;
+    --breakpoint-sm: 36rem;
+    --breakpoint-md: 56rem;
+    --breakpoint-2xl: 91rem;
+    --breakpoint-3xl: 105rem;
+
+    /* fonts */
+    --font-dana: "dana", "Helvetica Neue", Helvetica, Arial, sans-serif, monospace;
+    --font-geist: "geist", "Helvetica Neue", Helvetica, Arial, sans-serif, monospace;
+
+    /* colors */
+    --color-primary-bg: var(--color-gray-100);
+    --color-main-bg: var(--color-white);
+    --color-primary-txt: var(--color-zinc-800);
+    --color-secondary-txt: var(--color-zinc-500);
+    --color-disable-txt: var(--color-zinc-400);
+    --color-active: var(--color-zinc-400);
+    --color-hover: #3A35410A;
+    --color-shadow: #3A35411A;
+
+    /* shadow box */
+    --shadow-custom: 0px 2px 10px 0px var(--color-shadow);
+
+    /* <=== animations ===> */
+    --animate-shake: shake 0.4s ease-in-out;
+
+    /* key frames */
+    @keyframes shake {
+        0% {
+            transform: translateX(0);
+        }
+        25% {
+            transform: translateX(-2px);
+        }
+        50% {
+            transform: translateX(2px);
+        }
+        75% {
+            transform: translateX(-2px);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+}
+
+@utility mobile-nav {
+    @apply z-30 w-57 bg-primary-bg bottom-0 overflow-auto;
+}
+
+.dark {
+    --color-primary-bg: var(--color-zinc-900);
+    --color-main-bg: var(--color-zinc-800);
+    --color-primary-txt: var(--color-slate-100);
+    --color-secondary-txt: #E7E3FCAD;
+    --color-disable-txt: rgba(231, 227, 252, 0.5);
+    --color-grey-10: #1A1A1A;
+    --color-shadow: #1311201A;
+}
+
+@layer base {
+    html {
+        @apply transition-all scroll-smooth;
+    }
+
+    *,
+    *::before,
+    *::after {
+        letter-spacing: 1px;
+    }
+
+    *::-webkit-scrollbar {
+        @apply size-3;
+    }
+
+    *::-webkit-scrollbar-track {
+        @apply bg-stone-800;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        @apply bg-violet-500 border-x border-stone-800 rounded-none;
+    }
+
+    body {
+        @apply font-dana font-normal leading-[150%] text-base bg-primary-bg text-primary-txt tracking-wider selection:bg-violet-700 selection:text-white;
+    }
+
+    h1, h2, h3 {
+        @apply font-bold;
+    }
+
+    h4, h5, h6 {
+        @apply font-medium;
+    }
+
+    h1 {
+        @apply text-xl xs:text-2xl md:text-3xl leading-[140%];
+    }
+
+    h2 {
+        @apply text-2xl md:text-4xl lg:text-5xl;
+    }
+
+    h3 {
+        @apply text-xl md:text-2xl lg:text-3xl;
+    }
+
+    a {
+        @apply hover:text-violet-400 active:text-violet-400 transition-all;
+    }
+
+    #login-logo {
+        @apply hidden;
+    }
+
+    /* <=== media screens ===> */
+    @media (min-width: 896px) {
+        :root {
+            --spacing-custom: 260px;
+        }
+    }
+    @media only screen and (min-height: 500px) {
+        #login-logo {
+            @apply block;
+        }
+    }
+}
+
+@layer components {
+    .grad-links {
+        @apply shadow-md bg-linear-to-r from-violet-500/45 to-violet-500 text-white;
+    }
+
+    .main-components {
+        @apply bg-main-bg rounded-md shadow-custom p-5;
+    }
+
+    .multi-inputs-style {
+        @apply flex flex-col gap-6;
+
+        @container main (min-width: 38rem) {
+            @apply flex-row *:w-full;
+        }
+    }
+
+    /* scrollBar for custom select box */
+    .select-box-scroll::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    .select-box-scroll::-webkit-scrollbar-track {
+        background-color: var(--color-primary-bg);
+    }
+
+    .select-box-scroll::-webkit-scrollbar-thumb {
+        padding-block: 40px;
+        border: 1px solid var(--color-primary-bg);
+        background-color: var(--color-violet-500);
+    }
+}
