@@ -11,4 +11,4 @@ export default function CustomThemeProvider({children}: ChildrenComponentProps) 
             {children}
         </ThemeProvider>
     );
-}
+};

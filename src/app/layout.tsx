@@ -1,4 +1,4 @@
-import CustomThemeProvider from "@/components/CustomThemeProvider";
+import CustomThemeProvider from "@/components/ui/CustomThemeProvider";
 import {ChildrenComponentProps} from "@/types/ui";
 import {dana, geist} from "@/lib/fonts";
 import "@/styles/globals.css";
@@ -37,11 +37,9 @@ export default function RootLayout(
             className={`antialiased`}
         >
         <CustomThemeProvider>
-            <header></header>
             <main>
                 {children}
             </main>
-            <footer></footer>
         </CustomThemeProvider>
         </body>
         </html>
