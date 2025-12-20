@@ -1,16 +1,17 @@
 "use client";
 
 import {useEffect} from "react";
-import sidebarStore from "@/store/sidebarStore";
-import {applyCustomSpace} from "@/lib/utils";
+import useSidebarStore from "@/store/sidebarStore";
+import {storageCollapsedMenu} from "@/lib/utils";
 
 export default function SidebarEffect() {
-    const {collapsed, setCollapsed} = sidebarStore();
+    const {setCollapsed} = useSidebarStore();
 
     useEffect(() => {
-        setCollapsed(applyCustomSpace(collapsed));
-        localStorage.setItem("collapsedMenu", String(collapsed));
-    }, [collapsed, setCollapsed]);
+        const collapsedStorage: boolean = storageCollapsedMenu();
+        setCollapsed(collapsedStorage);
+        // eslint-disable-next-line
+    }, []);
 
     return null;
 };

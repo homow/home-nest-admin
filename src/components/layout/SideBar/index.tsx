@@ -1,6 +1,7 @@
 import {cn} from "@/lib/utils/ui-utils";
 import SideBarMenu from "./components/SideBarMenu";
 import SideBarHeader from "./components/SideBarHeader";
+import SidebarEffect from "./components/SidebarEffect";
 
 export default function SideBar() {
     return (
@@ -12,6 +13,7 @@ export default function SideBar() {
                 )
             }
         >
+            <SidebarEffect/>
             <SideBarHeader/>
             <SideBarMenu/>
         </aside>

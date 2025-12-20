@@ -15,6 +15,8 @@ function applyCustomSpace(
     }
 }
 
-const storageCollapsed: boolean = localStorage.getItem("collapsedMenu") === "true";
+function storageCollapsedMenu(): boolean {
+    return localStorage.getItem("collapsedMenu") === "true";
+}
 
-export {storageCollapsed, applyCustomSpace};
+export {storageCollapsedMenu, applyCustomSpace};
