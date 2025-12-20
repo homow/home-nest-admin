@@ -92,7 +92,7 @@ function SideBarIcons() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/>
             </symbol>
         </>
-    )
+    );
 }
 
 function HomePageIcons() {
@@ -120,7 +120,7 @@ function HomePageIcons() {
                 <path d="M4.5 2H22.5V0H4.5C3.4 0 2.5 0.9 2.5 2V13H0.5V16H14.5V13H4.5V2ZM23.5 4H17.5C16.95 4 16.5 4.45 16.5 5V15C16.5 15.55 16.95 16 17.5 16H23.5C24.05 16 24.5 15.55 24.5 15V5C24.5 4.45 24.05 4 23.5 4ZM22.5 13H18.5V6H22.5V13Z" fill="white"/>
             </symbol>
         </>
-    )
+    );
 }
 
 function Primary() {
@@ -135,7 +135,7 @@ function Primary() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
             </symbol>
         </>
-    )
+    );
 }
 
 export default function SvgDefs() {
@@ -155,5 +155,5 @@ export default function SvgDefs() {
                 <Primary/>
             </defs>
         </svg>
-    )
+    );
 };

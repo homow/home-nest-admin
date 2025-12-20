@@ -1,5 +1,5 @@
 import CustomThemeProvider from "@/components/ui/CustomThemeProvider";
-import SideBar from "@/components/layout/SideBar";
+import MainLayout from "@/components/layout/MainLayout";
 import {ChildrenComponentProps} from "@/types/ui";
 import {dana, geist} from "@/lib/fonts";
 import "@/styles/globals.css";
@@ -35,13 +35,12 @@ export default function RootLayout(
             <title>پنل مدیریت | آشیانه</title>
         </head>
         <body
-            className={`antialiased`}
+            className={"antialiased flex flex-row min-h-screen"}
         >
-        <SideBar/>
         <CustomThemeProvider>
-            <main>
+            <MainLayout>
                 {children}
-            </main>
+            </MainLayout>
         </CustomThemeProvider>
         </body>
         </html>
