@@ -2,7 +2,7 @@ import CustomThemeProvider from "@/components/ui/CustomThemeProvider";
 import MainLayout from "@/components/layout/MainLayout";
 import {ChildrenComponentProps} from "@/types/ui";
 import {dana, geist} from "@/lib/fonts";
-import "@/styles/globals.css";
+import "./globals.css";
 
 export default function RootLayout(
     {

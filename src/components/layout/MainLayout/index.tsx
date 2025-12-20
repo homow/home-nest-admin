@@ -1,8 +1,8 @@
-import {ChildrenComponentProps} from "@/types/ui";
+import type {ChildrenComponentProps} from "@/types/ui";
+import SvgDefs from "@/components/icon/SvgDefs";
+// import Overlay from "@/components/ui/Overlay";
 import SideBar from "../SideBar";
 import TopBar from "../TopBar";
-import SvgDefs from "@/components/ui/icon/SvgDefs";
-// import Overlay from "@/components/ui/Overlay";
 
 export default function MainLayout({children}: ChildrenComponentProps) {
     return (

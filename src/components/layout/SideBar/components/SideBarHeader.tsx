@@ -1,6 +1,6 @@
 import Logo from "@/components/ui/Logo";
 import {cn} from "@/lib/utils/ui-utils";
-import Icon from "@/components/ui/icon/Icon";
+import Icon from "@/components/icon/Icon";
 
 export default function SideBarHeader() {
     return (

@@ -1,7 +1,7 @@
 import type {SideBarDataTypes} from "@/types/ui";
 import {cn} from "@/lib/utils/ui-utils";
 import NavLinkClient from "@/components/ui/NavLinkClient";
-import Icon from "@/components/ui/icon/Icon";
+import Icon from "@/components/icon/Icon";
 
 interface Props {
     data: SideBarDataTypes;
