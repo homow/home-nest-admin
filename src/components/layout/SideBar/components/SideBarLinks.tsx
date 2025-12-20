@@ -1,30 +1,39 @@
+"use client";
+
 import type {SideBarDataTypes} from "@/types/ui";
 import {cn} from "@/lib/utils/ui-utils";
 import NavLinkClient from "@/components/ui/NavLinkClient";
 import Icon from "@/components/icon/Icon";
+import useSidebarStore from "@/store/sidebarStore";
 
 interface Props {
     data: SideBarDataTypes;
 }
 
 export default function SideBarLinks({data}: Props) {
+    const {collapsed} = useSidebarStore();
     const {title, dataLinks} = data;
 
     return (
         <div>
             {/* title links */}
             <div
-                className={cn("h-4.5 flex items-center gap-4")}
+                className={cn(
+                    "h-4.5 flex items-center gap-4",
+                    collapsed && "px-2"
+                )}
             >
                 {/* border */}
                 <div
                     className={cn(
-                        "w-10 h-px bg-disable-txt"
+                        "w-10 h-px bg-disable-txt",
+                        collapsed && "hidden"
                     )}
                 />
                 <p
                     className={cn(
                         "text-sm text-disable-txt",
+                        collapsed && "hidden"
                     )}
                 >
                     {title}
@@ -52,7 +61,9 @@ export default function SideBarLinks({data}: Props) {
                             <Icon icon={link.icon}/>
 
                             {/* text of link */}
-                            <span>
+                            <span
+                                className={collapsed ? "hidden" : ""}
+                            >
                                 {link.text}
                             </span>
                         </NavLinkClient>
