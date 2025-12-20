@@ -21,7 +21,7 @@ function useToggle(
         }
     }
 
-    return {toggle, setToggle, handleToggle};
+    return {toggle, handleToggle};
 }
 
 export default useToggle;
