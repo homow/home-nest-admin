@@ -1,6 +1,7 @@
 "use client";
 
 import type {UseToggleFn} from "@/types/ui";
+import {storageCollapsed} from "@/lib/utils";
 import {create} from "zustand";
 
 interface CollapsedState {
@@ -12,7 +13,7 @@ interface CollapsedState {
 
 const sidebarStore = create<CollapsedState>(
     (set) => ({
-        collapsed: false,
+        collapsed: storageCollapsed,
         setCollapsed: () => {
             set(state => ({
                 collapsed: !state.collapsed,

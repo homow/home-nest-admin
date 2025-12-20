@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
-import { useSidebarStore } from "@/stores/sidebar";
-import { applyCustomSpace } from "@/lib/utils";
+import {useEffect} from "react";
+import sidebarStore from "@/store/sidebarStore";
+import {applyCustomSpace} from "@/lib/utils";
 
 export default function SidebarEffect() {
-    const collapsed = useSidebarStore((s) => s.collapsed);
+    const {collapsed, setCollapsed} = sidebarStore();
 
     useEffect(() => {
-        applyCustomSpace(collapsed);
+        setCollapsed(applyCustomSpace(collapsed));
         localStorage.setItem("collapsedMenu", String(collapsed));
-    }, [collapsed]);
+    }, [collapsed, setCollapsed]);
 
     return null;
 };
