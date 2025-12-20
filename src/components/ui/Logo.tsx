@@ -1,9 +1,8 @@
-'use client';
-
 import Image from "next/image";
 import Link from "next/link";
+import type {ChildrenComponentProps} from "@/types/ui";
 
-export default function Logo() {
+export default function Logo({children}: ChildrenComponentProps) {
     return (
         <Link
             href="/"
@@ -22,6 +21,7 @@ export default function Logo() {
                     "size-8"
                 }
             />
+            {children}
         </Link>
     );
 };
