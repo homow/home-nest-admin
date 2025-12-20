@@ -23,7 +23,7 @@ export default function OnlineUi() {
         <span
             className={cn(
                 "absolute bottom-0 right-0 border-2 border-primary-bg rounded-full size-3",
-                online ? "bg-rose-600" : "bg-red-600"
+                online ? "bg-emerald-500" : "bg-red-600"
             )}
         />
     );

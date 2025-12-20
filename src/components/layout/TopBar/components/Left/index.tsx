@@ -1,5 +1,5 @@
 // import Notification from "./Notification/Notification";
-// import Account from "./AccountMenu/AccountMenu";
+import AccountMenu from "./components/AccountMenu";
 // import ThemeSection from "./ThemeSection/ThemeSection";
 // import SearchBar from "./SearchBar/SearchBar";
 
@@ -16,7 +16,7 @@ export default function Left() {
             >
                 {/*<ThemeSection/>*/}
                 {/*<Notification/>*/}
-                {/*<Account/>*/}
+                <AccountMenu/>
             </div>
         </div>
     );
