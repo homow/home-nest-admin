@@ -15,7 +15,6 @@ export default function Logo({children}: ChildrenComponentProps) {
                 alt="Logo"
                 width={518}
                 height={518}
-                placeholder="blur"
                 src="/images/shared/logo.webp"
                 className={
                     "size-8"

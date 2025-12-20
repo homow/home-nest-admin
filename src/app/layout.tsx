@@ -1,4 +1,5 @@
 import CustomThemeProvider from "@/components/ui/CustomThemeProvider";
+import SideBar from "@/components/layout/SideBar";
 import {ChildrenComponentProps} from "@/types/ui";
 import {dana, geist} from "@/lib/fonts";
 import "@/styles/globals.css";
@@ -36,6 +37,7 @@ export default function RootLayout(
         <body
             className={`antialiased`}
         >
+        <SideBar/>
         <CustomThemeProvider>
             <main>
                 {children}
