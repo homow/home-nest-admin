@@ -1,13 +1,15 @@
 "use client";
 
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {cn} from "@/lib/utils/ui-utils";
+import useToggle from "@/hooks/useToggle";
 
 export default function OnlineUi() {
-    const [online, setOnline] = useState<boolean | undefined>(undefined);
+    const {toggle: online, handleToggle: setOnline} = useToggle();
 
     useEffect(() => {
         setOnline(navigator.onLine);
+
         const handleOnline = () => setOnline(true);
         const handleOffline = () => setOnline(false);
 
@@ -18,6 +20,7 @@ export default function OnlineUi() {
             window.removeEventListener("online", handleOnline);
             window.removeEventListener("offline", handleOffline);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

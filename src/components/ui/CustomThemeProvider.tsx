@@ -1,7 +1,7 @@
 import {ThemeProvider} from 'next-themes';
-import {type ChildrenComponentProps} from "@/types/ui"
+import {type MainComponentProps} from "@/types/ui"
 
-export default function CustomThemeProvider({children}: ChildrenComponentProps) {
+export default function CustomThemeProvider({children}: MainComponentProps) {
     return (
         <ThemeProvider
             enableSystem

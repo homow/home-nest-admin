@@ -6,7 +6,9 @@ import AccountMenu from "./components/AccountMenu";
 export default function Left() {
     return (
         <div
-            className={"flex items-center justify-between gap-4 py-3 md:flex-1"}
+            className={
+                "flex items-center justify-between gap-4 py-3 md:flex-1"
+            }
         >
             {/* search bar */}
             {/*<SearchBar/>*/}

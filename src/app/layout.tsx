@@ -1,13 +1,13 @@
 import CustomThemeProvider from "@/components/ui/CustomThemeProvider";
 import MainLayout from "@/components/layout/MainLayout";
-import {ChildrenComponentProps} from "@/types/ui";
+import {MainComponentProps} from "@/types/ui";
 import {dana, geist} from "@/lib/fonts";
 import "./globals.css";
 
 export default function RootLayout(
     {
         children,
-    }: ChildrenComponentProps
+    }: MainComponentProps
 ) {
     return (
         <html

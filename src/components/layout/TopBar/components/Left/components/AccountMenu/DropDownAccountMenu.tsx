@@ -1,7 +1,6 @@
 import type {DropDownOptionsType, DropDownProps} from "@/types/ui";
 import DropDownAccountOptions from "./DropDownOptionsMenu";
-import AccountAvatar from "../../common/AccounAvatar";
-import Overlay from "@/components/ui/Overlay";
+import AccountInfo from "./AccountInfo"
 import {cn} from "@/lib/utils/ui-utils";
 import {Activity} from "react";
 
@@ -29,17 +28,29 @@ export default function DropDownAccountMenu(
                     )
                 }
             >
-                {dropDownAccountOptionsData.length > 0 &&
-                    dropDownAccountOptionsData.map(
-                        (data) => (
-                            <DropDownAccountOptions
-                                key={data.name}
-                                dataLink={data}
-                                setOpenMenu={setOpen}
-                            />
+                <AccountInfo
+                    className={"pb-4 border-b border-disable-txt/50"}
+                />
+
+                <ul
+                    className={cn(
+                        "divide-y divide-disable-txt/30 pt-2 *:last:hover:bg-rose-600 *:last:active:bg-rose-600",
+                        className
+                    )}
+                >
+                    {dropDownAccountOptionsData.length > 0 &&
+                        dropDownAccountOptionsData.map(
+                            (data) => (
+                                <DropDownAccountOptions
+                                    key={data.name}
+                                    dataLink={data}
+                                    className={"pt-2"}
+                                    setOpenMenu={setOpen}
+                                />
+                            )
                         )
-                    )
-                }
+                    }
+                </ul>
             </div>
         </Activity>
     );
