@@ -4,9 +4,10 @@ import {useEffect, useState} from "react";
 import {cn} from "@/lib/utils/ui-utils";
 
 export default function OnlineUi() {
-    const [online, setOnline] = useState<boolean>(navigator.onLine);
+    const [online, setOnline] = useState<boolean | undefined>(undefined);
 
     useEffect(() => {
+        setOnline(navigator.onLine);
         const handleOnline = () => setOnline(true);
         const handleOffline = () => setOnline(false);
 
