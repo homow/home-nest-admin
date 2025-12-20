@@ -1,4 +1,5 @@
 import RightTopBar from "./components/Right";
+import LeftTopBar from "./components/Left";
 
 export default function TopBar() {
     return (
@@ -8,6 +9,7 @@ export default function TopBar() {
             }
         >
             <RightTopBar/>
+            <LeftTopBar/>
         </header>
     );
 };
