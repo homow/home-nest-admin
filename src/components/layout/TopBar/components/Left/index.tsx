@@ -1,6 +1,6 @@
-// import Notification from "./Notification/Notification";
+import Notification from "./components/NotificationBar";
 import AccountMenu from "./components/AccountMenu";
-// import ThemeSection from "./ThemeSection/ThemeSection";
+import ThemeSection from "./components/ThemeSection";
 import SearchBar from "./components/SearchBar";
 
 export default function Left() {
@@ -16,8 +16,8 @@ export default function Left() {
             <div
                 className={"flex items-center justify-between gap-4 py-3"}
             >
-                {/*<ThemeSection/>*/}
-                {/*<Notification/>*/}
+                <ThemeSection/>
+                <Notification/>
                 <AccountMenu/>
             </div>
         </div>

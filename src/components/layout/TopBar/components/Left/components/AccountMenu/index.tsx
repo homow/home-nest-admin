@@ -4,7 +4,7 @@ import useToggle from "@/hooks/useToggle";
 import Overlay from "@/components/ui/Overlay";
 import useScrollLock from "@/hooks/useScrollLock";
 import AccountAvatar from "../../common/AccounAvatar";
-import DropDownAccountMenu from "@/components/layout/TopBar/components/Left/components/AccountMenu/DropDownAccountMenu";
+import DropDownAccountMenu from "./DropDownAccountMenu";
 
 export default function AccountMenu() {
     const {toggle, handleToggle} = useToggle();
