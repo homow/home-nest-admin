@@ -148,7 +148,7 @@ export default function SvgDefs() {
                 {/* <===== SideBar icons =====> */}
                 <SideBarIcons/>
 
-                {/* <=== Home Page ===> */}
+                {/* <=== (Home) Page ===> */}
                 <HomePageIcons/>
 
                 {/* <=== Primary ===> */}

@@ -17,8 +17,8 @@ export default function Logo({children}: ChildrenComponentProps) {
                 height={128}
                 quality={75}
                 alt="لوگوی سایت"
-                className={"object-contain size-8"}
                 src="/images/shared/logo.webp"
+                className={"object-contain size-8"}
             />
             {children}
         </Link>
