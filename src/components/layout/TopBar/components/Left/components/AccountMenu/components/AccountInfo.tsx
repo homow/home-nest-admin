@@ -1,5 +1,5 @@
 import type {MainComponentProps} from "@/types/ui";
-import AccountAvatar from '../../common/AccounAvatar';
+import AccountAvatar from '../../../common/AccounAvatar';
 import {cn} from "@/lib/utils/ui-utils";
 
 export default function AccountInfo(

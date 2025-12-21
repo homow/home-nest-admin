@@ -3,35 +3,38 @@
 import {Activity, useEffect, useRef} from "react";
 import {createPortal} from "react-dom";
 import {cn} from "@/lib/utils";
+import {NoLimitArgsFn} from "@/types/ui";
+import Icon from "@/components/icon/Icon";
 
-type ZNumber = 0 | 10 | 20 | 30 | 40 | 50
+type ZNumber = 0 | 10 | 20 | 30 | 40 | 50;
 
-type ZIndex = `z-${ZNumber}`
+type ZIndex = `z-${ZNumber}`;
 
-interface Props {
+export interface Props {
     z?: ZIndex;
-    isOpen: boolean;
-    message: string;
     title?: string;
-    onConfirm?: () => void;
-    onCancel?: () => void;
-    confirmText?: string;
-    cancelText?: string;
+    isOpen: boolean;
+    message?: string;
     loading?: boolean;
+    cancelText?: string;
     dangerMode?: boolean;
+    confirmText?: string;
+    onCancel?: NoLimitArgsFn;
+    onConfirm?: NoLimitArgsFn;
 }
 
 function InnerConfirmModal(
     {
         isOpen,
-        message,
-        title = "تأیید",
-        onConfirm,
+        loading,
         onCancel,
-        confirmText = "تأیید",
+        onConfirm,
+        z = "z-30",
+        title = "تأیید",
         cancelText = "لغو",
         dangerMode = false,
-        z = "z-30"
+        confirmText = "تأیید",
+        message = "آیا مطمئن هستید؟",
     }: Props
 ) {
     const buttonRef = useRef<HTMLButtonElement>(null);
@@ -47,7 +50,7 @@ function InnerConfirmModal(
     const modalHeaderColor = dangerMode ? "text-rose-500" : "text-emerald-500";
 
     useEffect(() => {
-        if (buttonRef?.current) buttonRef.current.focus();
+        if (isOpen && buttonRef?.current) buttonRef.current.focus();
 
         function handler(event: KeyboardEvent) {
             if (event.key === "Escape") onCancel?.();
@@ -61,7 +64,9 @@ function InnerConfirmModal(
     }, [isOpen, onCancel]);
 
     return (
-        <Activity mode={isOpen ? "visible" : "hidden"}>
+        <Activity
+            mode={isOpen ? "visible" : "hidden"}
+        >
             <div
                 role="dialog"
                 aria-modal="true"
@@ -94,21 +99,31 @@ function InnerConfirmModal(
                         className="flex justify-end gap-3"
                     >
                         <button
+                            type={"button"}
                             ref={buttonRef}
                             onClick={() => {
                                 onConfirm?.();
                             }}
                             className={
                                 cn(
-                                    "cursor-pointer px-4 py-1.5 rounded-lg text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black focus:ring-offset-white hover:brightness-110",
+                                    "cursor-pointer px-4 py-1.5 rounded-lg text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black focus:ring-offset-white hover:brightness-110 disabled:pointer-events-none disabled:cursor-not-allowed",
                                     confirmBtnBg
                                 )
                             }
+                            disabled={loading}
                         >
-                            {confirmText}
+                            {loading ? (
+                                    <Icon
+                                        icon={"loadingDoted"}
+                                        className="animate-spin [animation-duration:2s]"
+                                    />
+                                )
+                                : confirmText
+                            }
                         </button>
 
                         <button
+                            type={"button"}
                             onClick={() => {
                                 onCancel?.();
                             }}
@@ -136,20 +151,22 @@ export default function ConfirmModal(
         confirmText = "تأیید",
         cancelText = "لغو",
         dangerMode = false,
-        z = "z-30"
+        z = "z-30",
+        loading
     }: Props
 ) {
     return createPortal(
         <InnerConfirmModal
-            isOpen ={isOpen}
-            message ={message}
-            title ={title}
-            onConfirm ={onConfirm}
-            onCancel ={onCancel}
-            confirmText ={confirmText}
-            cancelText ={cancelText}
-            dangerMode ={dangerMode}
+            isOpen={isOpen}
+            message={message}
+            title={title}
+            onConfirm={onConfirm}
+            onCancel={onCancel}
+            confirmText={confirmText}
+            cancelText={cancelText}
+            dangerMode={dangerMode}
             z={z}
+            loading={loading}
         />,
         document.body
     );
