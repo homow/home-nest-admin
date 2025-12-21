@@ -25,7 +25,7 @@ export default function loading(
             >
                 {/* Spinner */}
                 <div
-                    className="size-16 border-4 border-t-violet-500 border-gray-300 rounded-full animate-spin xl:size-24 xl:border-8"
+                    className="size-16 border-4 border-t-violet-500 border-gray-300 rounded-full animate-spin xl:size-20 xl:border-8"
                 />
                 {/* Message */}
                 <p
