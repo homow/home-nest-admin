@@ -1,17 +1,17 @@
 "use client";
 
-import {useEffect} from "react";
-import {cn} from "@/lib/utils/ui-utils";
+import {useEffect, useEffectEvent} from "react";
 import useToggle from "@/hooks/useToggle";
+import {cn} from "@/lib/utils/ui-utils";
 
 export default function OnlineUi() {
     const {toggle: online, handleToggle: setOnline} = useToggle();
 
+    const handleOnline = useEffectEvent(() => setOnline(true));
+    const handleOffline = useEffectEvent(() => setOnline(false));
+
     useEffect(() => {
         setOnline(navigator.onLine);
-
-        const handleOnline = () => setOnline(true);
-        const handleOffline = () => setOnline(false);
 
         window.addEventListener("online", handleOnline);
         window.addEventListener("offline", handleOffline);
