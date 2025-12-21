@@ -17,6 +17,7 @@ import {
     getAlertModalBgBar,
 } from "@/lib/utils";
 
+import type {UseToggleFn} from "@/types/ui";
 import {createPortal} from "react-dom";
 import {cn} from "@/lib/utils";
 
@@ -27,9 +28,9 @@ export interface SetDataTypes {
 
 interface Props extends SetDataTypes {
     isOpen: boolean;
-    setIsOpen: (value?: boolean) => void;
-    setData: Dispatch<SetStateAction<SetDataTypes>>;
     closeDelay?: number;
+    setIsOpen: UseToggleFn;
+    setData: Dispatch<SetStateAction<SetDataTypes>>;
 }
 
 function InnerAlertModal(
@@ -84,7 +85,7 @@ function InnerAlertModal(
                 animationFrame = requestAnimationFrame(animate);
             } else {
                 setIsOpen(false);
-                setData({alertType: null, message: ""});
+                setData({message: "", alertType: null});
             }
         }
 
@@ -176,12 +177,12 @@ function InnerAlertModal(
 
 export default function AlertModal(
     {
-        message = "",
+        message,
         alertType,
-        isOpen = false,
+        isOpen,
         setIsOpen,
         setData,
-        closeDelay = 5000
+        closeDelay
     }: Props) {
 
     if (typeof document === "undefined") return null;

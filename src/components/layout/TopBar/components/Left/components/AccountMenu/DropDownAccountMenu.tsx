@@ -23,7 +23,7 @@ export default function DropDownAccountMenu(
         >
             <div
                 className={
-                    cn("w-58 mt-2 absolute top-full left-0 z-20 bg-main-bg py-2  rounded-md shadow-2xl",
+                    cn("w-58 mt-2 absolute top-full left-0 z-20 bg-main-bg py-2 rounded-md shadow-2xl",
                         className
                     )
                 }
