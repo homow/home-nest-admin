@@ -4,20 +4,20 @@ type BaseProps = {
     loading?: boolean;
 }
 
-interface PropsStyle extends BaseProps {
+interface ButtonPropsStyle extends BaseProps {
     btnStyle: "fill" | "outline" | "sharpL" | "sharpR" | "sharpBoth" | "sharpNone" | "primary";
     className?: string;
     disabled?: boolean;
 }
 
-interface PrimaryProps extends BaseProps {
+interface ButtonPrimaryProps extends BaseProps {
     rightIcon?: string;
     leftIcon?: string;
     text?: string;
     textStyle?: string;
 }
 
-type InitType = PropsStyle & PrimaryProps;
+type InitType = ButtonPropsStyle & ButtonPrimaryProps;
 
 interface ButtonProps extends InitType {
     as: "button";
@@ -37,6 +37,6 @@ interface LinkProps extends InitType {
     btnRef?: never;
 }
 
-type Props = ButtonProps | LinkProps;
+type ButtonComponentProps = ButtonProps | LinkProps;
 
-export type {Props, PropsStyle, PrimaryProps};
+export type {ButtonComponentProps, ButtonPropsStyle, ButtonPrimaryProps};

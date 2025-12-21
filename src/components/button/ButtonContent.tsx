@@ -1,5 +1,5 @@
 import Icon from "@/components/icon/Icon";
-import type {PrimaryProps} from "@/types/ui";
+import type {ButtonPrimaryProps} from "@/types/ui";
 
 export default function ButtonContent(
     {
@@ -8,7 +8,7 @@ export default function ButtonContent(
         loading,
         text,
         textStyle
-    }: PrimaryProps
+    }: ButtonPrimaryProps
 ) {
     return (
         <>

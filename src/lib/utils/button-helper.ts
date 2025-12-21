@@ -1,5 +1,5 @@
 import {cn} from "@/lib/utils";
-import type {PropsStyle} from "@/types/ui";
+import type {ButtonPropsStyle} from "@/types/ui";
 
 export default function buttonStyle(
     {
@@ -7,7 +7,7 @@ export default function buttonStyle(
         className,
         loading,
         disabled
-    }: PropsStyle
+    }: ButtonPropsStyle
 ): string {
     const outlineStyle = "border border-violet-600 text-violet-600 focus-visible:border-violet-700 focus-visible:text-violet-900";
     const segmentedStyle = "hover:border-violet-500 active:bg-violet-600 active:border-violet-600 active:text-white disabled:border-neutral-300 disabled:text-neutral-500";

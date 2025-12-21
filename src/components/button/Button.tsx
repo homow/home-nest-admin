@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ButtonContent from "./ButtonContent";
 import buttonStyle from "@/lib/utils/button-helper";
-import type {Props} from "@/types/ui";
+import type {ButtonComponentProps} from "@/types/ui";
 
 function Button(
     {
@@ -19,7 +19,7 @@ function Button(
         onClick,
         btnRef,
         linkRef
-    }: Props) {
+    }: ButtonComponentProps) {
 
     const classNames: string = buttonStyle({
         btnStyle,
