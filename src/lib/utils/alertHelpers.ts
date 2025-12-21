@@ -1,4 +1,4 @@
-export type AlertModalType = "success" | "error" | "info" | "warning" | null;
+export type AlertModalType = "success" | "error" | "info" | "warning" | null | undefined;
 
 export function getAlertModalBgHeader(alertType: AlertModalType): string {
     const map = {

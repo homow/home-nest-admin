@@ -21,6 +21,7 @@ export interface Props {
     confirmText?: string;
     onCancel?: NoLimitArgsFn;
     onConfirm?: NoLimitArgsFn;
+    setIsOpen: (isOpen: boolean) => void;
 }
 
 function InnerConfirmModal(
@@ -29,6 +30,7 @@ function InnerConfirmModal(
         loading,
         onCancel,
         onConfirm,
+        setIsOpen,
         z = "z-30",
         title = "تأیید",
         cancelText = "لغو",
@@ -101,8 +103,9 @@ function InnerConfirmModal(
                         <button
                             type={"button"}
                             ref={buttonRef}
-                            onClick={() => {
-                                onConfirm?.();
+                            onClick={async () => {
+                                await onConfirm?.();
+                                setIsOpen(false);
                             }}
                             className={
                                 cn(
@@ -126,6 +129,7 @@ function InnerConfirmModal(
                             type={"button"}
                             onClick={() => {
                                 onCancel?.();
+                                setIsOpen(false);
                             }}
                             className={cn(
                                 "cursor-pointer px-4 py-1.5 rounded-lg text-white transition",
@@ -152,7 +156,8 @@ export default function ConfirmModal(
         cancelText = "لغو",
         dangerMode = false,
         z = "z-30",
-        loading
+        loading,
+        setIsOpen
     }: Props
 ) {
     return createPortal(
@@ -167,6 +172,7 @@ export default function ConfirmModal(
             dangerMode={dangerMode}
             z={z}
             loading={loading}
+            setIsOpen={setIsOpen}
         />,
         document.body
     );

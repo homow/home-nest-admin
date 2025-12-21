@@ -13,8 +13,8 @@ interface Props {
 }
 
 interface ChangeAlertModalData {
-    isOpen: boolean;
-    data: SetDataTypes;
+    isOpen?: boolean;
+    data?: SetDataTypes;
     delay?: number;
 }
 
@@ -42,7 +42,8 @@ export default function useAlertModal(
             data,
         }: ChangeAlertModalData
     ) {
-        const {alertType, message} = data;
+        const message: string | undefined = data?.message;
+        const alertType: AlertModalType | undefined = alertData?.alertType;
 
         if (isOpen !== toggle) handleToggle(isOpen);
 
@@ -51,8 +52,8 @@ export default function useAlertModal(
             || alertType !== alertData.alertType
         ) {
             setAlertData({
-                alertType: alertType ? alertType : alertData.alertType,
-                message: message ? message : alertData.message
+                alertType: alertType ??  alertData.alertType,
+                message: message ?? alertData.message
             });
         }
 

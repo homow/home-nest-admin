@@ -22,7 +22,7 @@ import {createPortal} from "react-dom";
 import {cn} from "@/lib/utils";
 
 export interface SetDataTypes {
-    alertType: AlertModalType;
+    alertType?: AlertModalType;
     message?: string;
 }
 
