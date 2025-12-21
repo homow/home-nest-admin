@@ -1,5 +1,6 @@
 import type {DropDownOptionsType, DropDownProps} from "@/types/ui";
 import DropDownAccountOptions from "./DropDownOptionsMenu";
+import useLogoutAction from "@/hooks/useLogoutAction";
 import AccountInfo from "./AccountInfo"
 import {cn} from "@/lib/utils/ui-utils";
 import {Activity} from "react";
@@ -11,10 +12,12 @@ export default function DropDownAccountMenu(
         className,
     }: DropDownProps
 ) {
+    const {LogoutComponent, openLogoutModal} = useLogoutAction();
+
     // drop down options
     const dropDownAccountOptionsData: DropDownOptionsType[] = [
         {icon: "user", url: "/account", name: "اکانت"},
-        {icon: "logout", name: "خروج"},
+        {icon: "logout", name: "خروج", callback: openLogoutModal},
     ];
 
     return (
@@ -51,6 +54,7 @@ export default function DropDownAccountMenu(
                         )
                     }
                 </ul>
+                <LogoutComponent/>
             </div>
         </Activity>
     );
