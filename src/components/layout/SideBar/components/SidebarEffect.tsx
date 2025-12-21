@@ -1,15 +1,26 @@
 "use client";
 
-import {useEffect} from "react";
 import useSidebarStore from "@/store/sidebarStore";
-import {storageCollapsedMenu} from "@/lib/utils";
+import {storageCollapsedMenu, applyCustomSpace} from "@/lib/utils";
+import {useEffect, useEffectEvent} from "react";
 
 export default function SidebarEffect() {
-    const {setCollapsed} = useSidebarStore();
+    const {setCollapsed, collapsed, setCurrentCollapsed} = useSidebarStore();
+
+    const handleResize = useEffectEvent(() => {
+        setCurrentCollapsed(applyCustomSpace(collapsed))
+    });
 
     useEffect(() => {
-        const collapsedStorage: boolean = storageCollapsedMenu();
-        setCollapsed(collapsedStorage);
+        const savedCollapsed: boolean = storageCollapsedMenu();
+        setCollapsed(savedCollapsed);
+
+        window.addEventListener("resize", handleResize);
+
+        // cleanUp event
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        }
         // eslint-disable-next-line
     }, []);
 

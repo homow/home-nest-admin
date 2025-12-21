@@ -1,30 +1,46 @@
 "use client";
 
 import {create} from "zustand";
+import type {UseToggleFn} from "@/types/ui";
 import {applyCustomSpace} from "@/lib/utils";
 
 interface CollapsedState {
     collapsed: boolean;
+    currentCollapsed: boolean;
 
     // actions
-    setCollapsed: (value: boolean) => void;
+    setCollapsed: UseToggleFn;
+    setCurrentCollapsed: (value: boolean) => void;
 }
 
-const sidebarStore = create<CollapsedState>(
+const useSidebarStore = create<CollapsedState>(
     (set) => ({
         collapsed: false,
-        setCollapsed: (value: boolean) => {
-            set(() => {
+        currentCollapsed: false,
+        setCollapsed: value => {
+            set(state => {
+                const val: boolean = typeof value === "boolean" ? value : !state.collapsed;
+
                 localStorage.setItem("collapsedMenu",
-                    String(value)
+                    String(val)
                 );
-                const collapsed: boolean = applyCustomSpace(value);
+
+                const currentCollapsed: boolean = applyCustomSpace(val);
+
                 return {
-                    collapsed,
+                    collapsed: val,
+                    currentCollapsed,
                 }
             });
         },
+        setCurrentCollapsed: value => {
+            set(() => {
+                return {
+                    currentCollapsed: value,
+                }
+            })
+        }
     })
 );
 
-export default sidebarStore;
+export default useSidebarStore;

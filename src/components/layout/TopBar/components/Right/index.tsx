@@ -1,22 +1,9 @@
-import Icon from "@/components/icon/Icon";
-
-function OpenMobileNavMenuBtn() {
-    return (
-        <span
-            className={"cursor-pointer md:hidden"}
-        >
-            <Icon
-                className={"-scale-x-100"}
-                icon={"bars"}
-            />
-        </span>
-    )
-}
+import OpenMobileNavMenu from "./components/ToggleMobileNav";
 
 export default function Right() {
     return (
         <div className={"md:hidden"}>
-            <OpenMobileNavMenuBtn/>
+            <OpenMobileNavMenu/>
         </div>
     );
 };

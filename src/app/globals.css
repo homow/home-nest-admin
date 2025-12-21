@@ -55,7 +55,7 @@
 }
 
 @utility mobile-nav {
-    @apply z-30 w-57 bg-primary-bg bottom-0 overflow-auto;
+    @apply z-40 w-57 bg-primary-bg bottom-0 overflow-auto;
 }
 
 .dark {
