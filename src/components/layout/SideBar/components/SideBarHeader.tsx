@@ -33,7 +33,8 @@ export default function SideBarHeader() {
                 onClick={toggleCollapse}
                 className={
                     cn(
-                        "hidden md:flex items-center justify-center absolute -left-5.5 cursor-pointer -rotate-180 transition-all duration-500"
+                        "hidden md:flex items-center justify-center absolute -left-5.5 cursor-pointer -rotate-180 transition-all duration-500",
+                        collapsed && "rotate-0"
                     )
                 }
             >
