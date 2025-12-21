@@ -1,19 +1,19 @@
 "use client";
 
 import {
-    Activity,
     type Dispatch,
     type SetStateAction,
+    Activity,
     useEffect,
     useRef,
-    useState
+    useState,
 } from "react";
 import {
+    type AlertModalType,
     getAlertModalBgHeader,
     getAlertModalBtnBg,
     getAlertModalTitle,
     getAlertModalBgBar,
-    type AlertModalType
 } from "@/lib/utils";
 import {cn} from "@/lib/utils";
 
