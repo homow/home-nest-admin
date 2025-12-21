@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function SideBarLinks({data}: Props) {
-    const {currentCollapsed} = useSidebarStore();
+    const {collapsed} = useSidebarStore();
     const {title, dataLinks} = data;
 
     return (
@@ -20,20 +20,20 @@ export default function SideBarLinks({data}: Props) {
             <div
                 className={cn(
                     "h-4.5 flex items-center gap-4",
-                    currentCollapsed && "px-2"
+                    collapsed && "px-2"
                 )}
             >
                 {/* border */}
                 <div
                     className={cn(
                         "w-10 h-px bg-disable-txt",
-                        currentCollapsed && "hidden"
+                        collapsed ? "absolute hidden-effect" : "show-effect static"
                     )}
                 />
                 <p
                     className={cn(
                         "text-sm text-disable-txt",
-                        currentCollapsed && "hidden"
+                        collapsed ? "absolute hidden-effect" : "show-effect static"
                     )}
                 >
                     {title}
@@ -62,7 +62,11 @@ export default function SideBarLinks({data}: Props) {
 
                             {/* text of link */}
                             <span
-                                className={currentCollapsed ? "hidden" : ""}
+                                className={
+                                    collapsed
+                                        ? "hidden-effect absolute"
+                                        : "show-effect static"
+                                }
                             >
                                 {link.text}
                             </span>

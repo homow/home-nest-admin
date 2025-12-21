@@ -20,7 +20,7 @@ export default function SideBarHeader() {
                 <span
                     className={cn(
                         "font-medium",
-                        currentCollapsed && "hidden",
+                        currentCollapsed ? "hidden-effect" : "show-effect"
                     )}
                 >
                     پنل مدیریت
