@@ -8,6 +8,7 @@ import {
     useRef,
     useState,
 } from "react";
+
 import {
     type AlertModalType,
     getAlertModalBgHeader,
@@ -15,6 +16,7 @@ import {
     getAlertModalTitle,
     getAlertModalBgBar,
 } from "@/lib/utils";
+
 import {cn} from "@/lib/utils";
 
 export interface SetDataTypes {
