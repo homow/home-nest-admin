@@ -1,6 +1,7 @@
 "use client";
 
 import {Activity, useEffect, useRef} from "react";
+import {createPortal} from "react-dom";
 import {cn} from "@/lib/utils";
 
 type ZNumber = 0 | 10 | 20 | 30 | 40 | 50
@@ -20,7 +21,7 @@ interface Props {
     dangerMode?: boolean;
 }
 
-export default function ConfirmModal(
+function InnerConfirmModal(
     {
         isOpen,
         message,
@@ -122,5 +123,34 @@ export default function ConfirmModal(
                 </div>
             </div>
         </Activity>
+    );
+}
+
+export default function ConfirmModal(
+    {
+        isOpen,
+        message,
+        title = "تأیید",
+        onConfirm,
+        onCancel,
+        confirmText = "تأیید",
+        cancelText = "لغو",
+        dangerMode = false,
+        z = "z-30"
+    }: Props
+) {
+    return createPortal(
+        <InnerConfirmModal
+            isOpen ={isOpen}
+            message ={message}
+            title ={title}
+            onConfirm ={onConfirm}
+            onCancel ={onCancel}
+            confirmText ={confirmText}
+            cancelText ={cancelText}
+            dangerMode ={dangerMode}
+            z={z}
+        />,
+        document.body
     );
 };
