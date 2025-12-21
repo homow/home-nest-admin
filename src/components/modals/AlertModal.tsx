@@ -17,6 +17,7 @@ import {
     getAlertModalBgBar,
 } from "@/lib/utils";
 
+import {createPortal} from "react-dom";
 import {cn} from "@/lib/utils";
 
 export interface SetDataTypes {
@@ -31,7 +32,7 @@ interface Props extends SetDataTypes {
     closeDelay?: number;
 }
 
-export default function AlertModal(
+function InnerAlertModal(
     {
         message = "",
         alertType,
@@ -170,5 +171,30 @@ export default function AlertModal(
                 </div>
             </div>
         </Activity>
+    );
+}
+
+export default function AlertModal(
+    {
+        message = "",
+        alertType,
+        isOpen = false,
+        setIsOpen,
+        setData,
+        closeDelay = 5000
+    }: Props) {
+
+    if (typeof document === "undefined") return null;
+
+    return createPortal(
+        <InnerAlertModal
+            isOpen={isOpen}
+            setData={setData}
+            message={message}
+            setIsOpen={setIsOpen}
+            alertType={alertType}
+            closeDelay={closeDelay}
+        />,
+        document.body
     );
 };
