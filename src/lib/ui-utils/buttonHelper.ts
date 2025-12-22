@@ -13,7 +13,7 @@ export default function buttonStyle(
     const segmentedStyle = "hover:border-violet-500 active:bg-violet-600 active:border-violet-600 active:text-white disabled:border-neutral-300 disabled:text-neutral-500";
 
     const buttonStyle: string = {
-        fill: "bg-violet-600 text-white rounded-lg hover:bg-violet-700 active:bg-violet-900 disabled:bg-neutral-200 disabled:text-neutral-400 focus-visible:bg-violet-700",
+        fill: "bg-violet-600 text-white rounded-lg hover:bg-violet-700 active:bg-violet-900 disabled:bg-neutral-500 disabled:text-neutral-300 focus-visible:bg-violet-700",
         outline: `${outlineStyle} rounded-lg hover:border-violet-700 active:text-violet-900 active:border-violet-900 disabled:text-neutral-300 disabled:border-neutral-50`,
         sharpL: `${outlineStyle} ${segmentedStyle} rounded-r-lg`,
         sharpR: `${outlineStyle} ${segmentedStyle} rounded-l-lg`,
@@ -27,6 +27,6 @@ export default function buttonStyle(
         buttonStyle,
         className,
         (loading || disabled)
-        && "cursor-not-allowed pointer-events-none"
+        && "pointer-events-none"
     );
 };

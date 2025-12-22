@@ -4,7 +4,6 @@ import {ChangeEventHandler, RefObject} from "react";
 export interface InitInputProps extends MainComponentProps {
     id: string;
     label: string;
-    errorMsg?: string;
     required?: boolean;
     parentClassName?: string;
     hasError?: boolean | string;

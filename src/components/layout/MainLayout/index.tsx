@@ -1,14 +1,10 @@
 import type {MainComponentProps} from "@/types/ui";
-import SvgDefs from "@/components/icon/SvgDefs";
 import SideBar from "../SideBar";
 import TopBar from "../TopBar";
 
 export default function MainLayout({children}: MainComponentProps) {
     return (
         <>
-            {/* svg icons */}
-            <SvgDefs/>
-
             {/* side bar */}
             <SideBar/>
 

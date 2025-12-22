@@ -6,13 +6,15 @@ import {useFormStatus} from "react-dom";
 
 interface Props extends MainComponentProps {
     btnStyle?: BtnStylesType;
+    disabled?: boolean;
 }
 
 export default function FormButton(
     {
         btnStyle,
         children,
-        className
+        className,
+        disabled,
     }: Props
 ) {
     const {pending} = useFormStatus();
@@ -21,7 +23,7 @@ export default function FormButton(
         <Button
             as={"button"}
             loading={pending}
-            disabled={pending}
+            disabled={disabled}
             buttonType={"submit"}
             className={className}
             btnStyle={btnStyle || "fill"}

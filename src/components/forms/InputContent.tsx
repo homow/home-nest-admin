@@ -10,7 +10,6 @@ export default function InputContent(
         id,
         children,
         hasError,
-        errorMsg,
         label,
         required
     }: InitInputProps
@@ -32,7 +31,7 @@ export default function InputContent(
             </div>
             {hasError && (
                 <ErrorMessageInputs
-                    msg={errorMsg}
+                    msg={typeof hasError === "string" ? hasError : "ارور موجوده"}
                 />
             )}
         </div>

@@ -1,8 +1,8 @@
 import CustomThemeProvider from "@/components/ui/CustomThemeProvider";
-import MainLayout from "@/components/layout/MainLayout";
 import {MainComponentProps} from "@/types/ui";
 import {dana, geist} from "@/lib/fonts";
 import "./globals.css";
+import SvgDefs from "@/components/icon/SvgDefs";
 
 export default function RootLayout(
     {
@@ -37,10 +37,11 @@ export default function RootLayout(
         <body
             className={"antialiased flex flex-row min-h-screen"}
         >
+        {/* svg icons */}
+        <SvgDefs/>
+
         <CustomThemeProvider>
-            <MainLayout>
-                {children}
-            </MainLayout>
+            {children}
         </CustomThemeProvider>
         </body>
         </html>

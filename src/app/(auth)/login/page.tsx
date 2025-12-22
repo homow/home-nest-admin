@@ -5,8 +5,9 @@ import {
     useState,
     useRef,
     useActionState,
+    startTransition,
     type ChangeEvent,
-    type FormEvent
+    // type FormEvent
 } from "react";
 import CheckBox from "@/components/forms/CheckBox";
 import FormButton from "@/components/button/FormButton";
@@ -16,6 +17,7 @@ import useToggle from "@/hooks/useToggle";
 import {login} from "@/actions/login";
 import {LoginFormDataTypes} from "@/types/auth";
 import {emailRegex} from "@/lib/auth-utils";
+import useAlertModal from "@/hooks/useAlertModal";
 
 const initValue: LoginFormDataTypes = {
     success: false,
@@ -40,6 +42,10 @@ export default function Login() {
         toggle: showPassword,
         handleToggle: setShowPassword
     } = useToggle();
+    const {AlertModalComponent, changeAlertModalData} = useAlertModal({
+        initAlertType: "success",
+        initMessage: "ورود موفقیت آمیز بود",
+    });
 
     // ref
     const inputRef = useRef<HTMLInputElement>(null);
@@ -48,30 +54,6 @@ export default function Login() {
     useEffect(() => {
         inputRef?.current?.focus();
     }, []);
-
-    function submitHandler(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-
-        const trimmedEmail: string = email?.trim()?.toLowerCase();
-        const trimPassword: string = password?.trim();
-
-        const newErrors = {
-            email: trimmedEmail ? "" : "ایمیل رو وارد کن",
-            password: trimPassword ? "" : "پسورد رو وارد کن",
-        }
-
-        if (newErrors.email || newErrors.password) {
-            setErrors(newErrors);
-            return;
-        }
-
-        if (!emailRegex.test(trimmedEmail)) {
-            setErrors({...newErrors, email: "فرمت ایمیل اشتباهه"});
-            return;
-        }
-
-        formAction(new FormData(event.currentTarget));
-    }
 
     // set email handler
     function setEmailHandler(event: ChangeEvent<HTMLInputElement>) {
@@ -117,8 +99,45 @@ export default function Login() {
         }
     }
 
+    function submitHandler() {
+        // event.preventDefault();
+
+        const trimmedEmail: string = email?.trim()?.toLowerCase();
+        const trimPassword: string = password?.trim();
+
+        const newErrors = {
+            email: trimmedEmail ? "" : "ایمیل رو وارد کن",
+            password: trimPassword ? "" : "پسورد رو وارد کن",
+        }
+
+        if (newErrors.email || newErrors.password) {
+            setErrors(newErrors);
+            return;
+        }
+
+        if (!emailRegex.test(trimmedEmail)) {
+            setErrors({...newErrors, email: "فرمت ایمیل اشتباهه"});
+            return;
+        }
+
+        // startTransition(() => {
+        //     formAction(new FormData(event.currentTarget));
+        // });
+    }
+
+    useEffect(() => {
+        if (state.success) {
+            changeAlertModalData({
+                isOpen: true,
+            });
+        }
+        // eslint-disable-next-line
+    }, [state]);
+
     return (
         <>
+            <AlertModalComponent/>
+
             {/* logo */}
             <Image
                 alt="logo"
@@ -147,8 +166,10 @@ export default function Login() {
                     </p>
 
                     <form
-                        onSubmit={submitHandler}
+                        // onSubmit={submitHandler}
                         className="space-y-6"
+
+                        action={formAction}
                     >
                         <Input
                             value={email}
@@ -203,7 +224,10 @@ export default function Login() {
                             />
                         </div>
 
-                        <FormButton>
+                        <FormButton
+                            // disabled={state.success}
+                            className={"w-full justify-center"}
+                        >
                             ورود
                         </FormButton>
                     </form>

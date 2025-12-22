@@ -13,16 +13,14 @@ export default function ButtonContent(
     return (
         <>
             {(rightIcon && !loading) && <Icon icon={rightIcon}/>}
-            <span>
-                {loading ? (
-                    <Icon
-                        icon="loadingDoted"
-                        className="animate-spin [animation-duration:2s]"
-                    />
-                ) : (
-                    <span className={textStyle}>{children}</span>
-                )}
-            </span>
+            {loading ? (
+                <Icon
+                    icon="settings"
+                    className="animate-spin [animation-duration:2s]"
+                />
+            ) : (
+                <span className={textStyle}>{children}</span>
+            )}
             {(leftIcon && !loading) && <Icon icon={leftIcon}/>}
         </>
     );

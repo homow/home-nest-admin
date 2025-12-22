@@ -21,7 +21,6 @@ export default function Input(
         parentClassName,
         children,
         hasError,
-        errorMsg,
         dir,
         inputRef,
         textAreaRef,
@@ -40,7 +39,6 @@ export default function Input(
             <InputContent
                 id={id}
                 label={label}
-                errorMsg={errorMsg}
                 required={required}
                 hasError={hasError}
                 parentClassName={parentClassName}
@@ -65,7 +63,6 @@ export default function Input(
             <InputContent
                 id={id}
                 label={label}
-                errorMsg={errorMsg}
                 required={required}
                 hasError={hasError}
                 parentClassName={parentClassName}

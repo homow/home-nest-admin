@@ -43,6 +43,8 @@ export async function login(
         }
     }
 
+    await new Promise(res => setTimeout(res, 4000));
+
     return {
         success: true,
         emailError: "",
