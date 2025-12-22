@@ -11,7 +11,7 @@ export interface InitInputProps extends MainComponentProps {
 }
 
 interface BaseInputPropsType extends InitInputProps {
-    value: string;
+    value?: string;
     name?: string;
     disabled?: boolean;
     placeholder: string;
@@ -21,24 +21,23 @@ interface BaseInputPropsType extends InitInputProps {
 
 interface TextAreaProps extends BaseInputPropsType {
     as: "textarea";
-    inputType: string;
-    inputRef?: RefObject<HTMLTextAreaElement>;
-    onChangeInput?: ChangeEventHandler<HTMLTextAreaElement>;
-    textAreaRef?: never;
-    onChangeTextArea?: never;
-    cols?: never;
-    rows?: never;
+    cols?: number;
+    rows?: number;
+    onChangeTextArea?: ChangeEventHandler<HTMLTextAreaElement | null>;
+    inputRef?: never;
+    inputType?: never;
+    onChangeInput?: never;
 }
 
 interface DefualtInputProps extends BaseInputPropsType {
     as: "input";
-    textAreaRef?: RefObject<HTMLInputElement>;
-    onChangeTextArea?: ChangeEventHandler<HTMLInputElement>;
-    inputRef?: never;
-    inputType?: never;
-    onChangeInput?: never;
-    cols?: number;
-    rows?: number;
+    inputType: string;
+    inputRef?: RefObject<HTMLInputElement | null>;
+    onChangeInput?: ChangeEventHandler<HTMLInputElement>;
+    cols?: never;
+    rows?: never;
+    textAreaRef?: never;
+    onChangeTextArea?: never;
 }
 
 export type InputPropsType = DefualtInputProps | TextAreaProps;

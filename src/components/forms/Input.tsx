@@ -46,8 +46,8 @@ export default function Input(
                 parentClassName={parentClassName}
             >
                 <input
-                    dir={dir}
                     id={id}
+                    dir={dir}
                     name={name}
                     ref={inputRef}
                     type={inputType}

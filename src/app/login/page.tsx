@@ -115,7 +115,8 @@ export default function Login() {
                     className="max-w-9/10 w-full xs:max-w-sm sm:max-w-md bg-white/10 rounded-2xl shadow-lg space-y-6 p-3 xs:p-8"
                 >
                     <h2
-                        className="text-2xl font-bold text-center">
+                        className="text-2xl font-bold text-center"
+                    >
                         خوش اومدی
                     </h2>
                     <p
@@ -129,48 +130,42 @@ export default function Login() {
                         className="space-y-6"
                         onSubmit={submitHandler}
                     >
-                        <div>
-                            <Input
-                                as={"input"}
-                                inputType={"text"}
-                                id={"email"}
-                                name={"email"}
-                                ref={inputRef}
-                                label={"ایمیل"}
-                                autoComplete={"email"}
-                                onChange={setEmailHandler}
-                                placeholder={"you@example.com"}
-                                dir={"ltr"}
-                                hasError={errors.email}
-                            />
-                        </div>
+                        <Input
+                            as={"input"}
+                            id={"email"}
+                            name={"email"}
+                            inputType={"text"}
+                            inputRef={inputRef}
+                            label={"ایمیل"}
+                            autoComplete={"email"}
+                            placeholder={"you@example.com"}
+                            dir={"ltr"}
+                            hasError={errors.email}
+                        />
 
-                        <div>
-                            <Input
-                                as={"input"}
-                                id="password"
-                                label={"پسورد"}
-                                name={"password"}
-                                placeholder={"******"}
-                                parentClassName={"relative"}
-                                onChange={setPasswordHandler}
-                                autoComplete={"current-password"}
-                                inputType={
-                                    showPassword ? "text" : "password"
-                                }
-                                dir={"ltr"}
-                                hasError={errors.password}
+                        <Input
+                            as={"input"}
+                            id="password"
+                            label={"پسورد"}
+                            name={"password"}
+                            placeholder={"******"}
+                            parentClassName={"relative"}
+                            autoComplete={"current-password"}
+                            inputType={
+                                showPassword ? "text" : "password"
+                            }
+                            dir={"ltr"}
+                            hasError={errors.password}
+                        >
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                aria-label={showPassword ? "Hide Password" : "Show Password"}
+                                className="absolute right-2 top-1/2 text-sm text-gray-500 hover:text-violet-500 cursor-pointer"
                             >
-                                <button
-                                    type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    aria-label={showPassword ? "Hide Password" : "Show Password"}
-                                    className="absolute right-2 top-1/2 text-sm text-gray-500 hover:text-violet-500 cursor-pointer"
-                                >
-                                    {showPassword ? "مخفی" : "نمایش"}
-                                </button>
-                            </Input>
-                        </div>
+                                {showPassword ? "مخفی" : "نمایش"}
+                            </button>
+                        </Input>
 
                         <div className="flex items-center justify-between text-sm text-gray-400">
                             <CheckBox
