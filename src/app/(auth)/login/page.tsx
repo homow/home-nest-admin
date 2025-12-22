@@ -10,6 +10,7 @@ import {
     type FormEvent
 } from "react";
 
+import useSetClientTitle from "@/hooks/useSetClientTitle";
 import FormButton from "@/components/button/FormButton";
 import CheckBox from "@/components/forms/CheckBox";
 import useAlertModal from "@/hooks/useAlertModal";
@@ -20,7 +21,6 @@ import useToggle from "@/hooks/useToggle";
 import {redirect} from "next/navigation";
 import {login} from "@/actions/login";
 import Image from "next/image";
-import useSetClientTitle from "@/hooks/useSetClientTitle";
 
 const initValue: LoginFormDataTypes = {
     success: false,
@@ -131,13 +131,22 @@ export default function Login() {
     }
 
     useEffect(() => {
-        if (state.success) {
-            changeAlertModalData({
-                isOpen: true,
-            });
+        (() => {
+            if (state.success) {
+                changeAlertModalData({
+                    isOpen: true,
+                });
 
-            setTimeout(() => redirect("/"), 4000);
-        }
+                setTimeout(() => redirect("/"), 4000);
+            } else {
+                if (state.emailError || state.passwordError) {
+                    setErrors({
+                        email: state.emailError ?? "",
+                        password: state.passwordError ?? ""
+                    });
+                }
+            }
+        })();
         // eslint-disable-next-line
     }, [state]);
 
@@ -165,12 +174,12 @@ export default function Login() {
                     <h2
                         className="text-2xl font-bold text-center"
                     >
-                        خوش اومدی
+                        آشیانه
                     </h2>
                     <p
                         className="text-sm text-center text-secondary-txt"
                     >
-                        به پنل مدیریت وارد شو.
+                        ورود به پنل مدیریت
                     </p>
 
                     <form
