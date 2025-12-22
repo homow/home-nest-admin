@@ -69,10 +69,6 @@
 }
 
 @layer base {
-    html {
-        @apply transition-all scroll-smooth;
-    }
-
     *,
     *::before,
     *::after {

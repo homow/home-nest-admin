@@ -11,6 +11,7 @@ export default function RootLayout(
 ) {
     return (
         <html
+            data-scroll-behavior="smooth"
             lang="fa"
             dir="rtl"
             className={`${dana.variable} ${geist.variable}`}
