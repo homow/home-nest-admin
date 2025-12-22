@@ -1,16 +1,5 @@
 import {cn} from "@/lib/ui-utils/ui-utils";
-
-type ZNumber = 0 | 10 | 20 | 30 | 40 | 50;
-type ZIndex = `z-${ZNumber}`;
-
-interface Props {
-    z?: ZIndex;
-    flag: boolean;
-    lock?: boolean;
-    blur?: boolean;
-    className?: string;
-    setFlag: (flag?: boolean) => void;
-}
+import {OverlayProps} from "@/types/ui";
 
 export default function Overlay(
     {
@@ -20,13 +9,13 @@ export default function Overlay(
         lock = false,
         blur = true,
         className,
-    }: Props
+    }: OverlayProps
 ) {
     if (!flag) return null;
 
     function clickHandler() {
         if (lock) return;
-        setFlag(false);
+        if(setFlag) setFlag(false);
     }
 
     return (

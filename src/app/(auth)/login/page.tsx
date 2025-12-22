@@ -7,7 +7,7 @@ import {
     useActionState,
     startTransition,
     type ChangeEvent,
-    // type FormEvent
+    type FormEvent
 } from "react";
 import CheckBox from "@/components/forms/CheckBox";
 import FormButton from "@/components/button/FormButton";
@@ -99,8 +99,8 @@ export default function Login() {
         }
     }
 
-    function submitHandler() {
-        // event.preventDefault();
+    function submitHandler(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
 
         const trimmedEmail: string = email?.trim()?.toLowerCase();
         const trimPassword: string = password?.trim();
@@ -120,9 +120,9 @@ export default function Login() {
             return;
         }
 
-        // startTransition(() => {
-        //     formAction(new FormData(event.currentTarget));
-        // });
+        startTransition(() => {
+            formAction(new FormData(event.currentTarget));
+        });
     }
 
     useEffect(() => {
@@ -166,10 +166,8 @@ export default function Login() {
                     </p>
 
                     <form
-                        // onSubmit={submitHandler}
+                        onSubmit={submitHandler}
                         className="space-y-6"
-
-                        action={formAction}
                     >
                         <Input
                             value={email}
@@ -225,7 +223,7 @@ export default function Login() {
                         </div>
 
                         <FormButton
-                            // disabled={state.success}
+                            disabled={state.success}
                             className={"w-full justify-center"}
                         >
                             ورود

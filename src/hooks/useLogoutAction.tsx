@@ -11,6 +11,10 @@ export default function useLogoutAction() {
         toggle: openConfirmModal,
         handleToggle: setOpenConfirmModal
     } = useToggle();
+    const {
+        toggle: openLockOverlay,
+        handleToggle: setOpenLockOverlay,
+    } = useToggle();
 
     const {AlertModalComponent, changeAlertModalData} = useAlertModal({
         initAlertType: "success",
@@ -20,11 +24,14 @@ export default function useLogoutAction() {
 
     const {replace} = useRouter();
 
-    function confirmHandler() {
-        replace("/login");
+    async function confirmHandler() {
+        setOpenLockOverlay(true);
         changeAlertModalData({
             isOpen: true
         });
+        setOpenConfirmModal(false);
+        await new Promise(resolve => setTimeout(resolve, 4000));
+        replace("/login");
     }
 
     function openLogoutModal() {
@@ -46,6 +53,10 @@ export default function useLogoutAction() {
                     "مطمئنی میخوای از حسابت خارج بشی؟"
                 }
                 onCancel={() => setOpenConfirmModal(false)}
+            />
+            <Overlay
+                flag={openLockOverlay}
+                lock
             />
             <Overlay
                 flag={openConfirmModal}
