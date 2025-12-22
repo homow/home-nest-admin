@@ -41,11 +41,16 @@ export default function Login() {
         email: "",
         password: ""
     });
+
     const {
         toggle: showPassword,
         handleToggle: setShowPassword
     } = useToggle();
-    const {AlertModalComponent, changeAlertModalData} = useAlertModal({
+
+    const {
+        AlertModalComponent,
+        changeAlertModalData
+    } = useAlertModal({
         initAlertType: "success",
         initMessage: "ورود موفقیت آمیز بود",
     });
@@ -53,6 +58,7 @@ export default function Login() {
     // ref
     const inputRef = useRef<HTMLInputElement>(null);
 
+    // set title
     useSetClientTitle("صفحه لاگین");
 
     // focus
@@ -67,8 +73,8 @@ export default function Login() {
         setEmail(val);
 
         if (
-            errors.email.includes("فرمت") &&
-            emailRegex.test(val.trim())
+            errors.email.includes("فرمت")
+            && emailRegex.test(val.trim())
         ) {
             setErrors({
                 ...errors,
@@ -77,8 +83,8 @@ export default function Login() {
         }
 
         if (
-            errors.email.includes("وارد") &&
-            val.trim()
+            errors.email.includes("وارد")
+            && val.trim()
         ) {
             setErrors({
                 ...errors,
@@ -94,8 +100,8 @@ export default function Login() {
         setPassword(val);
 
         if (
-            val.trim() &&
-            errors.password
+            val.trim()
+            && errors.password
         ) {
             setErrors({
                 ...errors,
