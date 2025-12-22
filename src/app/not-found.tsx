@@ -29,18 +29,20 @@ export default function NotFound() {
                     <Button
                         btnStyle={"fill"}
                         as={"button"}
-                        text="بازگشت به صفحه قبل"
                         onClick={goBack}
                         className="px-6 py-2 bg-violet-500 hover:bg-violet-600 text-white rounded-lg transition-colors"
-                    />
+                    >
+                        بازگشت به صفحه قبل
+                    </Button>
                 )}
                 <Button
                     btnStyle={"fill"}
                     as={"button"}
-                    text="بازگشت به خانه"
                     onClick={goHome}
                     className="px-6 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-lg transition-colors"
-                />
+                >
+                    بازگشت به خانه
+                </Button>
             </div>
         </section>
     );
