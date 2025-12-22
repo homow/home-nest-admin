@@ -73,7 +73,11 @@ function Button(
                 type={buttonType}
                 disabled={disabled}
                 className={classNames}
-                onClick={onClick}
+                onClick={(event) => {
+                    if (loading || disabled) return;
+
+                    if (onClick) onClick?.(event);
+                }}
                 ref={btnRef}
             >
                 <ButtonContent

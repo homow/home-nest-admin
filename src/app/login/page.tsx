@@ -6,16 +6,16 @@ import {useEffect, useState, useRef} from "react";
 import Button from "@/components/button/Button";
 import Input from "@/components/forms/Input";
 import Image from "next/image";
+import useToggle from "@/hooks/useToggle";
+import {login} from "@/actions/login";
+import FormButton from "@/components/button/FormButton";
 
 export default function Login() {
-    // state variables
-    const [loading, setLoading] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [remember, setRemember] = useState(false);
-    const [alertModalData, setAlertModalData] = useState({type: "error", message: ""});
-    const [isOpenAlertModal, setIsOpenAlertModal] = useState(false);
+    const {
+        toggle: showPassword,
+        handleToggle: setShowPassword
+    } = useToggle();
+
     const [errors, setErrors] = useState({
         email: "",
         password: ""
@@ -33,10 +33,6 @@ export default function Login() {
     // login handler
     const submitHandler = async event => {
         event.preventDefault();
-
-        if (loading) return;
-
-        setLoading(true);
 
         const trimmedEmail = email.trim().toLowerCase();
         const trimPassword = password.trim();
@@ -102,12 +98,8 @@ export default function Login() {
 
     return (
         <>
-            {/* alert modal for state */}
-            <AlertModal {...alertModalData} isOpen={isOpenAlertModal} setIsOpen={setIsOpenAlertModal} setData={setAlertModalData}/>
-
             {/* logo */}
             <Image
-
                 alt="logo"
                 height={240}
                 width={240}
@@ -116,19 +108,32 @@ export default function Login() {
                 className={"max-w-10 top-2 left-2 absolute xs:top-5 xs:left-5 xs:max-w-20"}
             />
 
-            <section className="flex items-center justify-center min-h-screen">
-                <div className="max-w-9/10 w-full xs:max-w-sm sm:max-w-md bg-white/10 rounded-2xl shadow-lg space-y-6 p-3 xs:p-8">
-                    <h2 className="text-2xl font-bold text-center">خوش اومدی</h2>
-                    <p className="text-sm text-center text-secondary-txt">
+            <section
+                className="flex items-center justify-center min-h-screen"
+            >
+                <div
+                    className="max-w-9/10 w-full xs:max-w-sm sm:max-w-md bg-white/10 rounded-2xl shadow-lg space-y-6 p-3 xs:p-8"
+                >
+                    <h2
+                        className="text-2xl font-bold text-center">
+                        خوش اومدی
+                    </h2>
+                    <p
+                        className="text-sm text-center text-secondary-txt"
+                    >
                         به پنل مدیریت وارد شو.
                     </p>
 
-                    <form className="space-y-6" onSubmit={submitHandler}>
+                    <form
+                        action={login}
+                        className="space-y-6"
+                        onSubmit={submitHandler}
+                    >
                         <div>
                             <Input
-                                type={"text"}
+                                as={"input"}
+                                inputType={"text"}
                                 id={"email"}
-                                value={email}
                                 name={"email"}
                                 ref={inputRef}
                                 label={"ایمیل"}
@@ -142,14 +147,17 @@ export default function Login() {
 
                         <div>
                             <Input
+                                as={"input"}
                                 id="password"
                                 label={"پسورد"}
-                                value={password}
                                 name={"password"}
                                 placeholder={"******"}
                                 parentClassName={"relative"}
                                 onChange={setPasswordHandler}
-                                type={showPassword ? "text" : "password"}
+                                autoComplete={"current-password"}
+                                inputType={
+                                    showPassword ? "text" : "password"
+                                }
                                 dir={"ltr"}
                                 hasError={errors.password}
                             >
@@ -167,20 +175,14 @@ export default function Login() {
                         <div className="flex items-center justify-between text-sm text-gray-400">
                             <CheckBox
                                 id={"remember"}
-                                checked={remember}
-                                onChange={setRemember}
+                                name={"remember"}
                                 label={"منو یادت باشه"}
                             />
                         </div>
 
-                        <Button
-                            as={"button"}
-                            text={"ورود"}
-                            loading={loading}
-                            btnStyle={"fill"}
-                            disabled={loading}
-                            buttonType={"submit"}
-                        />
+                        <FormButton>
+                            ورود
+                        </FormButton>
                     </form>
                 </div>
             </section>

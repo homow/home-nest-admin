@@ -21,6 +21,7 @@ export default function FormButton(
         <Button
             as={"button"}
             loading={pending}
+            disabled={pending}
             buttonType={"submit"}
             className={className}
             btnStyle={btnStyle || "fill"}

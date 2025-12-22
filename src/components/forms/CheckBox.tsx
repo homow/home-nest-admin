@@ -6,7 +6,7 @@ interface Props {
     id?: string;
     name?: string;
     label?: string;
-    checked: boolean;
+    checked?: boolean;
     className?: string;
     initValue?: boolean;
     onChange?: UseToggleFn;

@@ -1,25 +1,9 @@
 "use client";
 
 import {ErrorMessageInputs, RedStarField} from "../ui/Fragments";
-import type {ChangeEventHandler} from "react";
+import type {ChangeEventHandler, RefObject} from "react";
 import {MainComponentProps} from "@/types/ui";
 import {cn} from "@/lib/utils";
-
-interface Props extends MainComponentProps {
-    as: "input" | "textarea";
-    id: string;
-    label: string;
-    value: string;
-    name?: string;
-    inputType: string;
-    errorMsg?: string;
-    required?: boolean;
-    placeholder: string;
-    autoComplete?: string;
-    parentClassName?: string;
-    hasError?: boolean | string;
-    onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-}
 
 export default function Input(
     {
@@ -38,6 +22,8 @@ export default function Input(
         children,
         hasError,
         errorMsg,
+        dir,
+        ref,
     }: Props
 ) {
     const Component = as === "input" ? "input" : "textarea";
@@ -57,6 +43,8 @@ export default function Input(
                     {required && <RedStarField/>}
                 </label>
                 <Component
+                    ref={ref}
+                    dir={dir}
                     {...(inputType !== "file" && {value: value ?? ""})}
                     onChange={onChange}
                     id={id}

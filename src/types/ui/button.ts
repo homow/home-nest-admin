@@ -1,3 +1,4 @@
+import type {NoLimitArgsFn} from "@/types/ui/common";
 import type {ReactNode, RefObject} from "react";
 
 type BaseProps = {
@@ -25,7 +26,7 @@ interface ButtonProps extends InitType {
     as: "button";
     buttonType?: "button" | "submit" | "reset";
     url?: never;
-    onClick?: () => void;
+    onClick?: NoLimitArgsFn;
     btnRef?: RefObject<HTMLButtonElement | null>;
     linkRef?: never;
 }
