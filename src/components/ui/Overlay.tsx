@@ -1,4 +1,4 @@
-import {cn} from "@/lib/utils/ui-utils";
+import {cn} from "@/lib/ui-utils/ui-utils";
 
 type ZNumber = 0 | 10 | 20 | 30 | 40 | 50;
 type ZIndex = `z-${ZNumber}`;

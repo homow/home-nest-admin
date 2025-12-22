@@ -2,7 +2,7 @@
 
 import {Activity, useEffect, useRef} from "react";
 import {createPortal} from "react-dom";
-import {cn} from "@/lib/utils";
+import {cn} from "@/lib/ui-utils";
 import {NoLimitArgsFn} from "@/types/ui";
 import Icon from "@/components/icon/Icon";
 

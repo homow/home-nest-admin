@@ -1,6 +1,6 @@
 import type {UseToggleFn} from "@/types/ui";
 import {RefObject} from "react";
-import {cn} from "@/lib/utils";
+import {cn} from "@/lib/ui-utils";
 
 interface Props {
     id?: string;

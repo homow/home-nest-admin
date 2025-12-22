@@ -2,7 +2,7 @@
 
 import {create} from "zustand";
 import type {UseToggleFn} from "@/types/ui";
-import {applyCustomSpace} from "@/lib/utils";
+import {applyCustomSpace} from "@/lib/ui-utils";
 
 interface CollapsedState {
     collapsed: boolean;

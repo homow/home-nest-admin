@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ButtonContent from "./ButtonContent";
-import buttonStyle from "@/lib/utils/buttonHelper";
+import buttonStyle from "@/lib/ui-utils/buttonHelper";
 import type {ButtonComponentProps} from "@/types/ui";
 
 function Button(

@@ -1,6 +1,13 @@
 "use client";
 
-import {useEffect, useState, useRef, useActionState} from "react";
+import {
+    useEffect,
+    useState,
+    useRef,
+    useActionState,
+    type ChangeEvent,
+    type FormEvent
+} from "react";
 import CheckBox from "@/components/forms/CheckBox";
 import FormButton from "@/components/button/FormButton";
 import Input from "@/components/forms/Input";
@@ -8,6 +15,7 @@ import Image from "next/image";
 import useToggle from "@/hooks/useToggle";
 import {login} from "@/actions/login";
 import {LoginFormDataTypes} from "@/types/auth";
+import {emailRegex} from "@/lib/auth-utils";
 
 const initValue: LoginFormDataTypes = {
     success: false,
@@ -22,68 +30,64 @@ const initValue: LoginFormDataTypes = {
 
 export default function Login() {
     const [state, formAction] = useActionState(login, initValue);
-
+    const [password, setPassword] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [errors, setErrors] = useState({
+        email: "",
+        password: ""
+    });
     const {
         toggle: showPassword,
         handleToggle: setShowPassword
     } = useToggle();
 
-    const [errors, setErrors] = useState({
-        email: "",
-        password: ""
-    });
-
     // ref
     const inputRef = useRef<HTMLInputElement>(null);
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     // focus
     useEffect(() => {
         inputRef?.current?.focus();
     }, []);
 
-    const submitHandler = async event => {
+    function submitHandler(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+        const trimmedEmail: string = email?.trim()?.toLowerCase();
+        const trimPassword: string = password?.trim();
 
         const newErrors = {
             email: trimmedEmail ? "" : "ایمیل رو وارد کن",
             password: trimPassword ? "" : "پسورد رو وارد کن",
         }
 
-        if (newErrors.email || newErrors.password) {
-            setLoading(false);
-            setErrors(newErrors);
-            return;
-        }
-
         if (!emailRegex.test(trimmedEmail)) {
-            setLoading(false);
             setErrors({...newErrors, email: "فرمت ایمیل اشتباهه"});
             return;
         }
 
-        const userInfo = {
-            email: email.trim().toLowerCase(),
-            password: password.trim(),
-            remember
-        };
-
-        setLoading(false);
+        formAction(new FormData(event.currentTarget));
     }
 
     // set email handler
-    function setEmailHandler(event) {
-        const val = event.target.value;
+    function setEmailHandler(event: ChangeEvent<HTMLInputElement>) {
+        const val: string = event.target.value;
 
         setEmail(val);
 
-        if (errors.email.includes("فرمت") && emailRegex.test(val.trim())) {
+        if (
+            errors.email.includes("فرمت") &&
+            emailRegex.test(val.trim())
+        ) {
             setErrors({
                 ...errors,
                 email: ""
             });
         }
 
-        if (errors.email.includes("وارد") && val.trim()) {
+        if (
+            errors.email.includes("وارد") &&
+            val.trim()
+        ) {
             setErrors({
                 ...errors,
                 email: ""
@@ -92,15 +96,20 @@ export default function Login() {
     }
 
     // set password handler
-    function setPasswordHandler(event) {
-        const val = event.target.value;
+    function setPasswordHandler(event: ChangeEvent<HTMLInputElement>) {
+        const val: string = event.target.value;
 
         setPassword(val);
 
-        if (val.trim() && errors.password) setErrors({
-            ...errors,
-            password: ""
-        });
+        if (
+            val.trim() &&
+            errors.password
+        ) {
+            setErrors({
+                ...errors,
+                password: ""
+            });
+        }
     }
 
     return (
@@ -133,24 +142,28 @@ export default function Login() {
                     </p>
 
                     <form
-                        action={login}
-                        className="space-y-6"
                         onSubmit={submitHandler}
+                        className="space-y-6"
                     >
                         <Input
-                            as={"input"}
+                            value={email}
+                            dir={"ltr"}
                             id={"email"}
+                            as={"input"}
                             name={"email"}
+                            label={"ایمیل"}
                             inputType={"text"}
                             inputRef={inputRef}
-                            label={"ایمیل"}
                             autoComplete={"email"}
+                            hasError={
+                                errors.email || state.emailError
+                            }
                             placeholder={"you@example.com"}
-                            dir={"ltr"}
-                            hasError={errors.email}
+                            onChangeInput={setEmailHandler}
                         />
 
                         <Input
+                            value={password}
                             as={"input"}
                             id="password"
                             label={"پسورد"}
@@ -162,7 +175,10 @@ export default function Login() {
                                 showPassword ? "text" : "password"
                             }
                             dir={"ltr"}
-                            hasError={errors.password}
+                            hasError={
+                                errors.password || state.passwordError
+                            }
+                            onChangeInput={setPasswordHandler}
                         >
                             <button
                                 type="button"

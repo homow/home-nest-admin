@@ -1,7 +1,7 @@
 "use client";
 
 import type {SideBarDataTypes} from "@/types/ui";
-import {cn} from "@/lib/utils/ui-utils";
+import {cn} from "@/lib/ui-utils/ui-utils";
 import NavLinkClient from "@/components/ui/NavLinkClient";
 import Icon from "@/components/icon/Icon";
 import useSidebarStore from "@/store/sidebarStore";

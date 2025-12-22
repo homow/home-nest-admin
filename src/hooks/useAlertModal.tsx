@@ -1,7 +1,7 @@
 'use client';
 
 import AlertModal, {SetDataTypes} from "@/components/modals/AlertModal";
-import type {AlertModalType} from "@/lib/utils";
+import type {AlertModalType} from "@/lib/ui-utils";
 import useToggle from "./useToggle";
 import {useState} from "react";
 

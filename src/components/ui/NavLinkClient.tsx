@@ -3,7 +3,7 @@
 import type {MainComponentProps} from "@/types/ui"
 import useIsExactMatch from "@/hooks/useIsExactMatch";
 import Link from "next/link";
-import {cn} from "@/lib/utils/ui-utils";
+import {cn} from "@/lib/ui-utils/ui-utils";
 
 interface Props extends MainComponentProps {
     url: string;

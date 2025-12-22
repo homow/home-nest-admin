@@ -2,7 +2,7 @@
 
 import {useEffect, useEffectEvent} from "react";
 import useToggle from "@/hooks/useToggle";
-import {cn} from "@/lib/utils/ui-utils";
+import {cn} from "@/lib/ui-utils/ui-utils";
 
 export default function OnlineUi() {
     const {toggle: online, handleToggle: setOnline} = useToggle();

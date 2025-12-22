@@ -1,6 +1,7 @@
 "use server";
 
 import {LoginFormDataTypes} from "@/types/auth";
+import {emailRegex} from "@/lib/auth-utils";
 
 export async function login(
     prevState: LoginFormDataTypes,
@@ -20,13 +21,26 @@ export async function login(
     if (newErrors.email || newErrors.password) {
         return {
             success: false,
-            emailError: "ایمیل باید وارد بشه",
+            emailError: newErrors.email,
+            passwordError: newErrors.password,
             fields: {
                 email: prevState.fields.email,
                 password: prevState.fields.password,
                 remember: prevState.fields.remember,
             }
         };
+    }
+
+    if (!emailRegex.test(trimmedEmail)) {
+        return {
+            success: false,
+            emailError: "فرمت ایمیل اشتباهه",
+            fields: {
+                email: prevState.fields.email,
+                password: prevState.fields.password,
+                remember: prevState.fields.remember,
+            }
+        }
     }
 
     return {
