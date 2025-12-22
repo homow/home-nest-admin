@@ -1,16 +1,28 @@
 "use client";
 
-import AlertModal from "@/components/modals/AlertModal";
+import {useEffect, useState, useRef, useActionState} from "react";
 import CheckBox from "@/components/forms/CheckBox";
-import {useEffect, useState, useRef} from "react";
-import Button from "@/components/button/Button";
+import FormButton from "@/components/button/FormButton";
 import Input from "@/components/forms/Input";
 import Image from "next/image";
 import useToggle from "@/hooks/useToggle";
 import {login} from "@/actions/login";
-import FormButton from "@/components/button/FormButton";
+import {LoginFormDataTypes} from "@/types/auth";
+
+const initValue: LoginFormDataTypes = {
+    success: false,
+    emailError: "",
+    passwordError: "",
+    fields: {
+        email: "",
+        password: "",
+        remember: false
+    }
+}
 
 export default function Login() {
+    const [state, formAction] = useActionState(login, initValue);
+
     const {
         toggle: showPassword,
         handleToggle: setShowPassword
@@ -30,12 +42,7 @@ export default function Login() {
         inputRef?.current?.focus();
     }, []);
 
-    // login handler
     const submitHandler = async event => {
-        event.preventDefault();
-
-        const trimmedEmail = email.trim().toLowerCase();
-        const trimPassword = password.trim();
 
         const newErrors = {
             email: trimmedEmail ? "" : "ایمیل رو وارد کن",

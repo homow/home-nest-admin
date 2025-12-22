@@ -23,7 +23,8 @@ interface TextAreaProps extends BaseInputPropsType {
     as: "textarea";
     cols?: number;
     rows?: number;
-    onChangeTextArea?: ChangeEventHandler<HTMLTextAreaElement | null>;
+    textAreaRef?: RefObject<HTMLTextAreaElement | null>;
+    onChangeTextArea?: ChangeEventHandler<HTMLTextAreaElement>;
     inputRef?: never;
     inputType?: never;
     onChangeInput?: never;
