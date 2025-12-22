@@ -1,14 +1,14 @@
 "use client";
 
-import {ErrorMessageInputs, RedStarField} from "../ui/Fragments";
-import type {ChangeEventHandler, RefObject} from "react";
-import {MainComponentProps} from "@/types/ui";
+import type {InputPropsType} from "@/types/ui";
 import {cn} from "@/lib/utils";
+import InputContent from "@/components/forms/InputContent";
 
 export default function Input(
     {
         as,
-        onChange,
+        onChangeInput,
+        onChangeTextArea,
         name,
         inputType,
         id,
@@ -23,50 +23,67 @@ export default function Input(
         hasError,
         errorMsg,
         dir,
-        ref,
-    }: Props
+        inputRef,
+        textAreaRef,
+        cols,
+        rows,
+    }: InputPropsType
 ) {
-    const Component = as === "input" ? "input" : "textarea";
+    const styles: string = cn(
+        "mt-1 block bg-primary-bg/40 w-full rounded-lg border border-gray-300 px-4 py-2 placeholder-secondary-txt focus:border-violet-500 focus:ring-1 focus:ring-violet-500 outline-none transition resize-none",
+        hasError && "border-rose-600 bg-rose-600/10",
+        className,
+    );
 
-    return (
-        <div>
-            <div
-                className={cn(
-                    parentClassName
-                )}
+    if (as === "input") {
+        return (
+            <InputContent
+                id={id}
+                label={label}
+                errorMsg={errorMsg}
+                required={required}
+                hasError={hasError}
+                parentClassName={parentClassName}
             >
-                <label
-                    htmlFor={id}
-                    className="flex flex-row gap-1 text-sm"
-                >
-                    {label}
-                    {required && <RedStarField/>}
-                </label>
-                <Component
-                    ref={ref}
+                <input
                     dir={dir}
-                    {...(inputType !== "file" && {value: value ?? ""})}
-                    onChange={onChange}
                     id={id}
                     name={name}
+                    ref={inputRef}
                     type={inputType}
-                    autoComplete={autoComplete ?? "off"}
+                    className={styles}
+                    onChange={onChangeInput}
                     placeholder={placeholder ?? ""}
-                    className={
-                        cn(
-                            "mt-1 block bg-primary-bg/40 w-full rounded-lg border border-gray-300 px-4 py-2 placeholder-secondary-txt focus:border-violet-500 focus:ring-1 focus:ring-violet-500 outline-none transition",
-                            hasError && "border-rose-600 bg-rose-600/10",
-                            className,
-                        )
-                    }
+                    autoComplete={autoComplete ?? "off"}
+                    {...(inputType !== "file" && {value: value ?? ""})}
                 />
                 {children}
-            </div>
-            {hasError && (
-                <ErrorMessageInputs
-                    msg={errorMsg}
+            </InputContent>
+        );
+    } else {
+        return (
+            <InputContent
+                id={id}
+                label={label}
+                errorMsg={errorMsg}
+                required={required}
+                hasError={hasError}
+                parentClassName={parentClassName}
+            >
+                <textarea
+                    id={id}
+                    dir={dir}
+                    name={name}
+                    cols={cols ?? 30}
+                    rows={rows ?? 10}
+                    ref={textAreaRef}
+                    className={styles}
+                    onChange={onChangeTextArea}
+                    placeholder={placeholder ?? ""}
+                    autoComplete={autoComplete ?? "off"}
                 />
-            )}
-        </div>
-    );
+                {children}
+            </InputContent>
+        );
+    }
 };

@@ -22,5 +22,11 @@ export default function buttonStyle(
         primary: "text-violet-600 hover:border-violet-700 active:text-violet-900 disabled:text-neutral-300 focus-visible:text-violet-700"
     }[btnStyle];
 
-    return cn("flex items-center gap-2 h-10 text-center font-medium px-4 py-1.5 cursor-pointer transition-all outline-none md:h-11", buttonStyle, className, (loading || disabled) && "cursor-not-allowed pointer-events-none");
+    return cn(
+        "flex items-center gap-2 h-10 text-center font-medium px-4 py-1.5 cursor-pointer transition-all outline-none md:h-11",
+        buttonStyle,
+        className,
+        (loading || disabled)
+        && "cursor-not-allowed pointer-events-none"
+    );
 };
