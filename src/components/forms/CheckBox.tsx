@@ -1,5 +1,6 @@
-import {cn} from "@/lib/utils";
+import type {UseToggleFn} from "@/types/ui";
 import {RefObject} from "react";
+import {cn} from "@/lib/utils";
 
 interface Props {
     id?: string;
@@ -7,6 +8,8 @@ interface Props {
     label?: string;
     checked: boolean;
     className?: string;
+    initValue?: boolean;
+    onChange?: UseToggleFn;
     ref?: RefObject<HTMLInputElement>;
 }
 
@@ -17,6 +20,8 @@ export default function CheckBox(
         className,
         id = "checkbox",
         label = "انتخاب کن",
+        onChange,
+        initValue,
     }: Props
 ) {
     return (
@@ -30,6 +35,8 @@ export default function CheckBox(
             }
         >
             <input
+                checked={initValue}
+                onChange={event => onChange && onChange(event.target.checked)}
                 name={name}
                 ref={ref}
                 id={id}

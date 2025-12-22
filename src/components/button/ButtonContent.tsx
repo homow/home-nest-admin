@@ -6,7 +6,7 @@ export default function ButtonContent(
         rightIcon,
         leftIcon,
         loading,
-        text,
+        children,
         textStyle
     }: ButtonPrimaryProps
 ) {
@@ -20,7 +20,7 @@ export default function ButtonContent(
                         className="animate-spin [animation-duration:2s]"
                     />
                 ) : (
-                    <span className={textStyle}>{text}</span>
+                    <span className={textStyle}>{children}</span>
                 )}
             </span>
             {(leftIcon && !loading) && <Icon icon={leftIcon}/>}

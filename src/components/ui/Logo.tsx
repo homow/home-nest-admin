@@ -1,8 +1,8 @@
-import type {ChildrenComponentProps} from "@/types/ui";
+import type {MainComponentProps} from "@/types/ui";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Logo({children}: ChildrenComponentProps) {
+export default function Logo({children}: MainComponentProps) {
     return (
         <Link
             href="/"
@@ -12,10 +12,10 @@ export default function Logo({children}: ChildrenComponentProps) {
         >
             <Image
                 preload
-                sizes={"32px"}
                 width={128}
                 height={128}
                 quality={75}
+                sizes={"32px"}
                 alt="لوگوی سایت"
                 src="/images/shared/logo.webp"
                 className={"object-contain size-8"}

@@ -8,7 +8,7 @@ function Button(
         as = "button",
         url,
         btnStyle,
-        text,
+        children,
         textStyle,
         className,
         buttonType = "button",
@@ -39,11 +39,12 @@ function Button(
             >
                 <ButtonContent
                     loading={loading}
-                    text={text}
                     rightIcon={rightIcon}
                     leftIcon={leftIcon}
                     textStyle={textStyle}
-                />
+                >
+                    {children}
+                </ButtonContent>
             </Link>
         );
     } else if (as === "a") {
@@ -58,11 +59,12 @@ function Button(
             >
                 <ButtonContent
                     loading={loading}
-                    text={text}
                     rightIcon={rightIcon}
                     leftIcon={leftIcon}
                     textStyle={textStyle}
-                />
+                >
+                    {children}
+                </ButtonContent>
             </a>
         );
     } else {
@@ -76,11 +78,12 @@ function Button(
             >
                 <ButtonContent
                     loading={loading}
-                    text={text}
                     rightIcon={rightIcon}
                     leftIcon={leftIcon}
                     textStyle={textStyle}
-                />
+                >
+                    {children}
+                </ButtonContent>
             </button>
         );
     }
