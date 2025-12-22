@@ -9,15 +9,17 @@ import {
     type ChangeEvent,
     type FormEvent
 } from "react";
-import CheckBox from "@/components/forms/CheckBox";
+
 import FormButton from "@/components/button/FormButton";
-import Input from "@/components/forms/Input";
-import Image from "next/image";
-import useToggle from "@/hooks/useToggle";
-import {login} from "@/actions/login";
-import {LoginFormDataTypes} from "@/types/auth";
-import {emailRegex} from "@/lib/auth-utils";
+import CheckBox from "@/components/forms/CheckBox";
 import useAlertModal from "@/hooks/useAlertModal";
+import {LoginFormDataTypes} from "@/types/auth";
+import Input from "@/components/forms/Input";
+import {emailRegex} from "@/lib/auth-utils";
+import useToggle from "@/hooks/useToggle";
+import {redirect} from "next/navigation";
+import {login} from "@/actions/login";
+import Image from "next/image";
 
 const initValue: LoginFormDataTypes = {
     success: false,
@@ -130,6 +132,8 @@ export default function Login() {
             changeAlertModalData({
                 isOpen: true,
             });
+
+            setTimeout(() => redirect("/"), 4000);
         }
         // eslint-disable-next-line
     }, [state]);
@@ -140,6 +144,7 @@ export default function Login() {
 
             {/* logo */}
             <Image
+                loading={"eager"}
                 alt="logo"
                 height={240}
                 width={240}

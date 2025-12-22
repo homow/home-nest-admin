@@ -6,7 +6,10 @@ import useToggle from "@/hooks/useToggle";
 import {useEffect} from "react";
 
 export default function NotFound() {
-    const {toggle: hasBackPath, handleToggle: setHasBackPath} = useToggle();
+    const {
+        toggle: hasBackPath,
+        handleToggle: setHasBackPath
+    } = useToggle();
     const router = useRouter();
 
     useEffect(() => {

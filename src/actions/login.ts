@@ -2,12 +2,11 @@
 
 import {LoginFormDataTypes} from "@/types/auth";
 import {emailRegex} from "@/lib/auth-utils";
-import {redirect} from "next/navigation";
 
 export async function login(
     prevState: LoginFormDataTypes,
     formData: FormData,
-) {
+): Promise<LoginFormDataTypes> {
     const email = formData.get("email");
     const password = formData.get("password");
 
@@ -44,7 +43,12 @@ export async function login(
         }
     }
 
-    await new Promise(res => setTimeout(res, 4000));
-
-    redirect("/");
+    return {
+        success: true,
+        fields: {
+            email: "",
+            password: "",
+            remember: false,
+        }
+    }
 }
