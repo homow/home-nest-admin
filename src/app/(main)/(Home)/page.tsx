@@ -10,7 +10,7 @@ export default function Home() {
                 height={240}
                 quality={80}
                 loading={"eager"}
-                alt="لوگوی سایتش آشیانه"
+                alt="لوگوی سایت آشیانه"
                 className={"size-15 object-contain"}
                 src="/images/shared/logo.webp"
             />

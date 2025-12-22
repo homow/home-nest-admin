@@ -20,6 +20,7 @@ import useToggle from "@/hooks/useToggle";
 import {redirect} from "next/navigation";
 import {login} from "@/actions/login";
 import Image from "next/image";
+import useSetClientTitle from "@/hooks/useSetClientTitle";
 
 const initValue: LoginFormDataTypes = {
     success: false,
@@ -51,6 +52,8 @@ export default function Login() {
 
     // ref
     const inputRef = useRef<HTMLInputElement>(null);
+
+    useSetClientTitle("صفحه لاگین");
 
     // focus
     useEffect(() => {
