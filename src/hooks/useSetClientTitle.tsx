@@ -1,9 +1,9 @@
 'use client';
 
-import {useLayoutEffect} from "react";
+import {useEffect} from "react";
 
 export default function useSetClientTitle(title: string) {
-    useLayoutEffect(() => {
+    useEffect(() => {
         document.title = `${title} | آشیانه`;
     }, [title]);
 };
