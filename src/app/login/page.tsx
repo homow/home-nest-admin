@@ -60,6 +60,11 @@ export default function Login() {
             password: trimPassword ? "" : "پسورد رو وارد کن",
         }
 
+        if (newErrors.email || newErrors.password) {
+            setErrors(newErrors);
+            return;
+        }
+
         if (!emailRegex.test(trimmedEmail)) {
             setErrors({...newErrors, email: "فرمت ایمیل اشتباهه"});
             return;
