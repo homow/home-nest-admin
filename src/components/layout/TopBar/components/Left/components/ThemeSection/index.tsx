@@ -16,7 +16,9 @@ export default function ThemeSection() {
 
     if (!toggle) return null;
 
-    const currentTheme: string | undefined = theme === "system" ? systemTheme : theme;
+    const currentTheme: string | undefined = theme === "system"
+        ? systemTheme :
+        theme;
 
     if (!currentTheme) return null;
 

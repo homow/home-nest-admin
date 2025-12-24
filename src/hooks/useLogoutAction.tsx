@@ -1,10 +1,10 @@
 'use client';
 
-import useAlertModal from "@/hooks/useAlertModal";
 import ConfirmModal from "@/components/modals/ConfirmModal";
-import useToggle from "@/hooks/useToggle";
-import {useRouter} from "next/navigation";
+import useAlertModal from "@/hooks/useAlertModal";
 import Overlay from "@/components/ui/Overlay";
+import {useRouter} from "next/navigation";
+import useToggle from "@/hooks/useToggle";
 
 export default function useLogoutAction() {
     const {
