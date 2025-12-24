@@ -1,24 +1,24 @@
 "use client";
 
-import {useTheme} from "next-themes";
+// import {useEffect, useState} from "react";
 import Icon from "@/components/icon/Icon";
-import useToggle from "@/hooks/useToggle";
-import {useEffect} from "react";
+import {useTheme} from "next-themes";
 
 export default function ThemeSection() {
-    const {toggle, handleToggle} = useToggle();
+    // const [toggle, handleToggle] = useState<boolean>(false);
     const {theme, setTheme, systemTheme} = useTheme();
 
-    useEffect(() => {
-        handleToggle(true);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    // useEffect(() => {
+    //     queueMicrotask(() => {
+    //         handleToggle(true);
+    //     });
+    // }, []);
 
-    if (!toggle) return null;
+    // if (!toggle) return null;
 
     const currentTheme: string | undefined = theme === "system" ? systemTheme : theme;
 
-    if (!currentTheme) return null;
+    // if (!currentTheme) return null;
 
     return (
         <div

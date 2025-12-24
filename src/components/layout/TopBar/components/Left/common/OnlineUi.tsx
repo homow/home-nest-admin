@@ -1,17 +1,18 @@
 "use client";
 
-import {useEffect, useEffectEvent} from "react";
-import useToggle from "@/hooks/useToggle";
+import {useEffect, useEffectEvent, useState} from "react";
 import {cn} from "@/lib/ui-utils/ui-utils";
 
 export default function OnlineUi() {
-    const {toggle: online, handleToggle: setOnline} = useToggle();
+    const [online, setOnline] = useState<boolean>(false);
 
     const handleOnline = useEffectEvent(() => setOnline(true));
     const handleOffline = useEffectEvent(() => setOnline(false));
 
     useEffect(() => {
-        setOnline(navigator.onLine);
+        queueMicrotask(() => {
+            setOnline(navigator.onLine);
+        });
 
         window.addEventListener("online", handleOnline);
         window.addEventListener("offline", handleOffline);
@@ -20,7 +21,6 @@ export default function OnlineUi() {
             window.removeEventListener("online", handleOnline);
             window.removeEventListener("offline", handleOffline);
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
