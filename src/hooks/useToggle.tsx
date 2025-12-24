@@ -13,7 +13,7 @@ function useToggle(
 ) {
     const [toggle, setToggle] = useState<boolean>(initialValue);
 
-    function handleToggle(value?: boolean): void {
+    function handleToggle(value?: boolean) {
         if (typeof value === "boolean") {
             setToggle(value);
         } else {

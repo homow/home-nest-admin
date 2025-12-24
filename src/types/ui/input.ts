@@ -1,5 +1,5 @@
-import type {MainComponentProps} from "@/types/ui/common";
-import {ChangeEventHandler, RefObject} from "react";
+import type {ChangeEventHandler, Dispatch, RefObject, SetStateAction} from "react";
+import type {MainComponentProps} from "./common";
 
 export interface InitInputProps extends MainComponentProps {
     id: string;
@@ -38,6 +38,23 @@ interface DefualtInputProps extends BaseInputPropsType {
     rows?: never;
     textAreaRef?: never;
     onChangeTextArea?: never;
+}
+
+export interface SelectBoxOptionsType {
+    value: string;
+    label: string;
+    icon?: string;
+}
+
+export interface SelectBoxPropsType {
+    label: string;
+    options: SelectBoxOptionsType[];
+    value: string;
+    onChange: Dispatch<SetStateAction<string>>;
+    className?: string;
+    helperText?: string;
+    hasError?: boolean;
+    disabled?: boolean;
 }
 
 export type InputPropsType = DefualtInputProps | TextAreaProps;

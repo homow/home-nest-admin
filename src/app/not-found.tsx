@@ -1,20 +1,17 @@
 "use client";
 
 import {useRouter} from "next/navigation";
+import {useEffect, useState} from "react";
 import Button from "@/components/button/Button";
-import useToggle from "@/hooks/useToggle";
-import {useEffect} from "react";
 
 export default function NotFound() {
-    const {
-        toggle: hasBackPath,
-        handleToggle: setHasBackPath
-    } = useToggle();
+    const [hasBackPath, setHasBackPath] = useState<boolean>(false);
     const router = useRouter();
 
     useEffect(() => {
-        setHasBackPath(window.history.length > 1);
-        // eslint-disable-next-line
+        queueMicrotask(() => {
+            setHasBackPath(window.history.length > 1);
+        });
     }, []);
 
     const goBack = () => router.back();

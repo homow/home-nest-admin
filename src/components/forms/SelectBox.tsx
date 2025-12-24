@@ -66,7 +66,7 @@ export default function SelectBox(
         setOpen(!open);
     }
 
-    useEffect((): void => {
+    useEffect(() => {
         optionRefs.current = optionRefs.current.slice(0, options.length);
     }, [options]);
 
@@ -81,14 +81,14 @@ export default function SelectBox(
     }, [focusedIndex]);
 
     // clear focus when closes box
-    useEffect((): void => {
+    useEffect(() => {
         queueMicrotask(() => {
             setFocusedIndex(-1);
         });
     }, [open]);
 
     // close component when click the outside
-    useEffect((): () => void => {
+    useEffect(() => {
         function handleClickOutside(e: MouseEvent) {
             if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
                 setOpen(false);
@@ -97,7 +97,7 @@ export default function SelectBox(
 
         document.addEventListener("mousedown", handleClickOutside);
 
-        return (): void => {
+        return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         }
     }, []);
@@ -130,7 +130,8 @@ export default function SelectBox(
                 aria-controls="select-options"
                 className={cn(
                     "flex justify-between text-neutral-500 font-medium items-center w-full rounded-lg border border-gray-300 outline-none px-4 py-2 text-right bg-primary-bg/40 focus:border-violet-500 focus-visible:ring-1 focus:ring-violet-500",
-                    "hover:text-neutral-700 transition-all", open && "ring-1 ring-violet-500 border-violet-500 rounded-b-none"
+                    "hover:text-neutral-700 transition-all",
+                    open && "ring-1 ring-violet-500 border-violet-500 rounded-b-none"
                 )}
             >
                 <span

@@ -237,7 +237,9 @@ export default function Login() {
                             </button>
                         </Input>
 
-                        <div className="flex items-center justify-between text-sm text-gray-400">
+                        <div
+                            className="flex items-center justify-between text-sm text-gray-400"
+                        >
                             <CheckBox
                                 id={"remember"}
                                 name={"remember"}
