@@ -7,6 +7,7 @@ import {cn} from "@/lib/ui-utils/ui-utils";
 
 interface Props extends MainComponentProps {
     url: string;
+    title?: string;
     onClick?: () => void;
     isPrefetch?: boolean;
     activeStyle?: string;
@@ -17,6 +18,7 @@ interface Props extends MainComponentProps {
 export default function NavLinkClient(
     {
         url,
+        title,
         onClick,
         children,
         className,
@@ -30,6 +32,9 @@ export default function NavLinkClient(
 
     return (
         <Link
+            title={
+                typeof children === "string" ? children : title
+            }
             onClick={onClick}
             prefetch={isPrefetch}
             href={url}

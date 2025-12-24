@@ -5,7 +5,7 @@ export default function CreateProperties() {
         <section
             className={"main-components"}
         >
-            CreateProperties
+            ساخت ملک جدید
         </section>
     );
 };

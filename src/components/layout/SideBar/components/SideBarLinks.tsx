@@ -49,6 +49,7 @@ export default function SideBarLinks({data}: Props) {
             >
                 {dataLinks.length > 0 && dataLinks.map(link => (
                     <li
+                        title={link.text}
                         key={link.text}
                     >
                         <NavLinkClient
