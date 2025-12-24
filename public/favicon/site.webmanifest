@@ -1,7 +1,7 @@
 {
   "name": "HomeNest Admin Panel",
-  "short_name": "HomeNest",
-  "description": "پنل مدیریتی HomeNest برای مدیریت سریع و امن داده‌ها با Supabase و React.",
+  "short_name": "HomeNestAdmin",
+  "description": "پنل مدیریتی HomeNest برای مدیریت سریع و امن داده‌ها با Next.",
   "dir": "rtl",
   "lang": "fa",
   "display": "standalone",
@@ -13,40 +13,35 @@
   "categories": ["productivity", "utilities", "admin", "management"],
   "icons": [
     {
-      "src": "/favicon/icon-72x72.png",
-      "sizes": "72x72",
+      "src": "/favicon/apple-touch-icon.png",
+      "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "/favicon/icon-96x96.png",
-      "sizes": "96x96",
+      "src": "/favicon/favicon-16x16.png",
+      "sizes": "16x16",
       "type": "image/png"
     },
     {
-      "src": "/favicon/icon-128x128.png",
-      "sizes": "128x128",
+      "src": "/favicon/favicon-32x32.png",
+      "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "/favicon/icon-192x192.png",
+      "src": "/favicon/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/favicon/icon-256x256.png",
-      "sizes": "256x256",
-      "type": "image/png"
-    },
-    {
-      "src": "/favicon/icon-384x384.png",
-      "sizes": "384x384",
-      "type": "image/png"
-    },
-    {
-      "src": "/favicon/icon-512x512.png",
+      "src": "/favicon/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
     }
   ]
 }
