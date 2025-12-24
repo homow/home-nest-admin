@@ -11,7 +11,7 @@ export interface InitInputProps extends MainComponentProps {
 
 interface BaseInputPropsType extends InitInputProps {
     value?: string;
-    name?: string;
+    name: string;
     disabled?: boolean;
     placeholder: string;
     dir?: "rtl" | "ltr";
