@@ -18,10 +18,9 @@ function Button(
         loading,
         onClick,
         btnRef,
-        linkRef
+        linkRef,
     }: ButtonComponentProps
 ) {
-
     const classNames: string = buttonStyle({
         btnStyle,
         className,

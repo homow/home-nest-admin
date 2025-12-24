@@ -1,4 +1,4 @@
-import type {ChangeEventHandler, Dispatch, RefObject, SetStateAction} from "react";
+import type {ChangeEventHandler, RefObject} from "react";
 import type {MainComponentProps} from "./common";
 
 export interface InitInputProps extends MainComponentProps {
@@ -49,8 +49,8 @@ export interface SelectBoxOptionsType {
 export interface SelectBoxPropsType {
     label: string;
     options: SelectBoxOptionsType[];
-    value: string;
-    onChange: Dispatch<SetStateAction<string>>;
+    value: SelectBoxOptionsType["value"];
+    onChange: (value: SelectBoxPropsType["value"]) => void;
     className?: string;
     helperText?: string;
     hasError?: boolean;

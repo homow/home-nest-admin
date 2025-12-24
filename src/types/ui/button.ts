@@ -29,6 +29,7 @@ interface ButtonProps extends InitType {
     onClick?: NoLimitArgsFn | ((event: MouseEvent<HTMLButtonElement>) => void);
     btnRef?: RefObject<HTMLButtonElement | null>;
     linkRef?: never;
+    hasError?: string;
 }
 
 interface LinkProps extends InitType {
@@ -38,6 +39,7 @@ interface LinkProps extends InitType {
     onClick?: never;
     linkRef?: RefObject<HTMLAnchorElement | null>;
     btnRef?: never;
+    hasError?: never;
 }
 
 type ButtonComponentProps = ButtonProps | LinkProps;

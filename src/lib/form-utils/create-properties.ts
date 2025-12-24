@@ -15,10 +15,10 @@ function parseMetadataCreatePropertyForm(
 }
 
 function checkPrice(
-    price: string,
-    discount: string,
+    price?: string,
+    discount?: string,
 ): boolean {
-    const priceTrimmed: number | null = price.trim()
+    const priceTrimmed: number | null = price?.trim()
         ? parseDigitsStringToNumber(price)
         : 0;
     const priceWithDiscountTrimmed: number | null = discount?.trim()
