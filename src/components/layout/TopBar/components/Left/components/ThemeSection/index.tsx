@@ -1,24 +1,24 @@
 "use client";
 
-// import {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import Icon from "@/components/icon/Icon";
 import {useTheme} from "next-themes";
 
 export default function ThemeSection() {
-    // const [toggle, handleToggle] = useState<boolean>(false);
+    const [toggle, handleToggle] = useState<boolean>(false);
     const {theme, setTheme, systemTheme} = useTheme();
 
-    // useEffect(() => {
-    //     queueMicrotask(() => {
-    //         handleToggle(true);
-    //     });
-    // }, []);
+    useEffect(() => {
+        queueMicrotask(() => {
+            handleToggle(true);
+        });
+    }, []);
 
-    // if (!toggle) return null;
+    if (!toggle) return null;
 
     const currentTheme: string | undefined = theme === "system" ? systemTheme : theme;
 
-    // if (!currentTheme) return null;
+    if (!currentTheme) return null;
 
     return (
         <div
