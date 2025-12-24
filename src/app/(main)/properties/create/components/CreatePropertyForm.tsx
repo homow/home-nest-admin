@@ -113,9 +113,12 @@ export default function CreatePropertyForm() {
                     className={"text-amber-500 font-bold"}
                 >
                     توجه:
+                    {" "}
                 </span>
                 فیلدهایی که با
+                {" "}
                 <RedStarField/>
+                {" "}
                 مشخص شدن اجباری، و بقیه فیلدها اختیاری هستند.
             </p>
 
@@ -170,6 +173,7 @@ export default function CreatePropertyForm() {
                 >
                     {/* category */}
                     <SelectBox
+                        required
                         label="دسته بندی"
                         value={formData.category}
                         onChange={e => {
@@ -177,17 +181,7 @@ export default function CreatePropertyForm() {
                         }}
                         options={[
                             {value: "sale", label: "فروش"},
-                            {value: "rent", label: "رهن"},
-                            {value: "1", label: "1"},
-                            {value: "2", label: "2"},
-                            {value: "3", label: "3"},
-                            {value: "4", label: "4"},
-                            {value: "5", label: "5"},
-                            {value: "6", label: "6"},
-                            {value: "7", label: "7"},
-                            {value: "8", label: "8"},
-                            {value: "9", label: "9"},
-                            {value: "10", label: "10"},
+                            {value: "rent", label: "رهن"}
                         ]}
                     />
 
@@ -435,8 +429,13 @@ export default function CreatePropertyForm() {
                             </p>
                             <CheckBox
                                 id={"stock"}
-                                checked={formData.stock === 1}
-                                onChange={() => handleChange("stock", formData.stock === 1 ? 0 : 1)}
+                                checked={Boolean(formData.stock)}
+                                initValue={Boolean(formData.stock)}
+                                onChange={() => {
+                                    handleChange("stock",
+                                        formData.stock === 1 ? 0 : 1
+                                    );
+                                }}
                                 label={"در دسترس است"}
                             />
                         </div>

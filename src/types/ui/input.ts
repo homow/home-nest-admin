@@ -48,13 +48,14 @@ export interface SelectBoxOptionsType {
 
 export interface SelectBoxPropsType {
     label: string;
+    className?: string;
+    hasError?: boolean;
+    disabled?: boolean;
+    required?: boolean;
+    helperText?: string;
     options: SelectBoxOptionsType[];
     value: SelectBoxOptionsType["value"];
     onChange: (value: SelectBoxPropsType["value"]) => void;
-    className?: string;
-    helperText?: string;
-    hasError?: boolean;
-    disabled?: boolean;
 }
 
 export type InputPropsType = DefualtInputProps | TextAreaProps;

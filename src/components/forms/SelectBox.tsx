@@ -4,6 +4,7 @@ import {useState, useRef, useEffect, type KeyboardEvent} from "react";
 import {SelectBoxOptionsType, SelectBoxPropsType} from "@/types/ui";
 import {cn} from "@/lib/ui-utils";
 import Icon from "../icon/Icon";
+import {RedStarField} from "@/components/ui/Fragments";
 
 export default function SelectBox(
     {
@@ -14,7 +15,8 @@ export default function SelectBox(
         className,
         helperText,
         hasError,
-        disabled
+        disabled,
+        required
     }: SelectBoxPropsType
 ) {
     const [open, setOpen] = useState<boolean>(false);
@@ -114,11 +116,12 @@ export default function SelectBox(
         >
             <p
                 className={cn(
-                    "font-medium mb-1 -top-3.5 right-3.5 text-sm",
+                    "flex flex-row gap-1 font-medium mb-1 -top-3.5 right-3.5 text-sm",
                     disabled && "text-neutral-400"
                 )}
             >
                 {label}
+                {required && <RedStarField/>}
             </p>
 
             <button
@@ -189,9 +192,10 @@ export default function SelectBox(
 
                             className={
                                 cn(
-                                    "min-w-max flex flex-row items-center justify-between text-sm gap-4 cursor-pointer px-4 py-1.5 leading-7 hover:bg-black/30 dark:hover:bg-white/10",
-                                    value === opt.value && "font-bold bg-violet-500/40",
-                                    focusedIndex === index && "bg-black/30 dark:bg-white/10"
+                                    "min-w-max flex flex-row items-center justify-between text-sm gap-4 cursor-pointer px-4 py-1.5 leading-7 hover:bg-black/20 dark:hover:bg-white/10",
+                                    value === opt.value
+                                    && "font-bold bg-violet-500/70 dark:bg-violet-500/40",
+                                    focusedIndex === index && "bg-black/20 dark:bg-white/10"
                                 )
                             }
                         >
