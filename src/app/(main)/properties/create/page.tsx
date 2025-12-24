@@ -1,11 +1,12 @@
 import type {Metadata} from 'next';
+import CreatePropertyForm from "./components/CreatePropertyForm";
 
 export default function CreateProperties() {
     return (
         <section
             className={"main-components"}
         >
-            ساخت ملک جدید
+            <CreatePropertyForm/>
         </section>
     );
 };

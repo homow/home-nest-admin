@@ -84,6 +84,15 @@ export default function CreatePropertyForm() {
         }));
     }
 
+    // check features error
+    useEffect(() => {
+        if (errors.features && formData.features.length > 0) {
+            queueMicrotask(() => {
+                setErrors({...errors, features: ""});
+            });
+        }
+    }, [errors, formData.features.length]);
+
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         console.log(formData);
