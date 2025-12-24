@@ -42,7 +42,7 @@ export default function NotFound() {
                     btnStyle={"fill"}
                     as={"button"}
                     onClick={goHome}
-                    className="px-6 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-lg transition-colors"
+                    className="bg-rose-500 hover:bg-rose-600 "
                 >
                     بازگشت به خانه
                 </Button>
@@ -51,7 +51,6 @@ export default function NotFound() {
                         btnStyle={"fill"}
                         as={"button"}
                         onClick={goBack}
-                        className="px-6 py-2 bg-violet-500 hover:bg-violet-600 text-white rounded-lg transition-colors"
                     >
                         بازگشت به صفحه قبل
                     </Button>
