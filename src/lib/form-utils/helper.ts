@@ -42,7 +42,7 @@ function formatPriceDebouncedCB(
     fieldName: string,
     callback: (fieldName: string, value: string) => void
 ) {
-    const value: string = normalizeDigits(input);
+    const value: string = parseFormatDigitsToUS(input);
     callback(fieldName, value);
 }
 

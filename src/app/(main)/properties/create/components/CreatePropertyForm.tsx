@@ -206,7 +206,11 @@ export default function CreatePropertyForm() {
                             const priceChecked: boolean = checkPrice(val, formData.price_with_discount);
 
                             if (errors.price && priceChecked) {
-                                setErrors({...errors, price: "", price_with_discount: ""});
+                                setErrors({
+                                    ...errors,
+                                    price: "",
+                                    price_with_discount: ""
+                                });
                             }
                         }}
                     />

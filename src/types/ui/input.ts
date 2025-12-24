@@ -49,7 +49,7 @@ export interface SelectBoxOptionsType {
 export interface SelectBoxPropsType {
     label: string;
     className?: string;
-    hasError?: boolean;
+    hasError?: string;
     disabled?: boolean;
     required?: boolean;
     helperText?: string;

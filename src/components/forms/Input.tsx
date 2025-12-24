@@ -53,6 +53,8 @@ export default function Input(
                     onChange={onChangeInput}
                     placeholder={placeholder ?? ""}
                     autoComplete={autoComplete ?? "off"}
+                    aria-invalid={hasError ? "true" : "false"}
+                    aria-describedby={hasError ? `${id}-Error. ${hasError}` : undefined}
                     {...(inputType !== "file" && {value: value ?? ""})}
                 />
                 {children}
