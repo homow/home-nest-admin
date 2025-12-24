@@ -1,5 +1,5 @@
+import type {ReactNode, RefObject, MouseEvent} from "react";
 import type {NoLimitArgsFn} from "@/types/ui/common";
-import type {ReactNode, RefObject} from "react";
 
 type BaseProps = {
     loading?: boolean;
@@ -26,7 +26,7 @@ interface ButtonProps extends InitType {
     as: "button";
     buttonType?: "button" | "submit" | "reset";
     url?: never;
-    onClick?: NoLimitArgsFn;
+    onClick?: NoLimitArgsFn | ((event: MouseEvent<HTMLButtonElement>) => void);
     btnRef?: RefObject<HTMLButtonElement | null>;
     linkRef?: never;
 }

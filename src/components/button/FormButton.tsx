@@ -1,8 +1,9 @@
 'use client';
 
-import Button from "@/components/button/Button";
 import type {BtnStylesType, MainComponentProps} from "@/types/ui";
+import Button from "@/components/button/Button";
 import {useFormStatus} from "react-dom";
+import type {MouseEvent} from "react";
 
 interface Props extends MainComponentProps {
     btnStyle?: BtnStylesType;
@@ -27,6 +28,13 @@ export default function FormButton(
             buttonType={"submit"}
             className={className}
             btnStyle={btnStyle || "fill"}
+            onClick={(e: MouseEvent<HTMLButtonElement>) => {
+                if (pending) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return;
+                }
+            }}
         >
             {children || "تایید"}
         </Button>

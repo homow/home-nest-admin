@@ -1,7 +1,8 @@
 "use client";
 
 import type {FormCreatePropertyType} from "@/types/properties";
-import {useEffect, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
+import FormButton from "@/components/button/FormButton";
 
 // initial value in form data
 const initialFormData: FormCreatePropertyType = {
@@ -69,8 +70,24 @@ export default function CreatePropertyForm() {
         }));
     }
 
+    function handleSubmit(e: FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        console.log(formData);
+    }
+
     // features available
     const availableFeatures: string[] = [
         "بالکن", "پارکینگ", "آسانسور", "انبار", "استخر"
     ];
-}
+
+    return (
+        <form
+            onSubmit={handleSubmit}
+            className={"space-y-8"}
+        >
+            <FormButton>
+                ثبت ملک
+            </FormButton>
+        </form>
+    );
+};
