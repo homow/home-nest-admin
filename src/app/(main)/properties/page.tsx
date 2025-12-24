@@ -1,3 +1,5 @@
+import type {Metadata} from "next";
+
 export default function Properties() {
     return (
         <section
@@ -6,4 +8,8 @@ export default function Properties() {
             ملک ها
         </section>
     );
+};
+
+export const metadata: Metadata = {
+    title: `ملک ها ${process.env.NEXT_PUBLIC_BASE_TITLE}`,
 };
