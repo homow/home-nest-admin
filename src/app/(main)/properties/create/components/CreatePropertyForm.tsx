@@ -2,7 +2,6 @@
 
 import type {FormCreatePropertyType} from "@/types/properties";
 import {useEffect, useState} from "react";
-import useToggle from "@/hooks/useToggle";
 
 // initial value in form data
 const initialFormData: FormCreatePropertyType = {
@@ -23,9 +22,9 @@ const initialFormData: FormCreatePropertyType = {
 
 type FormPropertyErrors = Pick<
     FormCreatePropertyType,
-    "title" | "description" | "province_and_city" |
-    "address" | "features" | "price_with_discount" | "price"
->
+    "title" | "description" | "province_and_city"
+    | "address" | "price_with_discount" | "price"
+> & { features: string };
 
 export default function CreatePropertyForm() {
     const [formData, setFormData] = useState<FormCreatePropertyType>(initialFormData);
@@ -35,15 +34,15 @@ export default function CreatePropertyForm() {
         description: "",
         province_and_city: "",
         address: "",
-        features: [""],
         price: "",
-        price_with_discount: ""
+        price_with_discount: "",
+        features: "",
     });
 
     // test for has error now
     useEffect(() => {
         const rawErrors: boolean = Object.values(errors).filter(e =>
-            Array.isArray(e) ? e.length : Boolean(e)
+            Boolean(e)
         ).length > 0;
 
         queueMicrotask(() => {
@@ -51,10 +50,14 @@ export default function CreatePropertyForm() {
         });
     }, [errors]);
 
-    // features available
-    const availableFeatures: string[] = [
-        "بالکن", "پارکینگ", "آسانسور", "انبار", "استخر"
-    ];
+    // check error features
+    useEffect(() => {
+        if (errors.features && formData.features.length > 0) {
+            queueMicrotask(() => {
+                setErrors({...errors, features: ""});
+            });
+        }
+    }, [errors, formData.features.length]);
 
     // handle features
     function handleFeatureToggle(feature: string) {
@@ -65,4 +68,9 @@ export default function CreatePropertyForm() {
                 : [...prevState.features, feature]
         }));
     }
+
+    // features available
+    const availableFeatures: string[] = [
+        "بالکن", "پارکینگ", "آسانسور", "انبار", "استخر"
+    ];
 }

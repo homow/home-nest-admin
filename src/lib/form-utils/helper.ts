@@ -52,23 +52,8 @@ const formatPriceDebounced: (
     callback: (fieldName: string, value: string) => void
 ) => void = debounce(formatPriceDebouncedCB);
 
-// convert array of "key = value" strings to object
-function parseMetadataCreatePropertyForm(
-    data: string[]
-): Record<string, string> {
-    return data.reduce<Record<string, string>>(
-        (acc, item) => {
-            const [key, value] = item.split("=");
-            if (!key.trim() || !value.trim()) return acc;
-            acc[key.trim()] = value.trim();
-            return acc;
-        }, {} as Record<string, string>
-    );
-}
-
 export {
     formatPriceDebounced,
     parseFormatDigitsToUS,
     parseDigitsStringToNumber,
-    parseMetadataCreatePropertyForm,
 };
