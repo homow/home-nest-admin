@@ -20,5 +20,5 @@ export default function Home() {
 };
 
 export const metadata: Metadata = {
-    title: "پنل مدیریت | آشیانه"
+    title: `داشبورد ${process.env.NEXT_PUBLIC_BASE_TITLE}`,
 };
