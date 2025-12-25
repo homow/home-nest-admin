@@ -89,6 +89,7 @@ export default function ImagesForm(
                 <span
                     className={"font-bold text-amber-500"}>
                     توجه:
+                    {" "}
                 </span>
                 سایز هر تصویر باید زیر 3 مگابایت باشه
             </p>
