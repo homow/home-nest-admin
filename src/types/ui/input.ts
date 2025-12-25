@@ -15,7 +15,7 @@ interface BaseInputPropsType extends InitInputProps {
     disabled?: boolean;
     placeholder: string;
     dir?: "rtl" | "ltr";
-    autoComplete?: string;
+    autoComplete: "off" | string;
 }
 
 interface TextAreaProps extends BaseInputPropsType {

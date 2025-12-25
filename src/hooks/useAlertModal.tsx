@@ -43,7 +43,7 @@ export default function useAlertModal(
         }: ChangeAlertModalData
     ) {
         const message: string | undefined = data?.message;
-        const alertType: AlertModalType | undefined = alertData?.alertType;
+        const alertType: AlertModalType | undefined = data?.alertType;
 
         if (isOpen !== toggle) handleToggle(isOpen);
 

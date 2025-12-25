@@ -58,8 +58,8 @@ export default function Input(
                     disabled={disabled}
                     aria-disabled={disabled}
                     onChange={onChangeInput}
+                    autoComplete={autoComplete}
                     placeholder={placeholder ?? ""}
-                    autoComplete={autoComplete ?? "off"}
                     aria-invalid={hasError ? "true" : "false"}
                     aria-describedby={hasError ? `${id}-Error. ${hasError}` : undefined}
                     {...(inputType !== "file" && {value: value ?? ""})}
@@ -86,9 +86,9 @@ export default function Input(
                     className={styles}
                     disabled={disabled}
                     aria-disabled={disabled}
+                    autoComplete={autoComplete}
                     onChange={onChangeTextArea}
                     placeholder={placeholder ?? ""}
-                    autoComplete={autoComplete ?? "off"}
                 />
                 {children}
             </InputContent>

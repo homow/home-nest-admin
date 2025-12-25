@@ -137,6 +137,7 @@ export default function CreatePropertyForm() {
                         name="title"
                         inputType="text"
                         label="عنوان ملک"
+                        autoComplete="off"
                         value={formData.title}
                         hasError={errors.title}
                         placeholder="مثلاً: ویلایی، صدرا"
@@ -156,9 +157,9 @@ export default function CreatePropertyForm() {
                         inputType="text"
                         label="شناسه ملک"
                         id="property_slug"
+                        autoComplete="off"
                         name="property_slug"
                         placeholder="مثلاً A-1234"
-                        autoComplete="property_number"
                         value={formData.property_slug || ""}
 
                         onChangeInput={event => {
@@ -192,7 +193,7 @@ export default function CreatePropertyForm() {
                         id="price"
                         name="price"
                         inputType="text"
-                        autoComplete="price"
+                        autoComplete="off"
                         value={formData.price}
                         hasError={errors.price}
                         placeholder="مثلاً 1,200,000,000"
@@ -225,12 +226,12 @@ export default function CreatePropertyForm() {
                         dir="ltr"
                         as="input"
                         inputType="text"
+                        autoComplete="off"
                         label="قیمت با تخفیف"
                         hasError={errors.price}
                         id="price_with_discount"
                         name="price_with_discount"
                         placeholder="مثلاً 1,100,000,000"
-                        autoComplete="price_with_discount"
                         value={formData.price_with_discount}
 
                         onChangeInput={event => {
@@ -253,6 +254,7 @@ export default function CreatePropertyForm() {
                     <Input
                         as="input"
                         placeholder=""
+                        autoComplete="off"
                         id="discount_until"
                         name="discount_until"
                         label="تاریخ پایان تخفیف"
@@ -275,8 +277,8 @@ export default function CreatePropertyForm() {
                         label="استان و شهر"
                         id="province_and_city"
                         name="province_and_city"
+                        autoComplete="address-level2"
                         placeholder="مثلاً فارس، شیراز"
-                        autoComplete="province_and_city"
                         value={formData.province_and_city}
                         hasError={errors.province_and_city}
 
@@ -300,9 +302,9 @@ export default function CreatePropertyForm() {
                         label="آدرس"
                         name="address"
                         inputType="text"
-                        autoComplete="address"
                         value={formData.address}
                         hasError={errors.address}
+                        autoComplete="street-address"
                         placeholder="مثلا: خیابان قصردشت، کوچه 53، پلاک 10"
 
                         onChangeInput={event => {
@@ -332,6 +334,7 @@ export default function CreatePropertyForm() {
                     label="توضیحات"
                     id="description"
                     name="description"
+                    autoComplete="off"
                     value={formData.description}
                     hasError={errors.description}
                     placeholder="مثلاً طبقه دوم، ۲ خوابه، دارای استخر و چند حمام مجزا و . . ."
@@ -361,6 +364,7 @@ export default function CreatePropertyForm() {
                         id="metadata"
                         name="metadata"
                         inputType="text"
+                        autoComplete="off"
                         value={formData.metadata}
                         label="اطلاعات اضافی (هر ویژگی را با '،' جدا کنید)"
                         placeholder="مثلاً  فضای پارکینگ = دو ماشین، سقف = 3متر"
@@ -376,6 +380,7 @@ export default function CreatePropertyForm() {
                         as="input"
                         name="tags"
                         inputType="text"
+                        autoComplete="off"
                         value={formData.tags}
                         placeholder="مثلاً: نوساز، صدرا_شیراز"
                         label="برچسب‌ها (با کاما '،' جدا کنید)"
