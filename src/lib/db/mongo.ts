@@ -26,4 +26,4 @@ export default async function connectToDB() {
     } catch (e) {
         console.log(`MongoDB Connected failed while created or connected to ${dbName}: ${e}`);
     }
-}
+};
