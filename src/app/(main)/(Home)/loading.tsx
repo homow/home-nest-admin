@@ -3,7 +3,7 @@ import {cn} from "@/lib/ui-utils";
 type Props = {
     msg?: string;
     className?: string;
-}
+};
 
 export default function loading(
     {

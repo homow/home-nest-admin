@@ -101,7 +101,7 @@ export default function SelectBox(
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
-        }
+        };
     }, []);
 
     const selectedLabel: string = options.find((o: SelectBoxOptionsType): boolean => o.value === value)?.label || "انتخاب کنید";
@@ -187,7 +187,7 @@ export default function SelectBox(
                             }}
 
                             ref={(el: HTMLLIElement): void => {
-                                optionRefs.current[index] = el
+                                optionRefs.current[index] = el;
                             }}
 
                             className={

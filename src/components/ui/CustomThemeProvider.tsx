@@ -1,5 +1,5 @@
 import {ThemeProvider} from 'next-themes';
-import {type MainComponentProps} from "@/types/ui"
+import {type MainComponentProps} from "@/types/ui";
 
 export default function CustomThemeProvider({children}: MainComponentProps) {
     return (

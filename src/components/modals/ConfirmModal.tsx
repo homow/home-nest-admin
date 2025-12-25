@@ -62,7 +62,7 @@ function InnerConfirmModal(
 
         return () => {
             window.removeEventListener("keydown", handler);
-        }
+        };
     }, [isOpen, onCancel]);
 
     return (

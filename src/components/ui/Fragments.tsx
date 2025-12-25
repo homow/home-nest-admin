@@ -36,4 +36,4 @@ function ErrorMessageInputs(
     );
 }
 
-export {RedStarField, ErrorMessageInputs}
+export {RedStarField, ErrorMessageInputs};

@@ -8,7 +8,7 @@ export default function SidebarEffect() {
     const {setCollapsed, collapsed, setCurrentCollapsed} = useSidebarStore();
 
     const handleResize = useEffectEvent(() => {
-        setCurrentCollapsed(applyCustomSpace(collapsed))
+        setCurrentCollapsed(applyCustomSpace(collapsed));
     });
 
     useEffect(() => {
@@ -20,7 +20,7 @@ export default function SidebarEffect() {
         // cleanUp event
         return () => {
             window.removeEventListener("resize", handleResize);
-        }
+        };
         // eslint-disable-next-line
     }, []);
 

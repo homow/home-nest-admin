@@ -31,7 +31,7 @@ const initValue: LoginFormDataTypes = {
         password: "",
         remember: false
     }
-}
+};
 
 export default function Login() {
     const [state, formAction] = useActionState(login, initValue);
@@ -119,7 +119,7 @@ export default function Login() {
         const newErrors = {
             email: trimmedEmail ? "" : "ایمیل رو وارد کن",
             password: trimPassword ? "" : "پسورد رو وارد کن",
-        }
+        };
 
         if (newErrors.email || newErrors.password) {
             setErrors(newErrors);

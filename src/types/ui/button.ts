@@ -3,7 +3,7 @@ import type {NoLimitArgsFn} from "@/types/ui/common";
 
 type BaseProps = {
     loading?: boolean;
-}
+};
 
 type BtnStylesType = "fill" | "outline" | "sharpL" | "sharpR" | "sharpBoth" | "sharpNone" | "primary";
 

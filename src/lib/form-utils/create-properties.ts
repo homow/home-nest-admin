@@ -36,4 +36,4 @@ function checkPrice(
 export {
     checkPrice,
     parseMetadataCreatePropertyForm,
-}
+};

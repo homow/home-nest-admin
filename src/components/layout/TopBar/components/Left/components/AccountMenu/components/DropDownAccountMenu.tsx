@@ -1,7 +1,7 @@
 import type {DropDownOptionsType, DropDownProps} from "@/types/ui";
 import DropDownAccountOptions from "./DropDownOptionsMenu";
 import useLogoutAction from "@/hooks/useLogoutAction";
-import AccountInfo from "./AccountInfo"
+import AccountInfo from "./AccountInfo";
 import {cn} from "@/lib/ui-utils/ui-utils";
 import {Activity} from "react";
 

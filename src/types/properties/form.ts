@@ -16,4 +16,4 @@ interface FormCreatePropertyType {
 
 export type {
     FormCreatePropertyType,
-}
+};

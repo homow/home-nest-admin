@@ -30,15 +30,15 @@ const useSidebarStore = create<CollapsedState>(
                 return {
                     collapsed: val,
                     currentCollapsed,
-                }
+                };
             });
         },
         setCurrentCollapsed: value => {
             set(() => {
                 return {
                     currentCollapsed: value,
-                }
-            })
+                };
+            });
         }
     })
 );

@@ -18,7 +18,7 @@ export async function login(
         password: trimPassword === "" ? "پسورد رو وارد کن"
             : trimPassword.length > 6 ? "پسورد بالای 6 رقمه"
                 : "",
-    }
+    };
 
     if (newErrors.email || newErrors.password) {
         return {
@@ -42,7 +42,7 @@ export async function login(
                 password: prevState.fields.password,
                 remember: prevState.fields.remember,
             }
-        }
+        };
     }
 
     return {
@@ -52,5 +52,5 @@ export async function login(
             password: "",
             remember: false,
         }
-    }
+    };
 }

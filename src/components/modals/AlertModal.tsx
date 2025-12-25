@@ -43,7 +43,7 @@ function InnerAlertModal(
         closeDelay = 5000
     }: Props
 ) {
-    const [barWidth, setBarWidth] = useState(100)
+    const [barWidth, setBarWidth] = useState(100);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
     const bgHeader: string = getAlertModalBgHeader(alertType);
@@ -65,7 +65,7 @@ function InnerAlertModal(
         // cleanUp Event
         return () => {
             window.removeEventListener("keydown", handleKey);
-        }
+        };
     }, [isOpen, setIsOpen]);
 
     // progress bar and auto close
