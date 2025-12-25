@@ -26,6 +26,9 @@ export default function Input(
         textAreaRef,
         cols,
         rows,
+        accept,
+        multiple,
+        disabled,
     }: InputPropsType
 ) {
     const styles: string = cn(
@@ -48,8 +51,12 @@ export default function Input(
                     dir={dir}
                     name={name}
                     ref={inputRef}
+                    accept={accept}
                     type={inputType}
                     className={styles}
+                    multiple={multiple}
+                    disabled={disabled}
+                    aria-disabled={disabled}
                     onChange={onChangeInput}
                     placeholder={placeholder ?? ""}
                     autoComplete={autoComplete ?? "off"}
@@ -77,6 +84,8 @@ export default function Input(
                     rows={rows ?? 10}
                     ref={textAreaRef}
                     className={styles}
+                    disabled={disabled}
+                    aria-disabled={disabled}
                     onChange={onChangeTextArea}
                     placeholder={placeholder ?? ""}
                     autoComplete={autoComplete ?? "off"}

@@ -27,10 +27,14 @@ interface TextAreaProps extends BaseInputPropsType {
     inputRef?: never;
     inputType?: never;
     onChangeInput?: never;
+    accept?: never;
+    multiple?: never;
 }
 
 interface DefualtInputProps extends BaseInputPropsType {
     as: "input";
+    accept?: string;
+    multiple?: boolean;
     inputType: string;
     inputRef?: RefObject<HTMLInputElement | null>;
     onChangeInput?: ChangeEventHandler<HTMLInputElement>;
