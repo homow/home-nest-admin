@@ -1,6 +1,7 @@
+import nextTs from "eslint-config-next/typescript";
 import {defineConfig, globalIgnores} from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
+import stylistic from "@stylistic/eslint-plugin";
 
 const eslintConfig = defineConfig([
     ...nextVitals,
@@ -14,9 +15,11 @@ const eslintConfig = defineConfig([
         "next-env.d.ts",
     ]),
     {
+        plugins: {
+            "@stylistic": stylistic,
+        },
         rules: {
-            semi: ["error", "always"],
-            "@typescript-eslint/semi": ["error", "never"],
+            "@stylistic/semi": ["error", "always"],
         }
     }
 ]);
