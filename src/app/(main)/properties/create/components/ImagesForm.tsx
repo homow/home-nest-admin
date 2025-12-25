@@ -5,9 +5,8 @@ import useAlertModal from "@/hooks/useAlertModal";
 import Input from "@/components/forms/Input";
 import Image from "next/image";
 
-export default function ImagesForm(
-    {}
-) {
+export default function ImagesForm() {
+    // states
     const [mainFile, setMainFile] = useState<File | null>(null);
     const [othersFile, setOthersFile] = useState<File[]>([]);
     const [mainPreview, setMainPreview] = useState<string>("");
@@ -16,10 +15,13 @@ export default function ImagesForm(
         initAlertType: "warning",
         initMessage: ""
     });
+
+    // refrences
     const mainImageRef = useRef<HTMLInputElement>(null);
     const imagesRef = useRef<HTMLInputElement>(null);
     const maxSizeMB: number = 3;
 
+    // change main image handler
     function handleMainChange(e: ChangeEvent<HTMLInputElement>) {
         const file: File | undefined = e.target.files?.[0];
 
@@ -41,6 +43,7 @@ export default function ImagesForm(
         setMainPreview(file ? URL.createObjectURL(file) : "");
     }
 
+    // change other images handler
     function handleOthersChange(e: ChangeEvent<HTMLInputElement>) {
         function resetFiles(message: string) {
             changeAlertModalData({
@@ -73,6 +76,7 @@ export default function ImagesForm(
         setOthersPreview(files.map(f => URL.createObjectURL(f)));
     }
 
+    // submit handler
     function submitHandler(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         console.log(mainFile);
@@ -100,7 +104,7 @@ export default function ImagesForm(
             <div
                 className={"multi-inputs-style"}
             >
-                {/* main_images */}
+                {/* main_image */}
                 <Input
                     dir="ltr"
                     as="input"
@@ -115,7 +119,7 @@ export default function ImagesForm(
                     accept="image/png,image/jpeg,image/webp"
                 />
 
-                {/* images */}
+                {/* other images */}
                 <Input
                     multiple
                     dir="ltr"
