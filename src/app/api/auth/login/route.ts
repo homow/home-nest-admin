@@ -6,9 +6,8 @@ export function POST() {
             ok: true,
             message: "User successfully logged in",
             user: {
-                name: "Fucking Copilot",
+                name: "John",
                 age: 2,
-                parent: "Fucking Microsoft"
             }
         },
         {
