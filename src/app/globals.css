@@ -88,7 +88,7 @@
     }
 
     body {
-        @apply font-dana font-normal leading-[150%] text-base bg-primary-bg text-primary-txt tracking-wider selection:bg-violet-700 selection:text-white;
+        @apply font-dana font-normal leading-[150%] text-base bg-primary-bg text-primary-txt tracking-wider selection:bg-violet-700/40 dark:selection:bg-violet-600/60 selection:text-black dark:selection:text-neutral-100;
     }
 
     h1, h2, h3 {
