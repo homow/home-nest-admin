@@ -1,10 +1,20 @@
 import type {MainComponentProps} from "@/types/ui";
 import MainLayout from "@/components/layout/MainLayout";
+import {ReactNode} from "react";
 
-export default function Layout({children}: MainComponentProps) {
+interface Props extends MainComponentProps {
+    sidebar?: ReactNode;
+    topbar?: ReactNode;
+}
+
+export default function Layout({children, sidebar, topbar}: Props) {
     return (
-        <MainLayout>
-            {children}
-        </MainLayout>
+        <>
+            {sidebar}
+            <MainLayout>
+                {topbar}
+                {children}
+            </MainLayout>
+        </>
     );
 };
