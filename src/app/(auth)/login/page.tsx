@@ -20,7 +20,6 @@ import {emailRegex} from "@/lib/auth-utils";
 import useToggle from "@/hooks/useToggle";
 import {redirect} from "next/navigation";
 import {login} from "@/actions/login";
-import Image from "next/image";
 
 const initValue: LoginFormDataTypes = {
     success: false,
@@ -160,22 +159,11 @@ export default function Login() {
         <>
             <AlertModalComponent/>
 
-            {/* logo */}
-            <Image
-                loading={"eager"}
-                alt="logo"
-                height={240}
-                width={240}
-                id={"login-logo"}
-                src={"/images/shared/logo.webp"}
-                className={"max-w-10 top-2 left-2 absolute xs:top-5 xs:left-5 xs:max-w-20"}
-            />
-
             <section
-                className="flex items-center justify-center min-h-screen"
+                className="flex-1 flex items-center justify-center"
             >
                 <div
-                    className="max-w-9/10 w-full xs:max-w-sm sm:max-w-md bg-white/10 rounded-2xl shadow-lg space-y-6 p-3 xs:p-8"
+                    className="flex-1 max-w-9/10 w-full xs:max-w-sm sm:max-w-md bg-white/10 rounded-2xl shadow-lg space-y-6 p-3 xs:p-8"
                 >
                     <h2
                         className="text-2xl font-bold text-center"
