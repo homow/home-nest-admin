@@ -1,6 +1,17 @@
-import {NextResponse} from "next/server";
+import {NextRequest, NextResponse} from "next/server";
+import {cookies} from "next/headers";
 
-export function POST() {
+export async function POST(req: NextRequest) {
+    const cookieStore = await cookies();
+
+    cookieStore.set("GPT", "GPT", {
+        maxAge: 60
+    });
+
+    const body = await req.json();
+
+    console.log(body);
+
     return NextResponse.json(
         {
             ok: true,
@@ -9,9 +20,6 @@ export function POST() {
                 name: "John",
                 age: 2,
             }
-        },
-        {
-            status: 200
         }
     );
 }

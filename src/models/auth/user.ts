@@ -1,15 +1,6 @@
 import {type Model, model, models, Schema} from "mongoose";
 import {emailRegex} from "@/lib/auth-utils";
-
-type UserRole = "user" | "admin" | "super_admin";
-
-interface UserSchemaType {
-    name?: string;
-    email: string;
-    role: UserRole;
-    password: string;
-    isActive: boolean;
-}
+import {UserDB} from "@/types/models";
 
 const UserSchema: Schema = new Schema(
     {
@@ -49,7 +40,7 @@ const UserSchema: Schema = new Schema(
     }
 );
 
-const UserModel: Model<UserSchemaType> =
+const UserModel: Model<UserDB> =
     models.Users || model("Users", UserSchema);
 
 export default UserModel;

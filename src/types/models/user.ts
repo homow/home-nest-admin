@@ -17,3 +17,7 @@ export interface UserDB extends UserBase {
     _id: string;
     password: string;
 }
+
+export interface UserPublic extends UserBase {
+    id: string;
+}
