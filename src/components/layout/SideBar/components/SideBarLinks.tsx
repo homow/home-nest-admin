@@ -5,6 +5,7 @@ import useSidebarStore from "@/store/sidebarStore";
 import type {SideBarDataTypes} from "@/types/ui";
 import {cn} from "@/lib/ui-utils/ui-utils";
 import Icon from "@/components/icon/Icon";
+import useMobileNavStore from "@/store/mobileNavStore";
 
 interface Props {
     data: SideBarDataTypes;
@@ -12,6 +13,7 @@ interface Props {
 
 export default function SideBarLinks({data}: Props) {
     const {currentCollapsed} = useSidebarStore();
+    const {isOpenNav, setIsOpenNav} = useMobileNavStore();
     const {title, dataLinks} = data;
 
     return (
@@ -47,36 +49,45 @@ export default function SideBarLinks({data}: Props) {
             <ul
                 className={"mt-3 space-y-1.5"}
             >
-                {dataLinks.length > 0 && dataLinks.map(link => (
-                    <li
-                        title={link.text}
-                        key={link.text}
-                    >
-                        <NavLinkClient
-                            url={link.url}
-                            isActiveIncludesRoute={
-                                link.url !== "/"
-                            }
-                            className={"h-10.5 flex items-center pr-5.5 py-2 flex-row gap-3 w-full rounded-l-full hover:opacity-100"}
-                            activeStyle={"grad-links"}
-                            unActiveStyle={"hover:bg-violet-300 hover:text-gray-900  active:bg-violet-300 active:text-gray-900"}
+                {dataLinks.length > 0 &&
+                    dataLinks.map(link => (
+                        <li
+                            title={link.text}
+                            key={link.text}
                         >
-                            {/* icon */}
-                            <Icon icon={link.icon}/>
-
-                            {/* text of link */}
-                            <span
+                            <NavLinkClient
+                                onClick={() => {
+                                    if (isOpenNav) setIsOpenNav(false);
+                                }}
+                                url={link.url}
+                                activeStyle={"grad-links"}
+                                isActiveIncludesRoute={
+                                    link.url !== "/"
+                                }
                                 className={
-                                    currentCollapsed
-                                        ? "hidden-effect absolute"
-                                        : "show-effect static"
+                                    "h-10.5 flex items-center pr-5.5 py-2 flex-row gap-3 w-full rounded-l-full hover:opacity-100"
+                                }
+                                unActiveStyle={
+                                    "hover:bg-violet-300 hover:text-gray-900  active:bg-violet-300 active:text-gray-900"
                                 }
                             >
+                                {/* icon */}
+                                <Icon icon={link.icon}/>
+
+                                {/* text of link */}
+                                <span
+                                    className={
+                                        currentCollapsed
+                                            ? "hidden-effect absolute"
+                                            : "show-effect static"
+                                    }
+                                >
                                 {link.text}
                             </span>
-                        </NavLinkClient>
-                    </li>
-                ))}
+                            </NavLinkClient>
+                        </li>
+                    ))
+                }
             </ul>
         </div>
     );
