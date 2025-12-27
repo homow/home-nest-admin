@@ -1,3 +1,6 @@
+import {signupSchema} from "@/validations/auth/user";
+import {z} from "zod";
+
 interface LoginFormDataTypes {
     success: boolean;
     emailError?: string;
@@ -9,4 +12,6 @@ interface LoginFormDataTypes {
     }
 }
 
-export type {LoginFormDataTypes};
+type SignupInput = z.infer<typeof signupSchema>;
+
+export type {LoginFormDataTypes, SignupInput};
