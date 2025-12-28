@@ -13,12 +13,11 @@ export default async function connectToDB() {
     const dbURI: string | undefined = process.env.MONGO_DB_URI;
     const dbName: string | undefined = process.env.MONGO_DB_NAME;
 
+    if (!dbURI) {
+        return new Error("MongoDB URI is missing");
+    }
+
     try {
-
-        if (!dbURI) {
-            return new Error("MongoDB URI is missing");
-        }
-
         await mongoose.connect(dbURI, {
             dbName,
         });
