@@ -1,3 +1,5 @@
+import type {Types} from "mongoose";
+
 export enum UserRoles {
     USER = "USER",
     ADMIN = "ADMIN",
@@ -9,17 +11,14 @@ export interface UserBase {
     email: string;
     role: UserRoles;
     isActive: boolean;
-}
-
-export interface AddUserDB extends UserBase {
-    password: string;
-}
-
-export interface GetUserDB extends UserBase {
-    _id: string;
-    password: string;
     createdAt: Date;
     updatedAt: Date;
+}
+
+export interface UserDB extends UserBase {
+    _id: Types.ObjectId;
+    password: string;
+    __v: number;
 }
 
 export interface UserPublic extends UserBase {
