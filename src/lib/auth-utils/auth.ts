@@ -23,7 +23,9 @@ function generateToken(
     const secret: string | undefined = process.env.JWT_SECRET;
 
     if (!secret) {
-        throw new Error("JWT_SECRET is not defined in environment variables");
+        throw new Error(
+            "JWT_SECRET is not defined in environment variables"
+        );
     }
 
     const options: SignOptions = {expiresIn};
@@ -31,19 +33,22 @@ function generateToken(
     return jwt.sign(payload, secret, options);
 }
 
-function verfyToken(token: string): string | boolean | JwtPayload {
+function verfyToken(
+    token: string
+): string | JwtPayload {
     const secret: string | undefined = process.env.JWT_SECRET;
 
     if (!secret) {
         throw new Error(
             "JWT_SECRET is not defined in environment variables"
         );
+
     } else {
         try {
             return jwt.verify(token, secret);
         } catch (e) {
             console.log(e);
-            return false;
+            throw new Error("Invalid or expired token");
         }
     }
 }
