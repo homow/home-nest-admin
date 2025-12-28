@@ -1,4 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
+import {emailRegex} from "@/lib/auth-utils";
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
@@ -6,23 +7,28 @@ export async function POST(req: NextRequest) {
 
     if (!email || !password) {
         return NextResponse.json(
-            {
-                ok: false,
-                error: "email and password are required"
-            }, {status: 400}
+            {ok: false, message: "email and password are required"},
+            {status: 400}
+        );
+    }
+    
+    if (!emailRegex.test(email)) {
+        return NextResponse.json(
+            {ok: false, message: "invalid email format"},
+            {status: 400}
         );
     }
 
     if (typeof password !== "string") {
         return NextResponse.json(
-            {ok: false, error: "password must be a string"},
+            {ok: false, message: "password must be a string"},
             {status: 400}
         );
     }
 
     if (password.length < 6) {
         return NextResponse.json(
-            {ok: false, error: "password must be at least 6 characters"},
+            {ok: false, message: "password must be at least 6 characters"},
             {status: 400}
         );
     }
