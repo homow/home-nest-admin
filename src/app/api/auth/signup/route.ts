@@ -3,7 +3,6 @@ import {NextRequest, NextResponse} from "next/server";
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
-    const {email, password, name} = body;
 
     const reslut = signupSchema.safeParse(body);
 
@@ -16,12 +15,15 @@ export async function POST(req: NextRequest) {
         });
     }
 
+    const {email, password, name} = reslut.data;
+
     return NextResponse.json({
         ok: true,
         message: "user successfully registered",
         data: {
             email,
             name,
+            password,
         }
     }, {
         status: 201
