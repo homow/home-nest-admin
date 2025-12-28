@@ -1,0 +1,56 @@
+import type {StringValue} from "ms";
+import {hash, compare} from "bcrypt";
+import jwt, {type JwtPayload, type SignOptions} from "jsonwebtoken";
+
+async function hashSecret(
+    value: string,
+    saltRounds: number = 12
+): Promise<string> {
+    return hash(value, saltRounds);
+}
+
+async function compareSecret(
+    value: string,
+    hashed: string
+): Promise<boolean> {
+    return compare(value, hashed);
+}
+
+function generateToken(
+    payload: object,
+    expiresIn: number | StringValue = "24h"
+): string {
+    const secret: string | undefined = process.env.JWT_SECRET;
+
+    if (!secret) {
+        throw new Error("JWT_SECRET is not defined in environment variables");
+    }
+
+    const options: SignOptions = {expiresIn};
+
+    return jwt.sign(payload, secret, options);
+}
+
+function verfyToken(token: string): string | boolean | JwtPayload {
+    const secret: string | undefined = process.env.JWT_SECRET;
+
+    if (!secret) {
+        throw new Error(
+            "JWT_SECRET is not defined in environment variables"
+        );
+    } else {
+        try {
+            return jwt.verify(token, secret);
+        } catch (e) {
+            console.log(e);
+            return false;
+        }
+    }
+}
+
+export {
+    generateToken,
+    hashSecret,
+    compareSecret,
+    verfyToken
+};
