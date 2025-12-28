@@ -1,6 +1,6 @@
 import {type Model, model, models, Schema} from "mongoose";
 import {emailRegex} from "@/lib/auth-utils";
-import {AddUserDB} from "@/types/models";
+import {AddUserDB, UserRoles} from "@/types/models";
 
 const UserSchema: Schema = new Schema(
     {
@@ -13,8 +13,9 @@ const UserSchema: Schema = new Schema(
         },
         role: {
             type: String,
-            enum: ["USER", "ADMIN", "SUPER_ADMIN"],
-            default: "USER",
+            enum: Object.values(UserRoles),
+            default: UserRoles.USER,
+            required: true,
         },
         email: {
             type: String,

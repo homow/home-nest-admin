@@ -1,7 +1,9 @@
 import {UserModel} from "@/models/auth";
 import connectToDB from "@/lib/db/mongo";
+import {hashSecret} from "@/lib/auth-utils";
 import {signupSchema} from "@/validations/auth";
 import {type NextRequest, NextResponse} from "next/server";
+import {UserRoles} from "@/types/models";
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
@@ -33,17 +35,33 @@ export async function POST(req: NextRequest) {
             });
         }
 
+        const hashedPassword: string = await hashSecret(password);
+
+        const res = await UserModel.create({
+            name,
+            email,
+            role: UserRoles.USER,
+            password: hashedPassword,
+        });
+
+        const newUser = res.toObject();
+
+        console.log("res:", res);
+        console.log("newUser:", newUser);
+
         return NextResponse.json({
             ok: true,
             message: "user successfully registered",
-            data: {
-                email,
-                name,
-                password,
+            user: {
+                email: newUser.email,
+                role: newUser.role,
+                name: newUser.name,
+                isActive: newUser.isActive,
             }
         }, {
             status: 201
         });
+
     } catch (e) {
         console.log(e);
 
