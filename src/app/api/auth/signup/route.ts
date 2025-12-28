@@ -4,7 +4,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const {email, password, name} = body;
 
-    if (!email && !password) {
+    if (!email || !password) {
         return NextResponse.json(
             {
                 ok: false,
@@ -13,13 +13,26 @@ export async function POST(req: NextRequest) {
         );
     }
 
-    if (typeof password !== "string" || password.length < 6) {
+    if (typeof password !== "string") {
         return NextResponse.json(
-            {
-                ok: false,
-                error: "password must be at least 6 characters"
-            },
+            {ok: false, error: "password must be a string"},
             {status: 400}
         );
     }
+
+    if (password.length < 6) {
+        return NextResponse.json(
+            {ok: false, error: "password must be at least 6 characters"},
+            {status: 400}
+        );
+    }
+
+    return NextResponse.json({
+        ok: true,
+        message: "user successfully registered",
+        data: {
+            email,
+            name,
+        }
+    });
 }
