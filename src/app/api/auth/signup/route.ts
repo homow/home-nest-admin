@@ -60,9 +60,8 @@ export async function POST(req: NextRequest) {
             status: 201
         });
 
+        // eslint-disable-next-line
     } catch (e) {
-        console.log(e);
-
         NextResponse.json({
             ok: false,
             message: "Internal Server Error",

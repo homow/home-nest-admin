@@ -22,7 +22,9 @@ export default async function connectToDB() {
             dbName,
         });
         console.log(`MongoDB Created and Connected: ${dbName}`);
+
+        // eslint-disable-next-line
     } catch (e) {
-        console.log(`MongoDB Connected failed while created or connected to ${dbName}: ${e}`);
+        console.log(`MongoDB Connected failed while created or connected to ${dbName}`);
     }
 };
