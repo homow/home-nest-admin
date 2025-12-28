@@ -24,7 +24,14 @@ export async function POST(req: NextRequest) {
 
         const user = await UserModel.findOne({email});
 
-        console.log(user);
+        if (user) {
+            return NextResponse.json({
+                ok: false,
+                message: `email already exists`,
+            }, {
+                status: 409
+            });
+        }
 
         return NextResponse.json({
             ok: true,
