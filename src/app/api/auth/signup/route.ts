@@ -46,9 +46,6 @@ export async function POST(req: NextRequest) {
 
         const newUser = res.toObject();
 
-        console.log("res:", res);
-        console.log("newUser:", newUser);
-
         return NextResponse.json({
             ok: true,
             message: "user successfully registered",
@@ -57,6 +54,7 @@ export async function POST(req: NextRequest) {
                 role: newUser.role,
                 name: newUser.name,
                 isActive: newUser.isActive,
+                createdAt: newUser.createdAt.toISOString(),
             }
         }, {
             status: 201
