@@ -1,6 +1,6 @@
 import {type Model, model, models, Schema} from "mongoose";
 import {emailRegex} from "@/lib/auth-utils";
-import {UserDB} from "@/types/models";
+import {AddUserDB} from "@/types/models";
 
 const UserSchema: Schema = new Schema(
     {
@@ -13,8 +13,8 @@ const UserSchema: Schema = new Schema(
         },
         role: {
             type: String,
-            enum: ["user", "admin", "super_admin"],
-            default: "user",
+            enum: ["USER", "ADMIN", "SUPER_ADMIN"],
+            default: "USER",
         },
         email: {
             type: String,
@@ -40,7 +40,7 @@ const UserSchema: Schema = new Schema(
     }
 );
 
-const UserModel: Model<UserDB> =
+const UserModel: Model<AddUserDB> =
     models.Users || model("Users", UserSchema);
 
 export {UserModel};

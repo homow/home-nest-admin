@@ -9,13 +9,17 @@ export interface UserBase {
     email: string;
     role: UserRoles;
     isActive: boolean;
-    createdAt: Date;
-    updatedAt: Date;
 }
 
-export interface UserDB extends UserBase {
+export interface AddUserDB extends UserBase {
+    password: string;
+}
+
+export interface GetUserDB extends UserBase {
     _id: string;
     password: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 export interface UserPublic extends UserBase {
