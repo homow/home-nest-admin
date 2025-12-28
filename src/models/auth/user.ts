@@ -43,4 +43,4 @@ const UserSchema: Schema = new Schema(
 const UserModel: Model<UserDB> =
     models.Users || model("Users", UserSchema);
 
-export default UserModel;
+export {UserModel};
