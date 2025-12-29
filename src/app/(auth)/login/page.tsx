@@ -4,13 +4,9 @@ import {
     useEffect,
     useState,
     useRef,
-    useActionState,
-    startTransition,
     type ChangeEvent,
     type FormEvent
 } from "react";
-import {login} from "@/actions/login";
-import {redirect} from "next/navigation";
 import useToggle from "@/hooks/useToggle";
 import Input from "@/components/forms/Input";
 import {LoginFormDataTypes} from "@/types/auth";
@@ -32,7 +28,6 @@ const initValue: LoginFormDataTypes = {
 };
 
 export default function Login() {
-    const [state, formAction] = useActionState(login, initValue);
     const [password, setPassword] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [errors, setErrors] = useState({
@@ -129,30 +124,7 @@ export default function Login() {
             return;
         }
 
-        startTransition(() => {
-            formAction(new FormData(event.currentTarget));
-        });
     }
-
-    useEffect(() => {
-        (() => {
-            if (state.success) {
-                changeAlertModalData({
-                    isOpen: true,
-                });
-
-                setTimeout(() => redirect("/"), 4000);
-            } else {
-                if (state.emailError || state.passwordError) {
-                    setErrors({
-                        email: state.emailError ?? "",
-                        password: state.passwordError ?? ""
-                    });
-                }
-            }
-        })();
-        // eslint-disable-next-line
-    }, [state]);
 
     return (
         <>
@@ -189,9 +161,7 @@ export default function Login() {
                             inputType={"text"}
                             inputRef={inputRef}
                             autoComplete={"email"}
-                            hasError={
-                                errors.email || state.emailError
-                            }
+                            hasError={errors.email}
                             placeholder={"you@example.com"}
                             onChangeInput={setEmailHandler}
                         />
@@ -209,9 +179,7 @@ export default function Login() {
                                 showPassword ? "text" : "password"
                             }
                             dir={"ltr"}
-                            hasError={
-                                errors.password || state.passwordError
-                            }
+                            hasError={errors.password}
                             onChangeInput={setPasswordHandler}
                         >
                             <button
@@ -235,7 +203,7 @@ export default function Login() {
                         </div>
 
                         <FormButton
-                            disabled={state.success}
+                            // disabled={}
                             className={"w-full justify-center"}
                         >
                             ورود
