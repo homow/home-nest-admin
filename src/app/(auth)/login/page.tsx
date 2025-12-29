@@ -9,17 +9,16 @@ import {
     type ChangeEvent,
     type FormEvent
 } from "react";
-
-import useSetClientTitle from "@/hooks/useSetClientTitle";
-import FormButton from "@/components/button/FormButton";
-import CheckBox from "@/components/forms/CheckBox";
-import useAlertModal from "@/hooks/useAlertModal";
-import {LoginFormDataTypes} from "@/types/auth";
-import Input from "@/components/forms/Input";
-import {emailRegex} from "@/lib/auth-utils";
-import useToggle from "@/hooks/useToggle";
-import {redirect} from "next/navigation";
 import {login} from "@/actions/login";
+import {redirect} from "next/navigation";
+import useToggle from "@/hooks/useToggle";
+import Input from "@/components/forms/Input";
+import {LoginFormDataTypes} from "@/types/auth";
+import {emailRegex} from "@/lib/auth-utils/regex";
+import useAlertModal from "@/hooks/useAlertModal";
+import CheckBox from "@/components/forms/CheckBox";
+import FormButton from "@/components/button/FormButton";
+import useSetClientTitle from "@/hooks/useSetClientTitle";
 
 const initValue: LoginFormDataTypes = {
     success: false,

@@ -1,9 +1,9 @@
 import {UserModel} from "@/models/auth";
-import connectToDB from "@/lib/db/mongo";
-import {hashSecret} from "@/lib/auth-utils";
-import {signupSchema} from "@/validations/auth";
-import {type NextRequest, NextResponse} from "next/server";
 import {UserRoles} from "@/types/models";
+import connectToDB from "@/lib/db/mongo";
+import {signupSchema} from "@/validations/auth";
+import {hashSecret} from "@/lib/auth-utils/auth";
+import {type NextRequest, NextResponse} from "next/server";
 
 export async function POST(req: NextRequest) {
     const body = await req.json();

@@ -1,7 +1,7 @@
 "use server";
 
 import {LoginFormDataTypes} from "@/types/auth";
-import {emailRegex} from "@/lib/auth-utils";
+import {emailRegex} from "@/lib/auth-utils/regex";
 
 export async function login(
     prevState: LoginFormDataTypes,
