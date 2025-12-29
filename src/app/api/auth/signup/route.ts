@@ -1,25 +1,25 @@
 import {UserModel} from "@/models/auth";
 import {UserRoles} from "@/types/models";
 import connectToDB from "@/lib/db/mongo";
-import {signupSchema} from "@/validations/auth";
+import {userSchema} from "@/validations/auth";
 import {hashSecret} from "@/lib/auth-utils/auth";
 import {type NextRequest, NextResponse} from "next/server";
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
 
-    const reslut = signupSchema.safeParse(body);
+    const reslutValidate = userSchema.safeParse(body);
 
-    if (!reslut.success) {
+    if (!reslutValidate.success) {
         return NextResponse.json({
             ok: false,
-            message: reslut.error.issues[0].message,
+            message: reslutValidate.error.issues[0].message,
         }, {
             status: 400
         });
     }
 
-    const {email, password, name} = reslut.data;
+    const {email, password, name} = reslutValidate.data;
 
     try {
         await connectToDB();
