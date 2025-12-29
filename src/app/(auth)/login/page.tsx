@@ -9,31 +9,23 @@ import {
 } from "react";
 import useToggle from "@/hooks/useToggle";
 import Input from "@/components/forms/Input";
-import {LoginFormDataTypes} from "@/types/auth";
-import {emailRegex} from "@/lib/auth-utils/regex";
+import {LoginFormStateType} from "@/types/auth";
 import useAlertModal from "@/hooks/useAlertModal";
+import {emailRegex} from "@/lib/auth-utils/regex";
 import CheckBox from "@/components/forms/CheckBox";
 import FormButton from "@/components/button/FormButton";
 import useSetClientTitle from "@/hooks/useSetClientTitle";
 
-const initValue: LoginFormDataTypes = {
+const initValue: LoginFormStateType = {
     success: false,
     emailError: "",
     passwordError: "",
-    fields: {
-        email: "",
-        password: "",
-        remember: false
-    }
 };
 
 export default function Login() {
     const [password, setPassword] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [errors, setErrors] = useState({
-        email: "",
-        password: ""
-    });
+    const [formState, setFormState] = useState<LoginFormStateType>(initValue);
 
     const {
         toggle: showPassword,
@@ -66,22 +58,22 @@ export default function Login() {
         setEmail(val);
 
         if (
-            errors.email.includes("فرمت")
+            formState?.emailError?.includes("فرمت")
             && emailRegex.test(val.trim())
         ) {
-            setErrors({
-                ...errors,
-                email: ""
+            setFormState({
+                ...formState,
+                emailError: ""
             });
         }
 
         if (
-            errors.email.includes("وارد")
+            formState?.emailError?.includes("وارد")
             && val.trim()
         ) {
-            setErrors({
-                ...errors,
-                email: ""
+            setFormState({
+                ...formState,
+                emailError: ""
             });
         }
     }
@@ -94,11 +86,11 @@ export default function Login() {
 
         if (
             val.trim()
-            && errors.password
+            && formState.passwordError
         ) {
-            setErrors({
-                ...errors,
-                password: ""
+            setFormState({
+                ...formState,
+                passwordError: ""
             });
         }
     }
@@ -109,18 +101,25 @@ export default function Login() {
         const trimmedEmail: string = email?.trim()?.toLowerCase();
         const trimPassword: string = password?.trim();
 
-        const newErrors = {
-            email: trimmedEmail ? "" : "ایمیل رو وارد کن",
-            password: trimPassword ? "" : "پسورد رو وارد کن",
+        const newErrors: LoginFormStateType = {
+            emailError: trimmedEmail ? "" : "ایمیل رو وارد کن",
+            passwordError: trimPassword ? "" : "پسورد رو وارد کن",
+            success: false,
         };
 
-        if (newErrors.email || newErrors.password) {
-            setErrors(newErrors);
+        if (
+            newErrors.emailError
+            || newErrors.passwordError
+        ) {
+            setFormState(newErrors);
             return;
         }
 
         if (!emailRegex.test(trimmedEmail)) {
-            setErrors({...newErrors, email: "فرمت ایمیل اشتباهه"});
+            setFormState({
+                ...newErrors,
+                emailError: "فرمت ایمیل اشتباهه"
+            });
             return;
         }
 
@@ -161,7 +160,7 @@ export default function Login() {
                             inputType={"text"}
                             inputRef={inputRef}
                             autoComplete={"email"}
-                            hasError={errors.email}
+                            hasError={formState.emailError}
                             placeholder={"you@example.com"}
                             onChangeInput={setEmailHandler}
                         />
@@ -179,7 +178,7 @@ export default function Login() {
                                 showPassword ? "text" : "password"
                             }
                             dir={"ltr"}
-                            hasError={errors.password}
+                            hasError={formState.passwordError}
                             onChangeInput={setPasswordHandler}
                         >
                             <button
@@ -203,7 +202,7 @@ export default function Login() {
                         </div>
 
                         <FormButton
-                            // disabled={}
+                            disabled={formState.success}
                             className={"w-full justify-center"}
                         >
                             ورود
