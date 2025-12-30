@@ -1,6 +1,11 @@
+import {
+    getRequestBody,
+    returnInternalServerError
+} from "@/lib/api-utils/utils";
+import connectToDB from "@/lib/db/mongo";
 import {userSchema} from "@/validations/auth";
-import {getRequestBody} from "@/lib/api-utils/utils";
 import {type NextRequest, NextResponse} from "next/server";
+import {UserModel} from "@/models/auth";
 
 export async function POST(req: NextRequest) {
     const body = await getRequestBody(req, "email and password required");
@@ -17,10 +22,21 @@ export async function POST(req: NextRequest) {
             {status: 422}
         );
     }
+    const {email, password} = resValidate.data;
 
     try {
+        await connectToDB();
+        const user = await UserModel.findOne({email});
 
+        if (!user) {
+            return NextResponse.json({
+                ok: false,
+                message: "Invalid email or password",
+            }, {
+                status: 401
+            });
+        }
     } catch (_) {
-
+        return returnInternalServerError();
     }
 }
