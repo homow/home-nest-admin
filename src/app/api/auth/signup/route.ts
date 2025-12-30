@@ -4,31 +4,11 @@ import connectToDB from "@/lib/db/mongo";
 import {userSchema} from "@/validations/auth";
 import {hashSecret} from "@/lib/auth-utils/auth";
 import {type NextRequest, NextResponse} from "next/server";
+import {getRequestBody} from "@/lib/api-utils/utils";
 
 export async function POST(req: NextRequest) {
-    let body;
-
-    try {
-        body = await req.json();
-        // eslint-disable-next-line
-    } catch (e) {
-        return NextResponse.json({
-            ok: false,
-            message: "Invalid or empty JSON body",
-        }, {
-            status: 400
-        });
-    }
-
-    if (!body || Object.keys(body).length === 0) {
-        return NextResponse.json(
-            {
-                ok: false,
-                message: "email and password is required",
-            },
-            {status: 400}
-        );
-    }
+    const body = await getRequestBody(req, "email and password required");
+    if (body instanceof NextResponse) return body;
 
     const resultValidate = userSchema.safeParse(body);
 

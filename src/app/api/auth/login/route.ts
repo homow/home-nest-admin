@@ -2,7 +2,19 @@ import {userSchema} from "@/validations/auth";
 import {type NextRequest, NextResponse} from "next/server";
 
 export async function POST(req: NextRequest) {
-    const body = await req.json();
+    let body;
+
+    try {
+        body = await req.json();
+        // eslint-disable-next-line
+    } catch (e) {
+        return NextResponse.json({
+            ok: false,
+            message: "Invalid or empty JSON body",
+        }, {
+            status: 400
+        });
+    }
 
     const resValidate = userSchema.safeParse(body);
 
