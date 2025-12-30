@@ -8,18 +8,18 @@ import {type NextRequest, NextResponse} from "next/server";
 export async function POST(req: NextRequest) {
     const body = await req.json();
 
-    const reslutValidate = userSchema.safeParse(body);
+    const resultValidate = userSchema.safeParse(body);
 
-    if (!reslutValidate.success) {
+    if (!resultValidate.success) {
         return NextResponse.json({
             ok: false,
-            message: reslutValidate.error.issues[0].message,
+            message: resultValidate.error.issues[0].message,
         }, {
             status: 400
         });
     }
 
-    const {email, password, name} = reslutValidate.data;
+    const {email, password, name} = resultValidate.data;
 
     try {
         await connectToDB();
