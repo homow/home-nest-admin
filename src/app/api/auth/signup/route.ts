@@ -6,7 +6,29 @@ import {hashSecret} from "@/lib/auth-utils/auth";
 import {type NextRequest, NextResponse} from "next/server";
 
 export async function POST(req: NextRequest) {
-    const body = await req.json();
+    let body;
+
+    try {
+        body = await req.json();
+        // eslint-disable-next-line
+    } catch (e) {
+        return NextResponse.json({
+            ok: false,
+            message: "Invalid or empty JSON body",
+        }, {
+            status: 400
+        });
+    }
+
+    if (!body || Object.keys(body).length === 0) {
+        return NextResponse.json(
+            {
+                ok: false,
+                message: "email and password is required",
+            },
+            {status: 400}
+        );
+    }
 
     const resultValidate = userSchema.safeParse(body);
 
