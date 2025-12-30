@@ -2,10 +2,18 @@ import {
     getRequestBody,
     returnInternalServerError
 } from "@/lib/api-utils/utils";
+import {
+    compareSecret,
+    generateToken,
+    hashSecret
+} from "@/lib/auth-utils/auth";
+import {cookies} from "next/headers";
+import {UserModel} from "@/models/auth";
 import connectToDB from "@/lib/db/mongo";
+import {UserPublic} from "@/types/models";
 import {userSchema} from "@/validations/auth";
 import {type NextRequest, NextResponse} from "next/server";
-import {UserModel} from "@/models/auth";
+import RefreshTokenModel from "@/models/auth/refreshToken";
 
 export async function POST(req: NextRequest) {
     const body = await getRequestBody(req, "email and password required");
@@ -22,11 +30,11 @@ export async function POST(req: NextRequest) {
             {status: 422}
         );
     }
-    const {email, password} = resValidate.data;
+    const {email, password, remember} = resValidate.data;
 
     try {
         await connectToDB();
-        const user = await UserModel.findOne({email});
+        const user = await UserModel.findOne({email}).lean();
 
         if (!user) {
             return NextResponse.json({
@@ -36,6 +44,70 @@ export async function POST(req: NextRequest) {
                 status: 401
             });
         }
+
+        const isValidPassword: boolean = await compareSecret(password, user.password);
+
+        if (!isValidPassword) {
+            return NextResponse.json({
+                ok: false,
+                message: "Invalid email or password",
+            }, {
+                status: 401
+            });
+        }
+
+        const userPublic: UserPublic = {
+            id: user._id.toString(),
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            isActive: user.isActive,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt
+        };
+
+        const refreshToken: string = generateToken({
+            id: userPublic.id,
+            role: user.role,
+            remember: !!remember
+        }, remember ? "7d" : "24h");
+
+        const accessToken: string = generateToken({
+            id: userPublic.id,
+        }, "1h");
+
+        const hashedRefreshToken: string = await hashSecret(refreshToken);
+
+        await RefreshTokenModel.create({
+            userId: user._id,
+            token: hashedRefreshToken,
+            expiresAt: remember
+                ? new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+                : new Date(Date.now() + 24 * 60 * 60 * 1000),
+        });
+
+        const cookieStore = await cookies();
+        cookieStore.set({
+            name: "refreshToken",
+            value: refreshToken,
+            httpOnly: true,
+            maxAge: remember
+                ? 7 * 24 * 60 * 60
+                : 24 * 60 * 60,
+            expires: remember
+                ? new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+                : new Date(Date.now() + 24 * 60 * 60 * 1000),
+            sameSite: "strict",
+            path: "/",
+            secure: process.env.NODE_ENV === "production"
+        });
+
+        return NextResponse.json({
+            ok: true,
+            message: "login successfully",
+            user: userPublic,
+            accessToken,
+        });
     } catch (_) {
         return returnInternalServerError();
     }

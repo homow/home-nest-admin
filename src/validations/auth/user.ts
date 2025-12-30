@@ -10,6 +10,7 @@ const userSchema = z.object({
             "Password must contain a number"
         ),
     name: z.string().optional(),
+    remember: z.boolean().optional(),
 });
 
 export {
