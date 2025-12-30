@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
 
         // eslint-disable-next-line
     } catch (e) {
-        NextResponse.json({
+        return NextResponse.json({
             ok: false,
             message: "Internal Server Error",
         }, {
