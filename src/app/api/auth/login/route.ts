@@ -62,8 +62,8 @@ export async function POST(req: NextRequest) {
             email: user.email,
             role: user.role,
             isActive: user.isActive,
-            createdAt: user.createdAt,
-            updatedAt: user.updatedAt
+            createdAt: user.createdAt.toISOString(),
+            updatedAt: user.updatedAt.toISOString(),
         };
 
         const refreshToken: string = generateToken({

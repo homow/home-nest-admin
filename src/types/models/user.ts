@@ -21,9 +21,11 @@ export interface UserDB extends UserBase {
     __v: number;
 }
 
-export interface UserPublic extends UserBase {
+export type UserPublic = Omit<UserBase, "createdAt" | "updatedAt"> & {
     id: string;
-}
+    createdAt: string;
+    updatedAt: string;
+};
 
 export interface RefreshToken {
     _id: Types.ObjectId;
