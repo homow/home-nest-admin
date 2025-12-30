@@ -1,6 +1,6 @@
-import {type Model, model, models, Schema} from "mongoose";
-import {emailRegex} from "@/lib/auth-utils";
 import {UserDB, UserRoles} from "@/types/models";
+import {emailRegex} from "@/lib/auth-utils/regex";
+import {type Model, model, models, Schema} from "mongoose";
 
 const UserSchema: Schema = new Schema(
     {
