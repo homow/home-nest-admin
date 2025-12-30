@@ -1,20 +1,10 @@
 import {userSchema} from "@/validations/auth";
+import {getRequestBody} from "@/lib/api-utils/utils";
 import {type NextRequest, NextResponse} from "next/server";
 
 export async function POST(req: NextRequest) {
-    let body;
-
-    try {
-        body = await req.json();
-        // eslint-disable-next-line
-    } catch (e) {
-        return NextResponse.json({
-            ok: false,
-            message: "Invalid or empty JSON body",
-        }, {
-            status: 400
-        });
-    }
+    const body = await getRequestBody(req, "email and password required");
+    if (body instanceof NextResponse) return body;
 
     const resValidate = userSchema.safeParse(body);
 
@@ -23,18 +13,14 @@ export async function POST(req: NextRequest) {
             {
                 ok: false,
                 message: resValidate.error.issues[0].message,
-            }
+            },
+            {status: 422}
         );
     }
 
-    return NextResponse.json(
-        {
-            ok: true,
-            message: "User successfully logged in",
-            user: {
-                name: "John",
-                age: 2,
-            }
-        }
-    );
+    try {
+
+    } catch (_) {
+
+    }
 }

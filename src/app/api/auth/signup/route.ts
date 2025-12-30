@@ -4,7 +4,7 @@ import connectToDB from "@/lib/db/mongo";
 import {userSchema} from "@/validations/auth";
 import {hashSecret} from "@/lib/auth-utils/auth";
 import {type NextRequest, NextResponse} from "next/server";
-import {getRequestBody} from "@/lib/api-utils/utils";
+import {getRequestBody, returnInternalServerError} from "@/lib/api-utils/utils";
 
 export async function POST(req: NextRequest) {
     const body = await getRequestBody(req, "email and password required");
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
             ok: false,
             message: resultValidate.error.issues[0].message,
         }, {
-            status: 400
+            status: 422
         });
     }
 
@@ -61,14 +61,7 @@ export async function POST(req: NextRequest) {
         }, {
             status: 201
         });
-
-        // eslint-disable-next-line
-    } catch (e) {
-        return NextResponse.json({
-            ok: false,
-            message: "Internal Server Error",
-        }, {
-            status: 500
-        });
+    } catch (_) {
+        return returnInternalServerError();
     }
 }

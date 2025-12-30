@@ -8,11 +8,10 @@ export async function getRequestBody(
 
     try {
         body = await req.json();
-        // eslint-disable-next-line
-    } catch (e) {
+    } catch (_) {
         return NextResponse.json({
             ok: false,
-            message: "Invalid or empty JSON body",
+            message: "JSON body is empty",
         }, {
             status: 400
         });
@@ -28,4 +27,13 @@ export async function getRequestBody(
         );
     }
     return body;
+}
+
+export function returnInternalServerError() {
+    return NextResponse.json({
+        ok: false,
+        message: "Internal Server Error",
+    }, {
+        status: 500
+    });
 }
