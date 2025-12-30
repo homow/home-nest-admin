@@ -24,3 +24,13 @@ export interface UserDB extends UserBase {
 export interface UserPublic extends UserBase {
     id: string;
 }
+
+export interface RefreshToken {
+    _id: Types.ObjectId;
+    token: string;
+    userId: Types.ObjectId;
+    isRevoked: boolean;
+    expiresAt: Date;
+    createdAt: Date;
+    updatedAt: Date;
+}
