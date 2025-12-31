@@ -9,12 +9,14 @@ import {
 } from "react";
 import useToggle from "@/hooks/useToggle";
 import Input from "@/components/forms/Input";
-import {LoginFormStateType, LoginInput} from "@/types/auth";
 import useAlertModal from "@/hooks/useAlertModal";
-import {emailRegex, hasNumberRegex} from "@/lib/utils/auth-utils/regex";
+import useLogin from "@/hooks/reactQuery/useLogin";
 import CheckBox from "@/components/forms/CheckBox";
 import FormButton from "@/components/button/FormButton";
 import useSetClientTitle from "@/hooks/useSetClientTitle";
+import {LoginFormStateType, LoginInput} from "@/types/auth";
+import {errorParser} from "@/lib/utils/api-utils/error-parser";
+import {emailRegex, hasNumberRegex} from "@/lib/utils/auth-utils/regex";
 
 const initValue: LoginFormStateType = {
     success: false,
@@ -51,6 +53,8 @@ export default function Login() {
     useEffect(() => {
         inputRef?.current?.focus();
     }, []);
+
+    const {mutate, data, error} = useLogin();
 
     // set email handler
     function setEmailHandler(event: ChangeEvent<HTMLInputElement>) {
@@ -146,8 +150,32 @@ export default function Login() {
             remember,
         };
 
-
+        mutate(loginData);
     }
+
+    useEffect(() => {
+        if (error) {
+            const parse: string = errorParser(error);
+            console.log(parse);
+        }
+
+        if (data) {
+            console.log(data);
+
+            if (!data.ok) {
+                const parse: string = errorParser(data);
+
+                changeAlertModalData({
+                    data: {
+                        alertType: "error",
+                        message: parse
+                    },
+                    isOpen: true
+                });
+            }
+        }
+        // eslint-disable-next-line
+    }, [data, error]);
 
     return (
         <>
