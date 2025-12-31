@@ -1,8 +1,9 @@
-import CustomThemeProvider from "@/components/ui/CustomThemeProvider";
-import SvgDefs from "@/components/icon/SvgDefs";
-import {MainComponentProps} from "@/types/ui";
-import {dana, geist} from "@/lib/utils/ui-utils/fonts";
 import "./globals.css";
+import {MainComponentProps} from "@/types/ui";
+import SvgDefs from "@/components/icon/SvgDefs";
+import {dana, geist} from "@/lib/utils/ui-utils/fonts";
+import CustomThemeProvider from "@/components/ui/CustomThemeProvider";
+import ReactQueryProvider from "@/components/clientWrapper/ReactQueryProvider";
 
 export default function RootLayout(
     {
@@ -79,7 +80,9 @@ export default function RootLayout(
         <SvgDefs/>
 
         <CustomThemeProvider>
-            {children}
+            <ReactQueryProvider>
+                {children}
+            </ReactQueryProvider>
         </CustomThemeProvider>
         </body>
         </html>
