@@ -1,5 +1,5 @@
-import type {MainComponentProps} from "@/types/ui";
 import {ReactNode} from "react";
+import type {MainComponentProps} from "@/types/ui";
 
 interface Props extends MainComponentProps {
     topbar?: ReactNode;

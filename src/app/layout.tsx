@@ -4,12 +4,16 @@ import SvgDefs from "@/components/icon/SvgDefs";
 import {dana, geist} from "@/lib/utils/ui-utils/fonts";
 import CustomThemeProvider from "@/components/ui/CustomThemeProvider";
 import ReactQueryProvider from "@/components/clientWrapper/ReactQueryProvider";
+import {getAccessCookie} from "@/lib/server-utils/getCookies";
+import UserStoreInitializer from "@/components/clientWrapper/UserStoreInitializer";
 
-export default function RootLayout(
+export default async function RootLayout(
     {
         children,
     }: MainComponentProps
 ) {
+    const access = await getAccessCookie();
+    console.log(access);
     return (
         <html
             data-scroll-behavior="smooth"

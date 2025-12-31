@@ -12,8 +12,8 @@ import {UserModel} from "@/models/auth";
 import connectToDB from "@/lib/db/mongo";
 import {UserPublic} from "@/types/models";
 import {userSchema} from "@/validations/auth";
-import {type NextRequest, NextResponse} from "next/server";
 import RefreshTokenModel from "@/models/auth/refreshToken";
+import {type NextRequest, NextResponse} from "next/server";
 
 export async function POST(req: NextRequest) {
     const body = await getRequestBody(req, "email and password required");
@@ -87,6 +87,8 @@ export async function POST(req: NextRequest) {
         });
 
         const cookieStore = await cookies();
+
+        // set refresh token
         cookieStore.set({
             name: "refreshToken",
             value: refreshToken,
@@ -102,11 +104,19 @@ export async function POST(req: NextRequest) {
             secure: process.env.NODE_ENV === "production"
         });
 
+        // set access token
+        cookieStore.set({
+            name: "accessToken",
+            value: accessToken,
+            httpOnly: true,
+            maxAge: 60 * 60,
+            expires: new Date(Date.now() + 60 * 60 * 1000)
+        });
+
         return NextResponse.json({
             ok: true,
             message: "login successfully",
             user: userPublic,
-            accessToken,
         });
     } catch (_) {
         return returnInternalServerError();
