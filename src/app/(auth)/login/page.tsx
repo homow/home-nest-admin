@@ -17,6 +17,7 @@ import useSetClientTitle from "@/hooks/useSetClientTitle";
 import {LoginFormStateType, LoginInput} from "@/types/auth";
 import {errorParser} from "@/lib/utils/api-utils/error-parser";
 import {emailRegex, passwordRegex} from "@/lib/utils/auth-utils/regex";
+import useUserStore from "@/store/userStore";
 
 const initValue: LoginFormStateType = {
     success: false,
@@ -55,6 +56,7 @@ export default function Login() {
     }, []);
 
     const {mutate, data, error} = useLogin();
+    const {setAccessToken, setUser} = useUserStore();
 
     // set email handler
     function setEmailHandler(event: ChangeEvent<HTMLInputElement>) {
@@ -172,6 +174,11 @@ export default function Login() {
                     },
                     isOpen: true
                 });
+            }
+
+            if (data.ok) {
+                setAccessToken(data?.accessToken);
+                setUser(data.user);
             }
         }
         // eslint-disable-next-line
