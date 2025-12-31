@@ -1,6 +1,6 @@
 "use client";
 
-import {cn} from "@/lib/ui-utils/ui-utils";
+import {cn} from "@/lib/utils/ui-utils/ui-utils";
 import Image from "next/image";
 import OnlineUi from "./OnlineUi";
 

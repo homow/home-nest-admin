@@ -1,5 +1,5 @@
 import {Dispatch, RefObject, SetStateAction} from "react";
-import {cn} from "@/lib/ui-utils";
+import {cn} from "@/lib/utils/ui-utils";
 import type {UseToggleFn} from "@/types/ui";
 
 interface Props {

@@ -1,5 +1,5 @@
 import {UserDB, UserRoles} from "@/types/models";
-import {emailRegex} from "@/lib/auth-utils/regex";
+import {emailRegex} from "@/lib/utils/auth-utils/regex";
 import {type Model, model, models, Schema} from "mongoose";
 
 const UserSchema: Schema = new Schema(

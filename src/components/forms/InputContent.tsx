@@ -2,7 +2,7 @@
 
 import {ErrorMessageInputs, RedStarField} from "@/components/ui/Fragments";
 import type {InitInputProps} from "@/types/ui";
-import {cn} from "@/lib/ui-utils";
+import {cn} from "@/lib/utils/ui-utils";
 
 export default function InputContent(
     {

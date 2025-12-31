@@ -2,7 +2,7 @@
 
 import {useState, useRef, useEffect, type KeyboardEvent} from "react";
 import {SelectBoxOptionsType, SelectBoxPropsType} from "@/types/ui";
-import {cn} from "@/lib/ui-utils";
+import {cn} from "@/lib/utils/ui-utils";
 import Icon from "../icon/Icon";
 import {RedStarField} from "@/components/ui/Fragments";
 

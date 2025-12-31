@@ -2,9 +2,9 @@ import {UserModel} from "@/models/auth";
 import {UserRoles} from "@/types/models";
 import connectToDB from "@/lib/db/mongo";
 import {userSchema} from "@/validations/auth";
-import {hashSecret} from "@/lib/auth-utils/auth";
+import {hashSecret} from "@/lib/utils/auth-utils/auth";
 import {type NextRequest, NextResponse} from "next/server";
-import {getRequestBody, returnInternalServerError} from "@/lib/api-utils/utils";
+import {getRequestBody, returnInternalServerError} from "@/lib/utils/api-utils/utils";
 
 export async function POST(req: NextRequest) {
     const body = await getRequestBody(req, "email and password required");

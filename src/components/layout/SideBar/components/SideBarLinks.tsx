@@ -3,7 +3,7 @@
 import NavLinkClient from "@/components/ui/NavLinkClient";
 import useSidebarStore from "@/store/sidebarStore";
 import type {SideBarDataTypes} from "@/types/ui";
-import {cn} from "@/lib/ui-utils/ui-utils";
+import {cn} from "@/lib/utils/ui-utils/ui-utils";
 import Icon from "@/components/icon/Icon";
 import useMobileNavStore from "@/store/mobileNavStore";
 

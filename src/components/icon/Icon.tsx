@@ -1,4 +1,4 @@
-import {cn} from "@/lib/ui-utils/ui-utils";
+import {cn} from "@/lib/utils/ui-utils/ui-utils";
 
 interface Props {
     icon: string;

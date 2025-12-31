@@ -6,9 +6,9 @@ import FormButton from "@/components/button/FormButton";
 import {ErrorMessageInputs, RedStarField} from "@/components/ui/Fragments";
 import Input from "@/components/forms/Input";
 import SelectBox from "@/components/forms/SelectBox";
-import {checkPrice, formatPriceDebounced} from "@/lib/form-utils";
+import {checkPrice, formatPriceDebounced} from "@/lib/utils/form-utils";
 import CheckBox from "@/components/forms/CheckBox";
-import {cn} from "@/lib/ui-utils";
+import {cn} from "@/lib/utils/ui-utils";
 
 // initial value in form data
 const initialFormData: FormCreatePropertyType = {

@@ -1,4 +1,4 @@
-import {cn} from "@/lib/ui-utils/ui-utils";
+import {cn} from "@/lib/utils/ui-utils/ui-utils";
 import {OverlayProps} from "@/types/ui";
 
 export default function Overlay(

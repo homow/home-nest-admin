@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import {cn} from "@/lib/ui-utils/ui-utils";
+import {cn} from "@/lib/utils/ui-utils/ui-utils";
 import type {MainComponentProps} from "@/types/ui";
 import useIsExactMatch from "@/hooks/useIsExactMatch";
 

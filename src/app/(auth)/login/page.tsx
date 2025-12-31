@@ -11,7 +11,7 @@ import useToggle from "@/hooks/useToggle";
 import Input from "@/components/forms/Input";
 import {LoginFormStateType, LoginInput} from "@/types/auth";
 import useAlertModal from "@/hooks/useAlertModal";
-import {emailRegex, hasNumberRegex} from "@/lib/auth-utils/regex";
+import {emailRegex, hasNumberRegex} from "@/lib/utils/auth-utils/regex";
 import CheckBox from "@/components/forms/CheckBox";
 import FormButton from "@/components/button/FormButton";
 import useSetClientTitle from "@/hooks/useSetClientTitle";

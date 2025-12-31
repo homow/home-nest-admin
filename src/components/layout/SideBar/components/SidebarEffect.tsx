@@ -1,7 +1,7 @@
 "use client";
 
 import useSidebarStore from "@/store/sidebarStore";
-import {storageCollapsedMenu, applyCustomSpace} from "@/lib/ui-utils";
+import {storageCollapsedMenu, applyCustomSpace} from "@/lib/utils/ui-utils";
 import {useEffect, useEffectEvent} from "react";
 
 export default function SidebarEffect() {

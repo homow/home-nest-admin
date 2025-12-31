@@ -1,7 +1,7 @@
 "use client";
 
 import type {InputPropsType} from "@/types/ui";
-import {cn} from "@/lib/ui-utils";
+import {cn} from "@/lib/utils/ui-utils";
 import InputContent from "@/components/forms/InputContent";
 
 export default function Input(

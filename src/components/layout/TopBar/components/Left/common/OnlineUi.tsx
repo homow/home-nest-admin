@@ -1,7 +1,7 @@
 "use client";
 
 import {useEffect, useEffectEvent, useState} from "react";
-import {cn} from "@/lib/ui-utils/ui-utils";
+import {cn} from "@/lib/utils/ui-utils/ui-utils";
 
 export default function OnlineUi() {
     const [online, setOnline] = useState<boolean>(false);

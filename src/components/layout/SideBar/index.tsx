@@ -1,6 +1,6 @@
 "use client";
 
-import {cn} from "@/lib/ui-utils/ui-utils";
+import {cn} from "@/lib/utils/ui-utils/ui-utils";
 import SideBarMenu from "./components/SideBarMenu";
 import SideBarHeader from "./components/SideBarHeader";
 import SidebarEffect from "./components/SidebarEffect";

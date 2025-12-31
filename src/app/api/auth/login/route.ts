@@ -1,12 +1,12 @@
 import {
     getRequestBody,
     returnInternalServerError
-} from "@/lib/api-utils/utils";
+} from "@/lib/utils/api-utils/utils";
 import {
     compareSecret,
     generateToken,
     hashSecret
-} from "@/lib/auth-utils/auth";
+} from "@/lib/utils/auth-utils/auth";
 import {cookies} from "next/headers";
 import {UserModel} from "@/models/auth";
 import connectToDB from "@/lib/db/mongo";

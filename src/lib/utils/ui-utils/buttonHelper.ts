@@ -1,4 +1,4 @@
-import {cn} from "@/lib/ui-utils";
+import {cn} from "@/lib/utils/ui-utils/index";
 import type {ButtonPropsStyle} from "@/types/ui";
 
 export default function buttonStyle(

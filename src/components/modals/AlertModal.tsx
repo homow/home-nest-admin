@@ -15,11 +15,11 @@ import {
     getAlertModalBtnBg,
     getAlertModalTitle,
     getAlertModalBgBar,
-} from "@/lib/ui-utils";
+} from "@/lib/utils/ui-utils";
 
 import type {UseToggleFn} from "@/types/ui";
 import {createPortal} from "react-dom";
-import {cn} from "@/lib/ui-utils";
+import {cn} from "@/lib/utils/ui-utils";
 
 export interface SetDataTypes {
     alertType?: AlertModalType;
