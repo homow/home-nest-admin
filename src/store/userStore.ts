@@ -8,7 +8,7 @@ interface UserStore {
     user: UserPublic | null;
     accessToken: string;
 
-    getUser: (user: UserPublic) => void;
+    setUser: (user: UserPublic) => void;
     setAccessToken: (accessToken: string) => void;
 }
 
@@ -16,7 +16,7 @@ const useUserStore = create(
     devtools<UserStore>((set) => ({
         user: null,
         accessToken: "",
-        getUser: user => {
+        setUser: user => {
             set(() => {
                 return {user};
             });
