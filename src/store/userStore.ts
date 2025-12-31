@@ -2,6 +2,7 @@
 
 import {create} from "zustand";
 import {UserPublic} from "@/types/models";
+import {devtools} from "zustand/middleware";
 
 interface UserStore {
     user: UserPublic | null;
@@ -11,8 +12,8 @@ interface UserStore {
     setAccessToken: (accessToken: string) => void;
 }
 
-const useUserStore = create<UserStore>(
-    (set) => ({
+const useUserStore = create(
+    devtools<UserStore>((set) => ({
         user: null,
         accessToken: "",
         getUser: user => {
@@ -21,7 +22,10 @@ const useUserStore = create<UserStore>(
             });
         },
         setAccessToken: (accessToken: string) => set(() => ({accessToken}))
-    })
+    }), {
+        name: "userStore",
+        enabled: process.env.NODE_ENV !== "production"
+    }),
 );
 
 export default useUserStore;
