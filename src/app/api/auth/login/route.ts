@@ -110,13 +110,17 @@ export async function POST(req: NextRequest) {
             value: accessToken,
             httpOnly: true,
             maxAge: 60 * 60,
-            expires: new Date(Date.now() + 60 * 60 * 1000)
+            expires: new Date(Date.now() + 60 * 60 * 1000),
+            sameSite: "strict",
+            path: "/",
+            secure: process.env.NODE_ENV === "production",
         });
 
         return NextResponse.json({
             ok: true,
             message: "login successfully",
             user: userPublic,
+            accessToken
         });
     } catch (_) {
         return returnInternalServerError();
