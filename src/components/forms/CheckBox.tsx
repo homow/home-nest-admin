@@ -1,6 +1,6 @@
-import type {UseToggleFn} from "@/types/ui";
-import {RefObject} from "react";
+import {Dispatch, RefObject, SetStateAction} from "react";
 import {cn} from "@/lib/ui-utils";
+import type {UseToggleFn} from "@/types/ui";
 
 interface Props {
     id?: string;
@@ -9,8 +9,8 @@ interface Props {
     checked?: boolean;
     className?: string;
     initValue?: boolean;
-    onChange?: UseToggleFn;
     ref?: RefObject<HTMLInputElement>;
+    onChange?: UseToggleFn | Dispatch<SetStateAction<boolean>>;
 }
 
 export default function CheckBox(

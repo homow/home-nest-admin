@@ -9,4 +9,14 @@ interface LoginFormStateType {
 
 type SignupInput = z.infer<typeof userSchema>;
 
-export type {LoginFormStateType, SignupInput};
+interface LoginInput {
+    email: string;
+    password: string;
+    remember?: boolean;
+}
+
+export type {
+    LoginFormStateType,
+    SignupInput,
+    LoginInput,
+};

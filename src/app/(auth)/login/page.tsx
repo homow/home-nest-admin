@@ -9,9 +9,9 @@ import {
 } from "react";
 import useToggle from "@/hooks/useToggle";
 import Input from "@/components/forms/Input";
-import {LoginFormStateType} from "@/types/auth";
+import {LoginFormStateType, LoginInput} from "@/types/auth";
 import useAlertModal from "@/hooks/useAlertModal";
-import {emailRegex} from "@/lib/auth-utils/regex";
+import {emailRegex, hasNumberRegex} from "@/lib/auth-utils/regex";
 import CheckBox from "@/components/forms/CheckBox";
 import FormButton from "@/components/button/FormButton";
 import useSetClientTitle from "@/hooks/useSetClientTitle";
@@ -24,6 +24,7 @@ const initValue: LoginFormStateType = {
 
 export default function Login() {
     const [password, setPassword] = useState<string>("");
+    const [remember, setRemember] = useState<boolean>(false);
     const [email, setEmail] = useState<string>("");
     const [formState, setFormState] = useState<LoginFormStateType>(initValue);
 
@@ -85,8 +86,18 @@ export default function Login() {
         setPassword(val);
 
         if (
-            val.trim()
-            && formState.passwordError
+            formState?.passwordError?.includes("6")
+            && val.trim().length > 6
+        ) {
+            setFormState({
+                ...formState,
+                passwordError: ""
+            });
+        }
+
+        if (
+            formState?.passwordError?.includes("عدد")
+            && hasNumberRegex.test(val.trim())
         ) {
             setFormState({
                 ...formState,
@@ -102,8 +113,14 @@ export default function Login() {
         const trimPassword: string = password?.trim();
 
         const newErrors: LoginFormStateType = {
-            emailError: trimmedEmail ? "" : "ایمیل رو وارد کن",
-            passwordError: trimPassword ? "" : "پسورد رو وارد کن",
+            emailError: trimmedEmail
+                ? "" :
+                "ایمیل رو وارد کن",
+            passwordError: trimPassword.length < 6
+                ? "پسورد حداقل 6 رقم هست"
+                : !hasNumberRegex.test(trimPassword)
+                    ? "پسورد باید شامل عدد باشه"
+                    : "",
             success: false,
         };
 
@@ -122,6 +139,13 @@ export default function Login() {
             });
             return;
         }
+
+        const loginData: LoginInput = {
+            email,
+            password,
+            remember,
+        };
+
 
     }
 
@@ -197,6 +221,8 @@ export default function Login() {
                             <CheckBox
                                 id={"remember"}
                                 name={"remember"}
+                                initValue={remember}
+                                onChange={setRemember}
                                 label={"منو یادت باشه"}
                             />
                         </div>

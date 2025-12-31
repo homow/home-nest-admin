@@ -1,7 +1,7 @@
 import CustomThemeProvider from "@/components/ui/CustomThemeProvider";
 import SvgDefs from "@/components/icon/SvgDefs";
 import {MainComponentProps} from "@/types/ui";
-import {dana, geist} from "@/lib/fonts";
+import {dana, geist} from "@/lib/ui-utils/fonts";
 import "./globals.css";
 
 export default function RootLayout(
