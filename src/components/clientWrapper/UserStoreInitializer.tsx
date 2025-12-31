@@ -1,16 +1,21 @@
 "use client";
 
-import useUserStore from "@/store/userStore";
 import {useEffect} from "react";
+import useUserStore from "@/store/userStore";
 
-export default function UserStoreInitializer(token?: string) {
+interface Props {
+    token?: string;
+}
+
+export default function UserStoreInitializer({token}: Props) {
     const {setAccessToken} = useUserStore();
-    
+
     useEffect(() => {
+        console.log(token);
         if (token) {
             setAccessToken(token);
         }
     }, [setAccessToken, token]);
-    
+
     return null;
 }
