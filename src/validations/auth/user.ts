@@ -6,8 +6,8 @@ const userSchema = z.object({
         .min(6,
             "Password must be at least 6 characters"
         )
-        .refine(val => /[0-9]/.test(val),
-            "Password must contain a number"
+        .regex(/^(?=.*[A-Za-z])(?=.*\d).+$/,
+            "Password must contain at least one letter and one number"
         ),
     name: z.string().optional(),
     remember: z.boolean().optional(),

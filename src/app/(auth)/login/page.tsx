@@ -16,7 +16,7 @@ import FormButton from "@/components/button/FormButton";
 import useSetClientTitle from "@/hooks/useSetClientTitle";
 import {LoginFormStateType, LoginInput} from "@/types/auth";
 import {errorParser} from "@/lib/utils/api-utils/error-parser";
-import {emailRegex, hasNumberRegex} from "@/lib/utils/auth-utils/regex";
+import {emailRegex, passwordRegex} from "@/lib/utils/auth-utils/regex";
 
 const initValue: LoginFormStateType = {
     success: false,
@@ -101,7 +101,7 @@ export default function Login() {
 
         if (
             formState?.passwordError?.includes("عدد")
-            && hasNumberRegex.test(val.trim())
+            && passwordRegex.test(val.trim())
         ) {
             setFormState({
                 ...formState,
@@ -122,8 +122,8 @@ export default function Login() {
                 "ایمیل رو وارد کن",
             passwordError: trimPassword.length < 6
                 ? "پسورد حداقل 6 رقم هست"
-                : !hasNumberRegex.test(trimPassword)
-                    ? "پسورد باید شامل عدد باشه"
+                : !passwordRegex.test(trimPassword)
+                    ? "پسورد باید شامل عدد و حروف انگلیسی باشه"
                     : "",
             success: false,
         };
