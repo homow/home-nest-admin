@@ -25,7 +25,6 @@ const RefreshTokenModelSchema: Schema = new Schema({
 
 RefreshTokenModelSchema.index({userId: 1});
 RefreshTokenModelSchema.index({expiresAt: 1}, {expireAfterSeconds: 0});
-RefreshTokenModelSchema.index({token: 1});
 
 const RefreshTokenModel: Model<RefreshToken> =
     models.RefreshToken
