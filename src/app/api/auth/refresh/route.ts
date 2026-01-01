@@ -1,18 +1,16 @@
-import {cookies} from "next/headers";
-import {JwtPayload} from "jsonwebtoken";
-import {NextResponse} from "next/server";
-import RefreshTokenModel from "@/models/auth/RefreshToken";
-import {returnInternalServerError} from "@/lib/utils/api-utils/utils";
 import {
     compareSecret,
     verifyToken,
     generateToken
 } from "@/lib/utils/auth-utils/auth";
-import {setAccessToken} from "@/lib/server-utils/cookies";
+import {JwtPayload} from "jsonwebtoken";
+import {NextResponse} from "next/server";
+import RefreshTokenModel from "@/models/auth/RefreshToken";
+import {returnInternalServerError} from "@/lib/utils/api-utils/utils";
+import {getRefreshToken, setAccessToken} from "@/lib/server-utils/cookies";
 
 export async function POST() {
-    const cookieStore = await cookies();
-    const refreshToken = cookieStore.get("refreshToken")?.value;
+    const refreshToken: string | undefined = await getRefreshToken();
 
     if (!refreshToken) {
         return NextResponse.json({
