@@ -1,6 +1,6 @@
 import {
-    getRequestBody,
-    returnInternalServerError
+    returnInternalServerError,
+    validateBody
 } from "@/lib/utils/api-utils/utils";
 import {
     compareSecret,
@@ -16,21 +16,15 @@ import RefreshTokenModel from "@/models/auth/RefreshToken";
 import {type NextRequest, NextResponse} from "next/server";
 
 export async function POST(req: NextRequest) {
-    const body = await getRequestBody(req, "email and password required");
+    const body = await validateBody({
+        req,
+        schema: userSchema,
+        messageForRequired: "email and password required"
+    });
+
     if (body instanceof NextResponse) return body;
 
-    const resValidate = userSchema.safeParse(body);
-
-    if (!resValidate.success) {
-        return NextResponse.json(
-            {
-                ok: false,
-                message: resValidate.error.issues[0].message,
-            },
-            {status: 422}
-        );
-    }
-    const {email, password, remember} = resValidate.data;
+    const {email, password, remember} = body;
 
     try {
         await connectToDB();
