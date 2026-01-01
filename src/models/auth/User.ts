@@ -2,7 +2,7 @@ import {UserDB, UserRoles} from "@/types/models";
 import {emailRegex} from "@/lib/utils/auth-utils/regex";
 import {type Model, model, models, Schema} from "mongoose";
 
-const UserSchema: Schema = new Schema(
+const UserModelSchema: Schema = new Schema(
     {
         name: {
             type: String,
@@ -41,7 +41,12 @@ const UserSchema: Schema = new Schema(
     }
 );
 
+UserModelSchema.index(
+    {email: 1},
+    {unique: true},
+);
+
 const UserModel: Model<UserDB> =
-    models.Users || model("Users", UserSchema);
+    models.Users || model("Users", UserModelSchema);
 
 export {UserModel};
