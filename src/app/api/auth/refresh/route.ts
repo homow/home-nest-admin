@@ -6,8 +6,8 @@ import {
 import {JwtPayload} from "jsonwebtoken";
 import {NextResponse} from "next/server";
 import RefreshTokenModel from "@/models/auth/RefreshToken";
+import {getRefreshToken, setAccessToken} from "@/lib/server-utils";
 import {returnInternalServerError} from "@/lib/utils/api-utils/utils";
-import {getRefreshToken, setAccessToken} from "@/lib/server-utils/cookies";
 
 export async function POST() {
     const refreshToken: string | undefined = await getRefreshToken();

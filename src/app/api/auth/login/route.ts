@@ -13,7 +13,7 @@ import {UserPublic} from "@/types/models";
 import {userSchema} from "@/validations/auth";
 import RefreshTokenModel from "@/models/auth/RefreshToken";
 import {type NextRequest, NextResponse} from "next/server";
-import {setAccessToken, setRefreshToken} from "@/lib/server-utils/cookies";
+import {setAccessToken, setRefreshToken} from "@/lib/server-utils";
 
 export async function POST(req: NextRequest) {
     const body = await validateBody({
