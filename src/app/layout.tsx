@@ -1,4 +1,5 @@
 import "./globals.css";
+import {cookies} from "next/headers";
 import {MainComponentProps} from "@/types/ui";
 import SvgDefs from "@/components/icon/SvgDefs";
 import {dana, geist} from "@/lib/utils/ui-utils/fonts";
@@ -12,7 +13,24 @@ export default async function RootLayout(
         children,
     }: MainComponentProps
 ) {
+    const cookieStore = await cookies();
+    const refreshToken = cookieStore.get("refreshToken");
     const accessToken = await getAccessCookie();
+
+    try {
+        const res = await fetch("http://localhost:3000/api/auth/refresh", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Cookie": `refreshToken=${refreshToken?.value}`,
+            },
+        });
+        const data = await res.json();
+        console.log(data);
+    } catch (e) {
+        console.log(e);
+    }
+
     return (
         <html
             data-scroll-behavior="smooth"
