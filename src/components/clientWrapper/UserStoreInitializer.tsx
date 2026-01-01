@@ -7,11 +7,10 @@ interface Props {
     token?: string;
 }
 
-export default function UserStoreInitializer({token}: Props) {
+export default function UserStoreInitializer({token}: Props): null {
     const {setAccessToken} = useUserStore();
 
-    useEffect(() => {
-        console.log(token);
+    useEffect((): void => {
         if (token) {
             setAccessToken(token);
         }
