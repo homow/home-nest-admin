@@ -1,3 +1,5 @@
+import {z} from "zod";
+import {ValidateBodyTypes} from "@/types/api";
 import {type NextRequest, NextResponse} from "next/server";
 
 export async function getRequestBody(
@@ -36,4 +38,36 @@ export function returnInternalServerError() {
     }, {
         status: 500
     });
+}
+
+export function formatZodError(error: z.ZodError) {
+    return error?.issues?.map(i => ({
+        fields: i.path.join("."),
+        message: i.message,
+    }));
+}
+
+export async function validateBody<T extends z.ZodTypeAny>(
+    {
+        req,
+        schema,
+        message,
+    }: ValidateBodyTypes<T>
+) {
+    const body = await getRequestBody(req, message);
+
+    if (body instanceof NextResponse) return body;
+
+    const result = schema.safeParse(body);
+
+    if (!result.success) {
+        return NextResponse.json({
+            ok: false,
+            errors: formatZodError(result.error),
+        }, {
+            status: 422
+        });
+    }
+
+    return result.data as z.infer<T>;
 }
