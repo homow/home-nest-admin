@@ -51,10 +51,10 @@ export async function validateBody<T extends z.ZodTypeAny>(
     {
         req,
         schema,
-        message,
+        messageForRequired,
     }: ValidateBodyTypes<T>
 ) {
-    const body = await getRequestBody(req, message);
+    const body = await getRequestBody(req, messageForRequired);
 
     if (body instanceof NextResponse) return body;
 
