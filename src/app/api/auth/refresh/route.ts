@@ -1,11 +1,15 @@
 import {cookies} from "next/headers";
-import {NextRequest, NextResponse} from "next/server";
-import RefreshTokenModel from "@/models/auth/RefreshToken";
 import {JwtPayload} from "jsonwebtoken";
+import {NextResponse} from "next/server";
+import RefreshTokenModel from "@/models/auth/RefreshToken";
 import {returnInternalServerError} from "@/lib/utils/api-utils/utils";
-import {compareSecret, verifyToken} from "@/lib/utils/auth-utils/auth";
+import {
+    compareSecret,
+    verifyToken,
+    generateToken
+} from "@/lib/utils/auth-utils/auth";
 
-export async function POST(req: NextRequest) {
+export async function POST() {
     const cookieStore = await cookies();
     const refreshToken = cookieStore.get("refreshToken")?.value;
 
@@ -60,11 +64,24 @@ export async function POST(req: NextRequest) {
             });
         }
 
-        const accessToken =
+        const accessToken: string = generateToken({
+            id: matchToken.userId,
+        }, "1h");
+
+        cookieStore.set({
+            name: "accessToken",
+            value: accessToken,
+            httpOnly: true,
+            maxAge: 60 * 60,
+            expires: new Date(Date.now() + 60 * 60 * 1000),
+            sameSite: "strict",
+            path: "/",
+            secure: process.env.NODE_ENV === "production",
+        });
 
         return NextResponse.json({
             ok: true,
-            token: findToken,
+            accessToken,
         });
     } catch (_) {
         return returnInternalServerError();
