@@ -2,7 +2,7 @@ import "./globals.css";
 import {MainComponentProps} from "@/types/ui";
 import SvgDefs from "@/components/icon/SvgDefs";
 import {dana, geist} from "@/lib/utils/ui-utils/fonts";
-import {getAccessCookie} from "@/lib/server-utils/getCookies";
+import {getAccessCookie} from "@/lib/server-utils/cookies";
 import CustomThemeProvider from "@/components/ui/CustomThemeProvider";
 import ReactQueryProvider from "@/components/clientWrapper/ReactQueryProvider";
 import UserStoreInitializer from "@/components/clientWrapper/UserStoreInitializer";

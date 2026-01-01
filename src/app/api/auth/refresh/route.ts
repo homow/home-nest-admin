@@ -8,6 +8,7 @@ import {
     verifyToken,
     generateToken
 } from "@/lib/utils/auth-utils/auth";
+import {setAccessToken} from "@/lib/server-utils/cookies";
 
 export async function POST() {
     const cookieStore = await cookies();
@@ -68,16 +69,7 @@ export async function POST() {
             id: matchToken.userId,
         }, "1h");
 
-        cookieStore.set({
-            name: "accessToken",
-            value: accessToken,
-            httpOnly: true,
-            maxAge: 60 * 60,
-            expires: new Date(Date.now() + 60 * 60 * 1000),
-            sameSite: "strict",
-            path: "/",
-            secure: process.env.NODE_ENV === "production",
-        });
+        await setAccessToken(accessToken);
 
         return NextResponse.json({
             ok: true,
