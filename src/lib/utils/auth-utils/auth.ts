@@ -33,7 +33,7 @@ function generateToken(
     return jwt.sign(payload, secret, options);
 }
 
-function verfyToken(
+function verifyToken(
     token: string
 ): string | JwtPayload {
     const secret: string | undefined = process.env.JWT_SECRET;
@@ -42,14 +42,8 @@ function verfyToken(
         throw new Error(
             "JWT_SECRET is not defined in environment variables"
         );
-
     } else {
-        try {
-            return jwt.verify(token, secret);
-        } catch (e) {
-            console.log(e);
-            throw new Error("Invalid or expired token");
-        }
+        return jwt.verify(token, secret);
     }
 }
 
@@ -57,5 +51,5 @@ export {
     generateToken,
     hashSecret,
     compareSecret,
-    verfyToken
+    verifyToken
 };
