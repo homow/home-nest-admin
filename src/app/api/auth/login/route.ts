@@ -7,13 +7,13 @@ import {
     generateToken,
     hashSecret
 } from "@/lib/utils/auth-utils/auth";
-import {cookies} from "next/headers";
 import {UserModel} from "@/models/auth";
 import connectToDB from "@/lib/db/mongo";
 import {UserPublic} from "@/types/models";
 import {userSchema} from "@/validations/auth";
 import RefreshTokenModel from "@/models/auth/RefreshToken";
 import {type NextRequest, NextResponse} from "next/server";
+import {setAccessToken, setRefreshToken} from "@/lib/server-utils/cookies";
 
 export async function POST(req: NextRequest) {
     const body = await validateBody({
@@ -80,35 +80,9 @@ export async function POST(req: NextRequest) {
                 : new Date(Date.now() + 24 * 60 * 60 * 1000),
         });
 
-        const cookieStore = await cookies();
-
-        // set refresh token
-        cookieStore.set({
-            name: "refreshToken",
-            value: refreshToken,
-            httpOnly: true,
-            maxAge: remember
-                ? 7 * 24 * 60 * 60
-                : 24 * 60 * 60,
-            expires: remember
-                ? new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-                : new Date(Date.now() + 24 * 60 * 60 * 1000),
-            sameSite: "strict",
-            path: "/",
-            secure: process.env.NODE_ENV === "production"
-        });
-
-        // set access token
-        cookieStore.set({
-            name: "accessToken",
-            value: accessToken,
-            httpOnly: true,
-            maxAge: 60 * 60,
-            expires: new Date(Date.now() + 60 * 60 * 1000),
-            sameSite: "strict",
-            path: "/",
-            secure: process.env.NODE_ENV === "production",
-        });
+        // set tokens
+        await setRefreshToken(refreshToken, remember);
+        await setAccessToken(accessToken);
 
         return NextResponse.json({
             ok: true,
