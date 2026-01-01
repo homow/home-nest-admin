@@ -5,6 +5,11 @@ export async function getAccessCookie(): Promise<string | undefined> {
     return cookieStore.get("accessToken")?.value;
 }
 
+export async function getRefreshToken(): Promise<string | undefined> {
+    const cookieStore = await cookies();
+    return cookieStore.get("refreshToken")?.value;
+}
+
 export async function setAccessToken(accessToken: string): Promise<void> {
     const cookieStore = await cookies();
 
