@@ -41,11 +41,6 @@ const UserModelSchema: Schema = new Schema(
     }
 );
 
-UserModelSchema.index(
-    {email: 1},
-    {unique: true},
-);
-
 const UserModel: Model<UserDB> =
     models.Users || model("Users", UserModelSchema);
 
