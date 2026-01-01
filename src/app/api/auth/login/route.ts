@@ -12,7 +12,7 @@ import {UserModel} from "@/models/auth";
 import connectToDB from "@/lib/db/mongo";
 import {UserPublic} from "@/types/models";
 import {userSchema} from "@/validations/auth";
-import RefreshTokenModel from "@/models/auth/refreshToken";
+import RefreshTokenModel from "@/models/auth/RefreshToken";
 import {type NextRequest, NextResponse} from "next/server";
 
 export async function POST(req: NextRequest) {

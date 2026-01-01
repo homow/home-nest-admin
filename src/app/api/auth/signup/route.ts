@@ -4,24 +4,18 @@ import connectToDB from "@/lib/db/mongo";
 import {userSchema} from "@/validations/auth";
 import {hashSecret} from "@/lib/utils/auth-utils/auth";
 import {type NextRequest, NextResponse} from "next/server";
-import {getRequestBody, returnInternalServerError} from "@/lib/utils/api-utils/utils";
+import {returnInternalServerError, validateBody} from "@/lib/utils/api-utils/utils";
 
 export async function POST(req: NextRequest) {
-    const body = await getRequestBody(req, "email and password required");
+    const body = await validateBody({
+        req,
+        schema: userSchema,
+        messageForRequired: "email and password required",
+    });
+
     if (body instanceof NextResponse) return body;
 
-    const resultValidate = userSchema.safeParse(body);
-
-    if (!resultValidate.success) {
-        return NextResponse.json({
-            ok: false,
-            message: resultValidate.error.issues[0].message,
-        }, {
-            status: 422
-        });
-    }
-
-    const {email, password, name} = resultValidate.data;
+    const {email, password, name} = body;
 
     try {
         await connectToDB();
